@@ -38,6 +38,7 @@
     <Compile Include="ActualCars\FueBasedCar.cs" />
     <Compile Include="ActualCars\ElectricCar.cs" />
     <Compile Include="ActualCars\FuelBasedTruck.cs" />
+    <Compile Include="Garage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ActualCars\" />

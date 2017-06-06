@@ -10,6 +10,7 @@ namespace GarageLogic
 		private string m_ModelName;
         private string m_LicenseNumber;
         private float m_RemainingEnergyPercentage;
+        private Wheels m_VehicleWheels;
 
 		/*** Getters and Setters ***/
 
@@ -28,6 +29,11 @@ namespace GarageLogic
 			get { return this.m_RemainingEnergyPercentage; }
 			set { this.m_RemainingEnergyPercentage = value; }
 		}
+		public Wheels VehicleWheels
+		{
+			get { return this.m_VehicleWheels; }
+			set { this.m_VehicleWheels = value; }
+		}
 
 
 
@@ -40,7 +46,7 @@ namespace GarageLogic
 
 
 		/*** Nested Class ***/
-		public class Wheel
+		public class Wheels
         {
 
 			/*** Data Members ***/
