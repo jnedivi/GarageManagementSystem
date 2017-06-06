@@ -3,7 +3,7 @@ namespace GarageLogic
 {
 	public abstract class FuelBasedEngine
 	{
-
+        /** **/
 
 		private enum eFeulType
 		{
@@ -15,6 +15,8 @@ namespace GarageLogic
 
 		private float m_CurrentAmountOfFuel;
 		private float m_MaxAmountOfFuel;
+        private float m_MaxAmountOfFue3l;
+        private float m_MaxAmountOfFue6l;
 
 		private void refuel(float i_FuelToAdd)
 		{
