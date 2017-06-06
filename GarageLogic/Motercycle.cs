@@ -4,9 +4,26 @@ namespace GarageLogic
 
 	public class Motercycle : Vehicle
 	{
-		private int m_EngineVolume;
+        /*** Data Members ***/
+		private float m_EngineVolume;
+        private eLicenseType m_LicenceType;
 
-		private enum eLicenseType
+
+        /*** Getters and Setters***/
+		public eLicenseType LicenceType
+		{
+			get { return this.m_LicenceType; }
+			set { this.m_LicenceType = value; }
+		}
+
+		public float EngineVolume
+		{
+			get { return this.m_EngineVolume; }
+			set { this.m_EngineVolume = value; }
+		}
+
+
+		public enum eLicenseType
 		{
 			A,
 			AB,

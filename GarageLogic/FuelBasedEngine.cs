@@ -1,11 +1,36 @@
 ﻿using System;
 namespace GarageLogic
 {
-	public abstract class FuelBasedEngine
+	public class FuelBasedEngine
 	{
-        /** **/
 
-		private enum eFeulType
+		/*** Data Members ***/
+
+		private float m_CurrentAmountOfFuel;
+		private float m_MaxAmountOfFuel;
+        private eFuelType m_FuelType;
+
+
+		/*** Getters and Setters ***/
+
+		public float CurrentAmountOfFuel
+		{
+			get { return this.m_CurrentAmountOfFuel; }
+			set { this.m_CurrentAmountOfFuel = value; }
+		}
+		public float MaxAmountOfFuel
+		{
+			get { return this.m_MaxAmountOfFuel; }
+			set { this.m_MaxAmountOfFuel = value; }
+		}
+		public eFuelType FuelType
+		{
+			get { return this.m_FuelType; }
+			set { this.m_FuelType = value; }
+		}
+	
+
+		public enum eFuelType
 		{
 			Soler,
 			Octance95,
@@ -13,12 +38,12 @@ namespace GarageLogic
 			Octane98
 		};
 
-		private float m_CurrentAmountOfFuel;
-		private float m_MaxAmountOfFuel;
-        private float m_MaxAmountOfFue3l;
-        private float m_MaxAmountOfFue6l;
 
-		private void refuel(float i_FuelToAdd)
+
+		/*** Class Logic ***/
+
+
+		public void refuel(float i_FuelToAdd)
 		{
 			if ((m_CurrentAmountOfFuel + i_FuelToAdd) <= m_MaxAmountOfFuel)
 			{
