@@ -1,12 +1,17 @@
 ﻿<Properties StartupConfiguration="{393944E4-8FFB-4C6D-8B8B-644AAE1AF534}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="GarageLogic/Car.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GarageLogic/ActualCars/FuelBasedTruck.cs">
     <Files>
-      <File FileName="GarageLogic/Vehicle.cs" Line="47" Column="6" />
-      <File FileName="GarageLogic/Car.cs" Line="40" Column="5" />
-      <File FileName="GarageLogic/Truck.cs" Line="9" Column="5" />
-      <File FileName="GarageLogic/Motercycle.cs" Line="18" Column="3" />
-      <File FileName="GarageLogic/ElectricBasedEngine.cs" Line="17" Column="1" />
-      <File FileName="GarageLogic/FuelBasedEngine.cs" Line="20" Column="1" />
+      <File FileName="GarageLogic/Vehicle.cs" Line="54" Column="13" />
+      <File FileName="GarageLogic/Car.cs" Line="10" Column="26" />
+      <File FileName="GarageLogic/Truck.cs" Line="7" Column="7" />
+      <File FileName="GarageLogic/Motercycle.cs" Line="17" Column="4" />
+      <File FileName="GarageLogic/ElectricBasedEngine.cs" Line="15" Column="29" />
+      <File FileName="GarageLogic/FuelBasedEngine.cs" Line="4" Column="9" />
+      <File FileName="GarageLogic/ActualCars/FuelBasedMotorcycle.cs" Line="6" Column="8" />
+      <File FileName="GarageLogic/ActualCars/ElectricMotorcycle.cs" Line="1" Column="1" />
+      <File FileName="GarageLogic/ActualCars/FueBasedCar.cs" Line="1" Column="1" />
+      <File FileName="GarageLogic/ActualCars/ElectricCar.cs" Line="1" Column="1" />
+      <File FileName="GarageLogic/ActualCars/FuelBasedTruck.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />

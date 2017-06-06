@@ -8,7 +8,7 @@ namespace GarageLogic
 		private float m_RemainingTimeOfOperation;
 		private float m_MaxTimeOfOperation;
 
-		/*** Getters and Setters***/
+		/*** Getters and Setters ***/
 
 		public float RemainingTimeOfOperation
 		{
@@ -21,6 +21,9 @@ namespace GarageLogic
 			set { this.m_MaxTimeOfOperation = value; }
 		}
 
+
+
+		/*** Class Logic ***/
 
 		public void recharge(float i_HoursToRecharge)
 		{

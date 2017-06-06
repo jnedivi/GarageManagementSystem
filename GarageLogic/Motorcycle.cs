@@ -2,7 +2,7 @@
 namespace GarageLogic
 {
 
-	public class Motercycle : Vehicle
+	public class Motorcycle : Vehicle
 	{
         /*** Data Members ***/
 		private float m_EngineVolume;

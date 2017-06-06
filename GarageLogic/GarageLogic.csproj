@@ -30,9 +30,17 @@
     <Compile Include="Vehicle.cs" />
     <Compile Include="Car.cs" />
     <Compile Include="Truck.cs" />
-    <Compile Include="Motercycle.cs" />
+    <Compile Include="Motorcycle.cs" />
     <Compile Include="ElectricBasedEngine.cs" />
     <Compile Include="FuelBasedEngine.cs" />
+    <Compile Include="ActualCars\FuelBasedMotorcycle.cs" />
+    <Compile Include="ActualCars\ElectricMotorcycle.cs" />
+    <Compile Include="ActualCars\FueBasedCar.cs" />
+    <Compile Include="ActualCars\ElectricCar.cs" />
+    <Compile Include="ActualCars\FuelBasedTruck.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ActualCars\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
