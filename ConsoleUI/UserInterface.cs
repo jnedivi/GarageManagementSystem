@@ -41,16 +41,20 @@ namespace ConsoleUI
             switch(mainMenuInputNumber)
             {
                 case 1:
-					// 1) Insert new Vehicle into Garage.
+                    /* 1) Insert new Vehicle into Garage. */
+                    insertNewVehicleIntoGarage();
 					break;
                 case 2:
-					// 2) Display list of licence numbers.
+                    /* 2) Display list of licence numbers. */
+                    displayListOfLicenceNumbers();
 					break;
                 case 3:
-					// 3) Change a Vehicle's status 
+                    /* 3) Change a Vehicle's status. */
+                    changeVehicleStatus();
 					break;
 				case 4:
-					// 4) Inflate tires
+                    /* 4) Inflate tires */
+                    inflateTires();
 					break;
 				case 5:
 					// 5) Refuel a vehicle.
@@ -80,8 +84,24 @@ namespace ConsoleUI
 		/* 1) Insert new Vehicle into Garage */
 		private void insertNewVehicleIntoGarage()
         {
+            string insertMessage = string.Format("Insert a new vehicle into garage:{0} " +
+                                                 "Please Select a Vehile type you wish to insert: ",System.Environment.NewLine);
+            string userInputVehicleType = System.Console.ReadLine();
+            int vehicleTypeNumber;
+            while(!isValidVehicleTypeInput(userInputVehicleType , out vehicleTypeNumber))
+            {
+				System.Console.WriteLine("Invalid Input. Please enter the number of the task you wish to complete.");
+				//userMainMenuInput = System.Console.ReadLine();
+            }
 
         }
+
+		private bool isValidVehicleTypeInput(string i_UserInput, out int o_MainMenuNumber)
+		{
+			return int.TryParse(i_UserInput, out o_MainMenuNumber) && o_MainMenuNumber >= 1 && o_MainMenuNumber <= 8;
+		}
+
+
 
 		/* 2) Display list of licence numbers */
 		private void displayListOfLicenceNumbers()
