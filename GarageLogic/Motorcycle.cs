@@ -8,9 +8,15 @@ namespace GarageLogic
 		private float m_EngineVolume;
         private eLicenseType m_LicenceType;
 
+        public Motorcycle()
+        {
+            this.NumberOfWheels = 2;
+            this.Tire.MaxAirPressure = 33f;
+            this.CreateTires(NumberOfWheels, this.Tire);
+        }
 
         /*** Getters and Setters***/
-		public eLicenseType LicenceType
+        public eLicenseType LicenceType
 		{
 			get { return this.m_LicenceType; }
 			set { this.m_LicenceType = value; }
@@ -30,17 +36,5 @@ namespace GarageLogic
 			A2,
 			B1,
 		};
-
-
-<<<<<<< Updated upstream
-        public Motorcycle()
-        {
-            this.NumberOfWheels = 2;
-            this.VehicleWheel.MaxAirPressure = 33f;
-        }
-=======
-       
->>>>>>> Stashed changes
-
 	}
 }

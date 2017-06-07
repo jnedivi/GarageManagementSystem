@@ -38,7 +38,7 @@ namespace GarageLogic
             get { return this.m_NumberOfWheels; }
             set { this.m_NumberOfWheels = value; }
         } 
-		public Wheel VehicleWheel
+		public Wheel Tire
 		{
 			get { return this.m_Wheel; }
 			set { this.m_Wheel = value; }
@@ -88,6 +88,15 @@ namespace GarageLogic
                 {
                     this.m_CurrentAirPressure += i_AirToAdd;
                 }
+            }
+        }
+
+        public void CreateTires(byte i_NumOfWheels, Wheel i_Tire)
+        {
+            for (int i = 0; i < this.NumberOfWheels; i++)
+            {
+                Wheel tire = i_Tire;
+                Tires.Add(tire);
             }
         }
     }
