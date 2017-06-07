@@ -34,7 +34,8 @@ namespace GarageLogic
 
         public Motorcycle()
         {
-            this.m_
+            this.NumberOfWheels = 2;
+            this.VehicleWheel.MaxAirPressure = 33f;
         }
 
 	}

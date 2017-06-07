@@ -5,8 +5,8 @@ namespace GarageLogic
 {
     public class Garage
     {
-		/*** Data Members ***/
-
+        /*** Data Members ***/
+        private List<Dictionary<string, object>> m_Garage;
 		private List<Vehicle> m_GarageVehicles;
 
 

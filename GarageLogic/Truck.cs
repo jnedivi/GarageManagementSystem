@@ -9,6 +9,13 @@ namespace GarageLogic
         private float m_MaxWeightAllowed;
         private bool m_HasHazardousMaterials;
 
+
+        public Truck()
+        {
+            this.NumberOfWheels = 12;
+            this.VehicleWheel.MaxAirPressure = 32f;
+        }
+
         /*** Getters and Setters***/
 
         public float MaxWeightAllowed

@@ -1,7 +1,7 @@
 ﻿﻿using System;
 namespace GarageLogic
 {
-    public class FueBasedCar : Car
+    public class FuelBasedCar : Car
     {
 
 		//4 tires with max air pressure of 30 (psi), Octane 98 fuel, 42 liter fuel tank
@@ -15,8 +15,9 @@ namespace GarageLogic
 
 		/*** Class Logic ***/
 
-		public FueBasedCar()
+		public FuelBasedCar()
         {
+
         }
     }
 }
