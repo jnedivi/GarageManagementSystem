@@ -35,6 +35,12 @@ namespace GarageLogic
 
         }
 
+        public enum eVehicleStatus
+        {
+            InRepair,
+            Repaired,
+            PayedFor
+        }
 
 
 

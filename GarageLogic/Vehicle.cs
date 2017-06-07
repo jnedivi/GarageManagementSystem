@@ -49,17 +49,7 @@ namespace GarageLogic
 			set { this.m_VehicleWheels = value; }
 		}
 
-
-
-
 		/*** Class Logic ***/
-
-        public enum eVehicleStatus
-        {
-            InRepair,
-            Repaired,
-            PayedFor
-        }
 
 		/*** Nested Class ***/
 		public class Wheel
@@ -77,11 +67,6 @@ namespace GarageLogic
 			{
 				get { return this.m_ManufacturerName; }
 				set { this.m_ManufacturerName = value; }
-			}
-            public byte NumberOfTires
-			{
-				get { return this.m_NumberOfTires; }
-				set { this.m_NumberOfTires = value; }
 			}
 			public float CurrentAirPressure
 			{
