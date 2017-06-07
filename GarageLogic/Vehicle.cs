@@ -1,4 +1,6 @@
 ﻿﻿using System;
+using System.Collections.Generic;
+
 namespace GarageLogic
 {
 
@@ -10,13 +12,9 @@ namespace GarageLogic
 		private string m_ModelName;
         private string m_LicenseNumber;
         private float m_RemainingEnergyPercentage;
-        private Wheels m_VehicleWheels;
+        private List<Wheel> m_VehicleWheels;
         private eVehicleStatus m_VehicleStatus;
-<<<<<<< HEAD
-        private int m_NumberOfTires;
-=======
-        private int m_NumberOfWesfieldWheels;
->>>>>>> a7e3e6dc62769bfc70c4a318658550a48cd9dd62
+        private int m_NumberOfWheels;
 
 		/*** Getters and Setters ***/
 
@@ -40,7 +38,7 @@ namespace GarageLogic
 			get { return this.m_VehicleStatus; }
 			set { this.m_VehicleStatus = value; }
 		}
-		public Wheels VehicleWheels
+		public List<Wheel> VehicleWheels
 		{
 			get { return this.m_VehicleWheels; }
 			set { this.m_VehicleWheels = value; }
@@ -51,7 +49,6 @@ namespace GarageLogic
 
 		/*** Class Logic ***/
 
-
         public enum eVehicleStatus
         {
             InRepair,
@@ -59,12 +56,8 @@ namespace GarageLogic
             PayedFor
         }
 
-
-
-
-
 		/*** Nested Class ***/
-		public class Wheels
+		public class Wheel
         {
 
 			/*** Data Members ***/
@@ -72,9 +65,6 @@ namespace GarageLogic
 			private string m_ManufacturerName;
             private float m_CurrentAirPressure;
             private float m_ReccomendedAirPressure;
-            private byte m_NumberOfTires;
-            private int donotin;
-
 
 			/*** Getters and Setters ***/
 
@@ -109,12 +99,6 @@ namespace GarageLogic
                     this.m_CurrentAirPressure += i_AirToAdd;
                 }
             }
-
-
         }
-
-      
-      
-
     }
 }
