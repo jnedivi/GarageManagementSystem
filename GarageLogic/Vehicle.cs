@@ -12,7 +12,7 @@ namespace GarageLogic
         private float m_RemainingEnergyPercentage;
         private Wheels m_VehicleWheels;
         private eVehicleStatus m_VehicleStatus;
-        private int m_NumberOfWheels;
+        private int m_NumberOfTires;
 
 		/*** Getters and Setters ***/
 
