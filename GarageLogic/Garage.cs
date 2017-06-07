@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 
 namespace GarageLogic
@@ -27,13 +27,58 @@ namespace GarageLogic
         }
 
 
-        public void InsertNewVehicle(Vehicle i_Vehicle)
-        {
+        /*** Garage Logic Methods ***/
 
-            //TODO: insert new vehicle
+		/* 1) Insert new Vehicle into Garage */
+        public void InsertNewVehicleIntoGarage(Vehicle i_Vehicle)
+		{
+            //TODO: add new vehicle (if does not exits already)
+		}
+
+		/* 2) Display list of licence numbers */
+        public string DisplayListOfLicenceNumbers(eVehicleStatus i_Status)
+		{
+            //TODO: filter and display list 
+
+            return null;
+		}
+
+		/* 3) Change a Vehicle's status */
+        public void ChangeVehicleStatus(Vehicle i_Vehicle , eVehicleStatus i_Status)
+		{
+            
+		}
+
+		/* 4) Inflate tires */
+		public void InflateTiresToMax(Vehicle i_Vehicle)
+		{
+            //TODO: inflate to maximum
+		}
+
+		/* 5) Refuel a vehicle */
+        public void RefuelVehicle(Vehicle i_Vehicle, FuelBasedEngine.eFuelType i_FuelType, float i_AmountToRefuel)
+		{
+			
+		}
+
+		/* 6) Charge a electric vehice. */
+		public void ChargeElectricVehice(Vehicle i_Vehicle, float i_MinutsToCharge)
+		{
+
+		}
+
+		/* 7) Display vehicle information */
+        public string DisplayVehicleInformation()
+		{
+			//Display vehicle information 
+            //(License number, Model name, Owner name, 
+            //Status in garage, Tire specifications (manufacturer and air pressure),
+            //Fuel status + Fuel type / Battery status, other relevant information based on vehicle type)
+
+			return null;
+		}
 
 
-        }
 
         public enum eVehicleStatus
         {
@@ -41,13 +86,6 @@ namespace GarageLogic
             Repaired,
             PayedFor
         }
-
-        // 
-
-
-
-
-
 
     }
 }

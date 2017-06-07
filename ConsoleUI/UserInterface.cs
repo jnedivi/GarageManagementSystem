@@ -1,4 +1,4 @@
-﻿using GarageLogic;
+﻿﻿using GarageLogic;
 using System;
 namespace ConsoleUI
 {
@@ -22,26 +22,104 @@ namespace ConsoleUI
         }
 
 
-
-        private void refuelVehicle(ref Vehicle io_Vehicle)
+        private void mainMenu()
         {
-         
 
+            Menu mainMenu = new Menu();
 
+            System.Console.WriteLine(mainMenu.mainMenu());
+
+            string userMainMenuInput = System.Console.ReadLine();
+            int mainMenuInputNumber;
+
+            while(!isValidMainMenuInput(userMainMenuInput , out mainMenuInputNumber))
+            {
+                System.Console.WriteLine("Invalid Input. Please enter the number of the task you wish to complete.");
+                userMainMenuInput = System.Console.ReadLine();
+            }
+
+            switch(mainMenuInputNumber)
+            {
+                case 1:
+					// 1) Insert new Vehicle into Garage.
+					break;
+                case 2:
+					// 2) Display list of licence numbers.
+					break;
+                case 3:
+					// 3) Change a Vehicle's status 
+					break;
+				case 4:
+					// 4) Inflate tires
+					break;
+				case 5:
+					// 5) Refuel a vehicle.
+					break;
+				case 6:
+					// 6) Charge a electric vehice.
+					break;
+				case 7:
+					// 7) Display vehicle information.
+					break;
+                default:
+                    System.Environment.Exit(1);
+                    break;
+					
+            }
         }
 
 
-        private void insertNewVehicle()
+        private bool isValidMainMenuInput(string i_UserInput , out int o_MainMenuNumber)
         {
-         
-
-            System.Console.WriteLine("Please select a Vehicle type: ");
-
+            return int.TryParse(i_UserInput , out o_MainMenuNumber) && o_MainMenuNumber >= 1 && o_MainMenuNumber <= 8;
+        }
 
 
+
+
+		/* 1) Insert new Vehicle into Garage */
+		private void insertNewVehicleIntoGarage()
+        {
 
         }
-    }
+
+		/* 2) Display list of licence numbers */
+		private void displayListOfLicenceNumbers()
+		{
+
+		}
+
+        /* 3) Change a Vehicle's status */
+		private void changeVehicleStatus()
+		{
+
+		}
+
+		/* 4) Inflate tires */
+		private void inflateTires()
+		{
+
+		}
+
+		/* 5) Refuel a vehicle */
+		private void refuelVehicle()
+		{
+
+		}
+
+		/* 6) Charge a electric vehice. */
+		private void chargeElectricVehice()
+		{
+
+		}
+
+		/* 7) Display vehicle information */
+		private void displayVehicleInformation()
+		{
+
+		}
+
+	}
 
 
 
@@ -50,9 +128,7 @@ namespace ConsoleUI
 
         public string mainMenu()
         {
-            //System.Console.Clear();
-           // System.Console.WriteLine("Main Menu");
-           // System.Console.WriteLine("Please Select a task number you wish to complete:");
+          
 
             string message = string.Format(
                 @"Main Menu
@@ -69,6 +145,8 @@ Please Select a task number you wish to complete:
 
             return message;
         }
+
+
 
 
 
