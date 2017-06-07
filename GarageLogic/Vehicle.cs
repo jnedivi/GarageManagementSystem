@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 namespace GarageLogic
 {
 
@@ -12,7 +12,11 @@ namespace GarageLogic
         private float m_RemainingEnergyPercentage;
         private Wheels m_VehicleWheels;
         private eVehicleStatus m_VehicleStatus;
+<<<<<<< HEAD
         private int m_NumberOfTires;
+=======
+        private int m_NumberOfWesfieldWheels;
+>>>>>>> a7e3e6dc62769bfc70c4a318658550a48cd9dd62
 
 		/*** Getters and Setters ***/
 
