@@ -14,7 +14,7 @@ namespace GarageLogic
         private float m_RemainingEnergyPercentage;
         private List<Wheel> m_VehicleWheels;
         private eVehicleStatus m_VehicleStatus;
-        private int m_NumberOfWheels;
+        private byte m_NumberOfWheels;
 
 		/*** Getters and Setters ***/
 
@@ -38,6 +38,11 @@ namespace GarageLogic
 			get { return this.m_VehicleStatus; }
 			set { this.m_VehicleStatus = value; }
 		}
+        public byte NumberOfWheels
+        {
+            get { return this.m_NumberOfWheels; }
+            set { this.m_NumberOfWheels = value; }
+        } 
 		public List<Wheel> VehicleWheels
 		{
 			get { return this.m_VehicleWheels; }
