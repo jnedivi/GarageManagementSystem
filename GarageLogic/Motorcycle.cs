@@ -2,10 +2,10 @@
 namespace GarageLogic
 {
 
-	public class Motorcycle : Vehicle
-	{
+    public class Motorcycle : Vehicle
+    {
         /*** Data Members ***/
-		private float m_EngineVolume;
+        private float m_EngineVolume;
         private eLicenseType m_LicenceType;
 
         public Motorcycle()
@@ -17,24 +17,24 @@ namespace GarageLogic
 
         /*** Getters and Setters***/
         public eLicenseType LicenceType
-		{
-			get { return this.m_LicenceType; }
-			set { this.m_LicenceType = value; }
-		}
+        {
+            get { return this.m_LicenceType; }
+            set { this.m_LicenceType = value; }
+        }
 
-		public float EngineVolume
-		{
-			get { return this.m_EngineVolume; }
-			set { this.m_EngineVolume = value; }
-		}
+        public float EngineVolume
+        {
+            get { return this.m_EngineVolume; }
+            set { this.m_EngineVolume = value; }
+        }
 
 
-		public enum eLicenseType
-		{
-			A,
-			AB,
-			A2,
-			B1,
-		};
-	}
+        public enum eLicenseType
+        {
+            A,
+            AB,
+            A2,
+            B1,
+        };
+    }
 }
