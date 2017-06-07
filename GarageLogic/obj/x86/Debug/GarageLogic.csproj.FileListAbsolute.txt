@@ -1,0 +1,5 @@
+/Users/jonathanwesfield/Desktop/Ex03/GarageLogic/obj/x86/Debug/GarageLogic.csproj.CoreCompileInputs.cache
+/Users/jonathanwesfield/Desktop/Ex03/GarageLogic/bin/Debug/GarageLogic.dll
+/Users/jonathanwesfield/Desktop/Ex03/GarageLogic/bin/Debug/GarageLogic.pdb
+/Users/jonathanwesfield/Desktop/Ex03/GarageLogic/obj/x86/Debug/GarageLogic.dll
+/Users/jonathanwesfield/Desktop/Ex03/GarageLogic/obj/x86/Debug/GarageLogic.pdb

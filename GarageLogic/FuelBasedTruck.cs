@@ -1,5 +1,5 @@
-﻿using System;
-namespace GarageLogic.ActualCars
+﻿﻿using System;
+namespace GarageLogic
 {
     public class FuelBasedTruck : Truck
     {

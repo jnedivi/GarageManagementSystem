@@ -11,6 +11,7 @@ namespace GarageLogic
         private string m_LicenseNumber;
         private float m_RemainingEnergyPercentage;
         private Wheels m_VehicleWheels;
+        private eVehicleStatus m_VehicleStatus;
 
 		/*** Getters and Setters ***/
 
@@ -29,6 +30,11 @@ namespace GarageLogic
 			get { return this.m_RemainingEnergyPercentage; }
 			set { this.m_RemainingEnergyPercentage = value; }
 		}
+		public eVehicleStatus VehicleStatus
+		{
+			get { return this.m_VehicleStatus; }
+			set { this.m_VehicleStatus = value; }
+		}
 		public Wheels VehicleWheels
 		{
 			get { return this.m_VehicleWheels; }
@@ -40,6 +46,13 @@ namespace GarageLogic
 
 		/*** Class Logic ***/
 
+
+        public enum eVehicleStatus
+        {
+            InRepair,
+            Repaired,
+            PayedFor
+        }
 
 
 
@@ -54,6 +67,8 @@ namespace GarageLogic
 			private string m_ManufacturerName;
             private float m_CurrentAirPressure;
             private float m_ReccomendedAirPressure;
+            private byte m_NumberOfTires;
+            private int donotin;
 
 
 			/*** Getters and Setters ***/
@@ -62,6 +77,11 @@ namespace GarageLogic
 			{
 				get { return this.m_ManufacturerName; }
 				set { this.m_ManufacturerName = value; }
+			}
+            public byte NumberOfTires
+			{
+				get { return this.m_NumberOfTires; }
+				set { this.m_NumberOfTires = value; }
 			}
 			public float CurrentAirPressure
 			{

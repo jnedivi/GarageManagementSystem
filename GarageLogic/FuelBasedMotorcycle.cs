@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿﻿﻿using System;
 namespace GarageLogic
 {
     public class FuelBasedMotorcycle : Motorcycle
@@ -20,6 +20,9 @@ namespace GarageLogic
             this.VehicleWheels.ReccomendedAirPressure = 33f;
             this.m_FuelEngine.FuelType = FuelBasedEngine.eFuelType.Octance95;
             this.m_FuelEngine.MaxAmountOfFuel = 5.5f;
+
+
+
         }
 
 	}

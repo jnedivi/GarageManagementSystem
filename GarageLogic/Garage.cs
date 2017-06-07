@@ -1,11 +1,43 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace GarageLogic
 {
     public class Garage
     {
-        public Garage()
+		/*** Data Members ***/
+
+		private List<Vehicle> m_GarageVehicles;
+
+
+
+
+
+		/*** Getters and Setters ***/
+
+		public List<Vehicle> GarageVehicles
+		{
+			get { return this.m_GarageVehicles; }
+			set { this.m_GarageVehicles = value; }
+		}
+
+
+		public Garage()
         {
         }
+
+
+        public void InsertNewVehicle(Vehicle i_Vehicle)
+        {
+
+            //TODO: insert new vehicle
+
+
+        }
+
+
+
+
     }
 }
 

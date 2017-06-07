@@ -32,5 +32,10 @@ namespace GarageLogic
 		};
 
 
+        public Motorcycle()
+        {
+            this.VehicleWheels.ReccomendedAirPressure = 33f;
+        }
+
 	}
 }

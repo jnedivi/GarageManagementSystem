@@ -8,6 +8,7 @@ namespace GarageLogic
 
 		private float m_CurrentAmountOfFuel;
 		private float m_MaxAmountOfFuel;
+        private bool m_IsFullAmountOfFuel;
         private eFuelType m_FuelType;
 
 
@@ -22,6 +23,11 @@ namespace GarageLogic
 		{
 			get { return this.m_MaxAmountOfFuel; }
 			set { this.m_MaxAmountOfFuel = value; }
+		}
+		public bool IsFullAmountOfFuel
+		{
+			get { return this.m_IsFullAmountOfFuel; }
+			set { this.m_IsFullAmountOfFuel = value; }
 		}
 		public eFuelType FuelType
 		{

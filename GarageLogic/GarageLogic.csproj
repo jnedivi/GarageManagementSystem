@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{393944E4-8FFB-4C6D-8B8B-644AAE1AF534}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>GarageLogic</RootNamespace>
     <AssemblyName>GarageLogic</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -33,12 +32,13 @@
     <Compile Include="Motorcycle.cs" />
     <Compile Include="ElectricBasedEngine.cs" />
     <Compile Include="FuelBasedEngine.cs" />
-    <Compile Include="ActualCars\FuelBasedMotorcycle.cs" />
-    <Compile Include="ActualCars\ElectricMotorcycle.cs" />
-    <Compile Include="ActualCars\FueBasedCar.cs" />
-    <Compile Include="ActualCars\ElectricCar.cs" />
-    <Compile Include="ActualCars\FuelBasedTruck.cs" />
     <Compile Include="Garage.cs" />
+    <Compile Include="ElectricCar.cs" />
+    <Compile Include="ElectricMotorcycle.cs" />
+    <Compile Include="FueBasedCar.cs" />
+    <Compile Include="FuelBasedMotorcycle.cs" />
+    <Compile Include="FuelBasedTruck.cs" />
+    <Compile Include="NewVehicle.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ActualCars\" />

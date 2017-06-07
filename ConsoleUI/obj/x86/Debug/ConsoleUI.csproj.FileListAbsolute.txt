@@ -1,0 +1,8 @@
+/Users/jonathanwesfield/Desktop/Ex03/ConsoleUI/obj/x86/Debug/ConsoleUI.csproj.CoreCompileInputs.cache
+/Users/jonathanwesfield/Desktop/Ex03/ConsoleUI/bin/Debug/ConsoleUI.exe
+/Users/jonathanwesfield/Desktop/Ex03/ConsoleUI/bin/Debug/ConsoleUI.pdb
+/Users/jonathanwesfield/Desktop/Ex03/ConsoleUI/obj/x86/Debug/ConsoleUI.exe
+/Users/jonathanwesfield/Desktop/Ex03/ConsoleUI/obj/x86/Debug/ConsoleUI.pdb
+/Users/jonathanwesfield/Desktop/Ex03/ConsoleUI/bin/Debug/GarageLogic.dll
+/Users/jonathanwesfield/Desktop/Ex03/ConsoleUI/bin/Debug/GarageLogic.pdb
+/Users/jonathanwesfield/Desktop/Ex03/ConsoleUI/obj/x86/Debug/ConsoleUI.csprojResolveAssemblyReference.cache

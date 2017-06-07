@@ -1,18 +1,22 @@
-﻿<Properties StartupConfiguration="{393944E4-8FFB-4C6D-8B8B-644AAE1AF534}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="GarageLogic/Garage.cs">
+﻿<Properties StartupConfiguration="{A64F1C84-B9AF-4CD0-B8FE-D48409E2BA91}|Default">
+  <MonoDevelop.Ide.ItemProperties.ConsoleUI PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ConsoleUI/UserInterface.cs">
     <Files>
-      <File FileName="GarageLogic/Vehicle.cs" Line="38" Column="9" />
+      <File FileName="GarageLogic/Vehicle.cs" Line="70" Column="57" />
       <File FileName="GarageLogic/Car.cs" Line="10" Column="26" />
       <File FileName="GarageLogic/Truck.cs" Line="7" Column="7" />
-      <File FileName="GarageLogic/Motorcycle.cs" Line="5" Column="24" />
-      <File FileName="GarageLogic/ElectricBasedEngine.cs" Line="15" Column="20" />
-      <File FileName="GarageLogic/FuelBasedEngine.cs" Line="4" Column="9" />
-      <File FileName="GarageLogic/ActualCars/FuelBasedMotorcycle.cs" Line="23" Column="1" />
-      <File FileName="GarageLogic/ActualCars/ElectricMotorcycle.cs" Line="14" Column="9" />
-      <File FileName="GarageLogic/ActualCars/FueBasedCar.cs" Line="11" Column="40" />
-      <File FileName="GarageLogic/ActualCars/ElectricCar.cs" Line="24" Column="13" />
-      <File FileName="GarageLogic/ActualCars/FuelBasedTruck.cs" Line="14" Column="18" />
-      <File FileName="GarageLogic/Garage.cs" Line="1" Column="1" />
+      <File FileName="GarageLogic/Motorcycle.cs" Line="38" Column="1" />
+      <File FileName="GarageLogic/ElectricBasedEngine.cs" Line="12" Column="9" />
+      <File FileName="GarageLogic/FuelBasedEngine.cs" Line="17" Column="3" />
+      <File FileName="GarageLogic/FuelBasedMotorcycle.cs" Line="23" Column="13" />
+      <File FileName="GarageLogic/ElectricMotorcycle.cs" Line="6" Column="9" />
+      <File FileName="GarageLogic/FueBasedCar.cs" Line="2" Column="22" />
+      <File FileName="GarageLogic/ElectricCar.cs" Line="2" Column="22" />
+      <File FileName="GarageLogic/FuelBasedTruck.cs" Line="2" Column="22" />
+      <File FileName="GarageLogic/Garage.cs" Line="8" Column="2" />
+      <File FileName="ConsoleUI/UserInterface.cs" Line="35" Column="13" />
+      <File FileName="ConsoleUI/Program.cs" Line="11" Column="29" />
+      <File FileName="GarageLogic/NewVehicle.cs" Line="1" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
@@ -20,6 +24,5 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.GarageLogic PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
 </Properties>
