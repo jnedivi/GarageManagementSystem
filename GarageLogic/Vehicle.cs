@@ -80,9 +80,9 @@ namespace GarageLogic
 			}
 
 
-			/*** Class Logic ***/
+            /*** Class Logic ***/
 
-			public void inflateAction(float i_AirToAdd)
+            public void InflateAction(float i_AirToAdd)
             {
                 if (this.m_CurrentAirPressure + i_AirToAdd <= this.m_ReccomendedAirPressure)
                 {

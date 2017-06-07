@@ -34,6 +34,7 @@ namespace GarageLogic
 			get { return this.m_FuelType; }
 			set { this.m_FuelType = value; }
 		}
+
 	
 
 		public enum eFuelType
