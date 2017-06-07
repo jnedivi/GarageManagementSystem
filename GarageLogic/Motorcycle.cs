@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 namespace GarageLogic
 {
 
@@ -32,11 +32,15 @@ namespace GarageLogic
 		};
 
 
+<<<<<<< Updated upstream
         public Motorcycle()
         {
             this.NumberOfWheels = 2;
             this.VehicleWheel.MaxAirPressure = 33f;
         }
+=======
+       
+>>>>>>> Stashed changes
 
 	}
 }

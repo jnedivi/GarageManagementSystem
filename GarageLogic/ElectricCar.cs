@@ -20,7 +20,7 @@ namespace GarageLogic
 		public ElectricCar()
         {
             this.RemainingEnergyPercentage = 2.5f;
-            this.VehicleWheels.ReccomendedAirPressure = 30f;
+           // this.VehicleWheels.ReccomendedAirPressure = 30f;
 
         }
     }

@@ -6,13 +6,18 @@ namespace ConsoleUI
     {
 
         private Garage m_Garage;
-        private Vehicle[] VehicleTypes = new Vehicle[5];
-        private FuelBasedTruck k;
+
+      
 
         public void startGarage()
         {
 
-            VehicleTypes[0] = new FuelBasedTruck();
+            Menu m = new Menu();
+
+            System.Console.WriteLine(m.mainMenu());
+
+
+            
 
         }
 
@@ -36,6 +41,35 @@ namespace ConsoleUI
 
 
         }
+    }
+
+
+
+    public class Menu {
+
+
+        public string mainMenu()
+        {
+            //System.Console.Clear();
+           // System.Console.WriteLine("Main Menu");
+           // System.Console.WriteLine("Please Select a task number you wish to complete:");
+
+            string message = string.Format(
+                @"Main Menu
+Please Select a task number you wish to complete:
+1) Insert new Vehicle into Garage.
+2) Display list of licence numbers.
+3) Change a Vehicle's status
+4) Inflate tires
+5) Refuel a vehicle.
+6) Charge a electric vehice.
+7) Display vehicle information.");
+
+
+
+            return message;
+        }
+
 
 
 

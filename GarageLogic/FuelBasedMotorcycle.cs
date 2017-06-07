@@ -17,7 +17,7 @@ namespace GarageLogic
 
         public FuelBasedMotorcycle()
         {
-            this.VehicleWheels.ReccomendedAirPressure = 33f;
+            //this.VehicleWheels.ReccomendedAirPressure = 33f;
             this.m_FuelEngine.FuelType = FuelBasedEngine.eFuelType.Octance95;
             this.m_FuelEngine.MaxAmountOfFuel = 5.5f;
 
