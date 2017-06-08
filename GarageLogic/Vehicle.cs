@@ -18,10 +18,9 @@ namespace GarageLogic
         private string m_OwnerName;
         private float m_RemainingEnergyPercentage;
         private List<Wheel> m_Tires;
-        //private Wheel m_Wheel;
-        private byte m_NumberOfWheels;
+        private int m_NumberOfWheels;
         private eVehicleStatus m_VehicleStatus;
-        private Dictionary<string, string> m_VehicleInformation;
+        internal Dictionary<string, string> m_VehicleInformation;
 
         public enum eVehicleStatus
         {
@@ -30,12 +29,12 @@ namespace GarageLogic
             PayedFor
         }
 
-        public void UpdateVehicleInformation()
+        public virtual void CreateVehicleInformation()
         {
-            m_VehicleInformation.Add(k_Owner, m_OwnerName);
-            m_VehicleInformation.Add(k_ModelName, m_ModelName);
-            m_VehicleInformation.Add(k_LicenseNumber, m_LicenseNumber);
-            m_VehicleInformation.Add(k_VehicleStatus, VehicleStatus.ToString);
+            m_VehicleInformation.Add(k_Owner, null);
+            m_VehicleInformation.Add(k_ModelName, null);
+            m_VehicleInformation.Add(k_LicenseNumber, null);
+            m_VehicleInformation.Add(k_VehicleStatus, null);
         }
 
         /*protected Vehicle()
@@ -60,6 +59,12 @@ namespace GarageLogic
 			set { this.m_LicenseNumber = value; }
 		}
 
+        public string OwnerName
+        {
+            get { return this.m_OwnerName; }
+            set { this.m_OwnerName = value; }
+        }
+
 		public float RemainingEnergyPercentage
 		{
 			get { return this.m_RemainingEnergyPercentage; }
@@ -72,16 +77,10 @@ namespace GarageLogic
             set { this.m_NumberOfWheels = value; }
         } 
 
-		/*public Wheel Tire
-		{
-			get { return this.m_Wheel; }
-			set { this.m_Wheel = value; }
-		}*/
-
         public List<Wheel> Tires
         {
             get { return this.m_Tires; }
-            set { this.m_Tires = value; }
+            protected set { this.m_Tires = value; }
         }
 
         public eVehicleStatus VehicleStatus
@@ -93,7 +92,7 @@ namespace GarageLogic
 		/*** Class Logic ***/
 
 		/*** Nested Class ***/
-		class Wheel
+		private class Wheel
         {
 
 			/*** Data Members ***/
@@ -139,14 +138,18 @@ namespace GarageLogic
 
             public void InflateAction(float i_AirToAdd)
             {
-                if (this.m_CurrentAirPressure + i_AirToAdd <= this.m_MaxAirPressure)
+                if ((this.m_CurrentAirPressure + i_AirToAdd > this.m_MaxAirPressure) || i_AirToAdd < 0)
+                {
+                    throw new ValueOutOfRangeException("Tire", 0f, this.m_MaxAirPressure - this.m_CurrentAirPressure);
+                }
+                else
                 {
                     this.m_CurrentAirPressure += i_AirToAdd;
                 }
             }
         }
 
-        public void CreateTires(byte i_NumOfWheels, Wheel i_Tire)
+        public void CreateTires(int i_NumOfWheels, Wheel i_Tire)
         {
 
             for (int i = 0; i < this.NumberOfWheels; i++)

@@ -47,13 +47,12 @@ namespace GarageLogic
 
 
 
-		/*** Class Logic ***/
+        /*** Class Logic ***/
 
 
-		public void Refuel(float i_FuelToAdd, eFuelType i_FuelType, ref Vehicle io_Vehicle)
-		{
-
-			if ((CurrentAmountOfFuel + i_FuelToAdd) > MaxAmountOfFuel)
+        public void Refuel(float i_FuelToAdd, eFuelType i_FuelType, ref Vehicle io_Vehicle)
+        {
+            if (((CurrentAmountOfFuel + i_FuelToAdd) > MaxAmountOfFuel) || i_FuelToAdd < 0)
 			{
                 throw new ValueOutOfRangeException("Fuel based engine", 0f, MaxAmountOfFuel - CurrentAmountOfFuel);
 			}

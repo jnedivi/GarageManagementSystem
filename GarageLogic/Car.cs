@@ -13,12 +13,17 @@ namespace GarageLogic
         public Car()
         {
             this.NumberOfWheels = 4;
-
         }
 
-		/*** Getters and Setters***/
+        public override void CreateVehicleInformation()
+        {
+            base.CreateVehicleInformation();
+            this.m
+        }
 
-		public eColor Color
+        /*** Getters and Setters***/
+
+        public eColor Color
         {
             get { return this.m_Color; }
             set { this.m_Color = value; }
