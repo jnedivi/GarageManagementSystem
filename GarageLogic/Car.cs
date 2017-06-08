@@ -2,7 +2,7 @@
 namespace GarageLogic
 {
 
-	public class Car : Vehicle
+	public abstract class Car : Vehicle
 	{
 
 		/*** Data Members ***/

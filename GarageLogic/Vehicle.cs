@@ -6,7 +6,11 @@ namespace GarageLogic
 
     public abstract class Vehicle
     {
-
+        /*** Constants ***/
+        private const string k_LicenseNumber = "License Number:";
+        private const string k_ModelName = "Model Name:";
+        private const string k_Owner = "Owner:";
+        private const string k_VehicleStatus = "Vehicle Status:";
 		/*** Data Members ***/
 
 		private string m_ModelName;
@@ -17,6 +21,7 @@ namespace GarageLogic
         //private Wheel m_Wheel;
         private byte m_NumberOfWheels;
         private eVehicleStatus m_VehicleStatus;
+        private Dictionary<string, string> m_VehicleInformation;
 
         public enum eVehicleStatus
         {
@@ -25,7 +30,13 @@ namespace GarageLogic
             PayedFor
         }
 
-        public virtual Dictionary<>
+        public void UpdateVehicleInformation()
+        {
+            m_VehicleInformation.Add(k_Owner, m_OwnerName);
+            m_VehicleInformation.Add(k_ModelName, m_ModelName);
+            m_VehicleInformation.Add(k_LicenseNumber, m_LicenseNumber);
+            m_VehicleInformation.Add(k_VehicleStatus, VehicleStatus.ToString);
+        }
 
         /*protected Vehicle()
         {

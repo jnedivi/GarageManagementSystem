@@ -65,6 +65,7 @@ namespace GarageLogic
             }
 
             CurrentAmountOfFuel += i_FuelToAdd;
+            io_Vehicle.RemainingEnergyPercentage = ((CurrentAmountOfFuel / MaxAmountOfFuel) * 100);
 		}
 	}
 }
