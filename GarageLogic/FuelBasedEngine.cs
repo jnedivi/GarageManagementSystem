@@ -50,12 +50,21 @@ namespace GarageLogic
 		/*** Class Logic ***/
 
 
-		public void refuel(float i_FuelToAdd)
+		public void Refuel(float i_FuelToAdd, eFuelType i_FuelType, ref Vehicle io_Vehicle)
 		{
-			if ((m_CurrentAmountOfFuel + i_FuelToAdd) <= m_MaxAmountOfFuel)
+
+			if ((CurrentAmountOfFuel + i_FuelToAdd) > MaxAmountOfFuel)
 			{
-				m_CurrentAmountOfFuel += i_FuelToAdd;
+                throw new ValueOutOfRangeException("Fuel based engine", 0f, MaxAmountOfFuel - CurrentAmountOfFuel);
 			}
+
+            if(i_FuelType != this.FuelType)
+            {
+                string givenFuelType = string.Format("{0}", i_FuelType);
+                throw new System.ArgumentException("Wrong fuel type for this engine", givenFuelType);
+            }
+
+            CurrentAmountOfFuel += i_FuelToAdd;
 		}
 	}
 }
