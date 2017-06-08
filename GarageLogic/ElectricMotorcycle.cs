@@ -22,7 +22,7 @@ namespace GarageLogic
 
         public ElectricMotorcycle()
         {
-            this.ElectricEngine.MaxTimeOfOperation = 2.7f;
+            this.ElectricEngine.MaxBatteryLife = 2.7f;
         }
     }
 }

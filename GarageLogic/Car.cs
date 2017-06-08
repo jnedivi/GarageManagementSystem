@@ -9,7 +9,7 @@ namespace GarageLogic
 	
 		private eColor m_Color;
         private eNumOfDoors m_NumberOfDoors;
-
+        
         public Car()
         {
             this.NumberOfWheels = 4;

@@ -21,7 +21,7 @@ namespace GarageLogic
 
         public ElectricCar()
         {
-            this.ElectricEngine.MaxTimeOfOperation = 2.7f;
+            this.ElectricEngine.MaxBatteryLife = 2.7f;
         }
     }
 }

@@ -5,33 +5,30 @@ namespace GarageLogic
 	{
 		/*** Data Members ***/
 
-		private float m_RemainingTimeOfOperation;
-		private float m_MaxTimeOfOperation;
+		private float m_RemainingTimeOnBattery;
+		private float m_MaxBatteryLife;
 
 		/*** Getters and Setters ***/
 
-		public float RemainingTimeOfOperation
+		public float RemainingTimeOnBattery
 		{
-			get { return this.m_RemainingTimeOfOperation; }
-			set { this.m_RemainingTimeOfOperation = value; }
+			get { return this.m_RemainingTimeOnBattery; }
+			set { this.m_RemainingTimeOnBattery = value; }
 		}
-		public float MaxTimeOfOperation
+		public float MaxBatteryLife
 		{
-			get { return this.m_MaxTimeOfOperation; }
-			set { this.m_MaxTimeOfOperation = value; }
+			get { return this.m_MaxBatteryLife; }
+			set { this.m_MaxBatteryLife = value; }
 		}
-
-
 
 		/*** Class Logic ***/
 
 		public void recharge(float i_HoursToRecharge)
 		{
-			if ((m_RemainingTimeOfOperation + i_HoursToRecharge) <= m_MaxTimeOfOperation)
+			if ((m_RemainingTimeOnBattery + i_HoursToRecharge) <= m_MaxBatteryLife)
 			{
-				m_RemainingTimeOfOperation += i_HoursToRecharge;
+				m_RemainingTimeOnBattery += i_HoursToRecharge;
 			}
 		}
 	}
-
 }
