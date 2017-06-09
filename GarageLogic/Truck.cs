@@ -1,7 +1,7 @@
 ﻿using System;
 namespace GarageLogic
 {
-    public class Truck : Vehicle
+    public abstract class Truck : Vehicle
     {
 
         /*** Data Members ***/
