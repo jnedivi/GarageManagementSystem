@@ -1,4 +1,4 @@
-﻿﻿using GarageLogic;
+﻿﻿﻿using GarageLogic;
 using System;
 using System.Text;
 namespace ConsoleUI
@@ -76,17 +76,8 @@ namespace ConsoleUI
 		/* 1) Insert new Vehicle into Garage */
 		private void insertNewVehicleIntoGarage()
         {
-            StringBuilder insertMessage = new StringBuilder();
-            insertMessage.AppendLine("Insert a new vehicle into garage:");
-            insertMessage.AppendLine("Please Select a Vehile type you wish to insert:");
-            insertMessage.AppendLine("1) Fuel-Based Motorcycle");
-            insertMessage.AppendLine("2) Electric Motorcycle");
-            insertMessage.AppendLine("3) Fuel-Based Car");
-            insertMessage.AppendLine("4) Electric Car");
-            insertMessage.AppendLine("5) Fuel-Based Truck");
-            insertMessage.AppendLine("6) Back to Main Menu");
-
-            System.Console.WriteLine(insertMessage);
+         
+            System.Console.WriteLine(UserMessages.InsertNewVehicleIntoGarageMessage());
                                                 
             string userInputVehicleType = System.Console.ReadLine();
             int vehicleTypeNumber;
