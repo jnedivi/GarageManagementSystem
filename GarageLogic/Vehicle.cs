@@ -7,10 +7,7 @@ namespace GarageLogic
     public abstract class Vehicle
     {
         /*** Constants ***/
-        private const string k_LicenseNumber = "License Number:";
-        private const string k_ModelName = "Model Name:";
-        private const string k_Owner = "Owner:";
-        private const string k_VehicleStatus = "Vehicle Status:";
+        
 		/*** Data Members ***/
 
 		private string m_ModelName;
@@ -20,7 +17,7 @@ namespace GarageLogic
         private List<Wheel> m_Tires;
         private int m_NumberOfWheels;
         private eVehicleStatus m_VehicleStatus;
-        internal Dictionary<string, string> m_VehicleInformation;
+        
 
         public enum eVehicleStatus
         {
@@ -29,12 +26,15 @@ namespace GarageLogic
             PayedFor
         }
 
-        public virtual void CreateVehicleInformation()
+        public virtual Dictionary<string, string> CreateVehicleInformation()
         {
-            m_VehicleInformation.Add(k_Owner, null);
-            m_VehicleInformation.Add(k_ModelName, null);
-            m_VehicleInformation.Add(k_LicenseNumber, null);
-            m_VehicleInformation.Add(k_VehicleStatus, null);
+            Dictionary<string, string> vehicleInformation = new Dictionary<string, string>();
+            vehicleInformation.Add("Owner Name", m_OwnerName);
+            vehicleInformation.Add("Model Name", m_ModelName);
+            vehicleInformation.Add("License Number", m_LicenseNumber);
+            vehicleInformation.Add("Vehicle Status", m_VehicleStatus.ToString());
+
+            return vehicleInformation;
         }
 
         /*protected Vehicle()
@@ -71,11 +71,11 @@ namespace GarageLogic
 			set { this.m_RemainingEnergyPercentage = value; }
 		}
 
-        public byte NumberOfWheels
+        public int NumberOfWheels
         {
             get { return this.m_NumberOfWheels; }
             set { this.m_NumberOfWheels = value; }
-        } 
+        }
 
         public List<Wheel> Tires
         {
@@ -158,6 +158,13 @@ namespace GarageLogic
                 Tires.Add(tire);
             }
         }
-        private makeSingleWheel
+
+        public void InflateTiresToMax()
+        {
+            foreach(Wheel tire in m_Tires)
+            {
+                tire.InflateAction(tire.MaxAirPressure - tire.CurrentAirPressure);
+            }
+        }
     }
 }

@@ -10,9 +10,6 @@ namespace GarageLogic
 		private List<Vehicle> m_GarageVehicles;
 
 
-
-
-
 		/*** Getters and Setters ***/
 
 		public List<Vehicle> GarageVehicles
@@ -56,9 +53,18 @@ namespace GarageLogic
 		}
 
 		/* 5) Refuel a vehicle */
-        public void RefuelVehicle(Vehicle i_Vehicle, FuelBasedEngine.eFuelType i_FuelType, float i_AmountToRefuel)
+        public void RefuelVehicle(string i_LicenseNumber, FuelBasedEngine.eFuelType i_FuelType, float i_AmountToRefuel)
 		{
-			
+            Vehicle vehicle;
+            GetVehicle(i_LicenseNumber, out vehicle);
+
+            if(vehicle == null)
+            {
+                throw new System.ArgumentException("This vehicle doesn't exist in the garage.");
+            }
+            // TODO: check if vehicle fuel based
+
+            FuelBasedEngine.Refuel(i_AmountToRefuel, i_FuelType, ref vehicle);
 		}
 
 		/* 6) Charge a electric vehice. */
@@ -68,18 +74,39 @@ namespace GarageLogic
 		}
 
 		/* 7) Display vehicle information */
-        public string DisplayVehicleInformation()
+        public void DisplayVehicleInformation(Vehicle i_Vehicle)
 		{
-			//Display vehicle information 
+            //Display vehicle information 
             //(License number, Model name, Owner name, 
             //Status in garage, Tire specifications (manufacturer and air pressure),
             //Fuel status + Fuel type / Battery status, other relevant information based on vehicle type)
 
-			return null;
+            Dictionary<string, string> vehicleInformation = i_Vehicle.CreateVehicleInformation();
+            Dictionary<string, string>.KeyCollection keys = vehicleInformation.Keys;
+
+            foreach(string key in keys)
+            {
+
+            }
 		}
 
+        public bool GetVehicle(string i_LicenseNumber, out Vehicle o_Vehicle)
+        {
+            bool vehicleExists = false;
+            o_Vehicle = null;
 
+            foreach(Vehicle vehicle in m_GarageVehicles)
+            {
+                if(i_LicenseNumber == vehicle.LicenseNumber)
+                {
+                    vehicleExists = true;
+                    o_Vehicle = vehicle;
+                    break;
+                }
+            }
 
+            return vehicleExists;
+        }
 
 
     }
