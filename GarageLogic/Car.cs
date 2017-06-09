@@ -5,14 +5,17 @@ namespace GarageLogic
 	public abstract class Car : Vehicle
 	{
 
-		/*** Data Members ***/
-	
+        /*** Data Members ***/
+
+        private const float k_MaxAirPressureCar = 30.0f;
+        private const int k_NumberOfWheelsForCar = 4;
+
 		private eColor m_Color;
         private eNumOfDoors m_NumberOfDoors;
         
         public Car()
         {
-            this.NumberOfWheels = 4;
+            this.Wheels = CreateWheels(k_NumberOfWheelsForCar, k_MaxAirPressureCar);
         }
 
         public override void CreateVehicleInformation()

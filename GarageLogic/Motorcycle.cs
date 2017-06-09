@@ -5,6 +5,9 @@ namespace GarageLogic
     public abstract class Motorcycle : Vehicle
     {
         /*** Data Members ***/
+        private const float k_MaxAirPressureForMotorcycle = 33.0f;
+        private const int k_NumberOfWheelsForMotorcycle = 2;
+
         private float m_EngineVolume;
         private eLicenseType m_LicenceType;
         
@@ -13,9 +16,7 @@ namespace GarageLogic
 
         public Motorcycle()
         {
-            this.NumberOfWheels = 2;
-            this.Tire.MaxAirPressure = 33f;
-            this.CreateTires(NumberOfWheels, Tire);
+            this.Wheels = CreateWheels(k_NumberOfWheelsForMotorcycle, k_MaxAirPressureForMotorcycle);
         }
 
         /*** Getters and Setters***/

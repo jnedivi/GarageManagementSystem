@@ -32,19 +32,19 @@ namespace GarageLogic
             //TODO: add new vehicle (if does not exits already)
 		}
 
-		/* 2) Display list of licence numbers */
-        public string DisplayListOfLicenceNumbers(eVehicleStatus i_Status)
-		{
-            //TODO: filter and display list 
+		///* 2) Display list of licence numbers */
+  //      public string DisplayListOfLicenceNumbers(eVehicleStatus i_Status)
+		//{
+  //          //TODO: filter and display list 
 
-            return null;
-		}
+  //          return null;
+		//}
 
-		/* 3) Change a Vehicle's status */
-        public void ChangeVehicleStatus(Vehicle i_Vehicle , eVehicleStatus i_Status)
-		{
+		///* 3) Change a Vehicle's status */
+  //      public void ChangeVehicleStatus(Vehicle i_Vehicle , eVehicleStatus i_Status)
+		//{
             
-		}
+		//}
 
 		/* 4) Inflate tires */
 		public void InflateTiresToMax(Vehicle i_Vehicle)

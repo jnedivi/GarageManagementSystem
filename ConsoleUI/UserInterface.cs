@@ -1,4 +1,4 @@
-﻿﻿using GarageLogic;
+﻿﻿﻿using GarageLogic;
 using System;
 using System.Text;
 namespace ConsoleUI
@@ -8,27 +8,18 @@ namespace ConsoleUI
 
         private Garage m_Garage;
 
-      
-
         public void startGarage()
         {
-
-            Menu m = new Menu();
-
-            System.Console.WriteLine(m.mainMenu());
-
-
-            
-
+            mainMenu();
         }
 
 
         private void mainMenu()
         {
 
-            Menu mainMenu = new Menu();
+          
 
-            System.Console.WriteLine(mainMenu.mainMenu());
+            System.Console.WriteLine(UserMessages.MainMenuMessage());
 
             string userMainMenuInput = System.Console.ReadLine();
             int mainMenuInputNumber;
@@ -85,22 +76,46 @@ namespace ConsoleUI
 		/* 1) Insert new Vehicle into Garage */
 		private void insertNewVehicleIntoGarage()
         {
-            StringBuilder insertMessage = new StringBuilder();
-            insertMessage.AppendLine("Insert a new vehicle into garage:");
-            insertMessage.AppendLine("Please Select a Vehile type you wish to insert:");
-            insertMessage.AppendLine("1) Fuel-Based Motorcycle");
-            insertMessage.AppendLine("2) Electric Motorcycle");
-            insertMessage.AppendLine("3) Fuel-Based Car");
-            insertMessage.AppendLine("4) Electric Car");
-            insertMessage.AppendLine();
+         
+            System.Console.WriteLine(UserMessages.InsertNewVehicleIntoGarageMessage());
                                                 
             string userInputVehicleType = System.Console.ReadLine();
             int vehicleTypeNumber;
             while(!isValidVehicleTypeInput(userInputVehicleType , out vehicleTypeNumber))
             {
 				System.Console.WriteLine("Invalid Input. Please enter the number of the task you wish to complete.");
-				//userMainMenuInput = System.Console.ReadLine();
+				userInputVehicleType = System.Console.ReadLine();
             }
+            Vehicle vehicleToAdd;
+			switch (vehicleTypeNumber)
+			{
+				case 1:
+                    /* 1) Fuel-Based Motorcycle */
+                    vehicleToAdd = new FuelBasedMotorcycle();
+					break;
+				case 2:
+					/* 2) Electric Motorcycle */
+                    vehicleToAdd = new ElectricMotorcycle();
+					break;
+				case 3:
+					/* 3) Fuel-Based Car */
+                    vehicleToAdd = new FuelBasedCar();
+					break;
+				case 4:
+					/* 4) Electric Car */
+                    vehicleToAdd = new ElectricCar();
+					break;
+				case 5:
+					/* 5) Fuel-Based Truck */
+                    vehicleToAdd = new FuelBasedTruck();
+					break;
+                default:
+                    /* 5) back to main menu */
+                    mainMenu();
+                    return; 
+			}
+
+            //TODO: get new licence number and insert new vehicle
 
         }
 
@@ -110,13 +125,12 @@ namespace ConsoleUI
 		}
 
 
-
 		/* 2) Display list of licence numbers */
 		private void displayListOfLicenceNumbers()
 		{
 			string insertMessage = string.Format("Display List Of Licence Numbers. Please choose a filter:{0} " +
                                                  "{1} ", System.Environment.NewLine);
-            this.m_Garage.DisplayListOfLicenceNumbers(i_Status: Garage.eVehicleStatus.InRepair);
+          //  this.m_Garage.DisplayListOfLicenceNumbers(i_Status: Garage.eVehicleStatus.InRepair);
 		}
 
         /* 3) Change a Vehicle's status */
@@ -153,14 +167,13 @@ namespace ConsoleUI
 
 
 
-    public class Menu {
+    public static class UserMessages {
 
 
-        public string mainMenu()
+        public static string MainMenuMessage()
         {
           
-
-            string message = string.Format(
+            string mainMenuMessage = string.Format(
                 @"Main Menu
 Please Select a task number you wish to complete:
 1) Insert new Vehicle into Garage.
@@ -170,10 +183,25 @@ Please Select a task number you wish to complete:
 5) Refuel a vehicle.
 6) Charge a electric vehice.
 7) Display vehicle information.");
+            
+            return mainMenuMessage;
+        }
 
+        public static StringBuilder InsertNewVehicleIntoGarageMessage()
+        {
 
+            StringBuilder InsertNewVehicleMessage = new StringBuilder();
+			InsertNewVehicleMessage.AppendLine("Insert a new vehicle into garage:");
+			InsertNewVehicleMessage.AppendLine("Please Select a Vehile type you wish to insert:");
+			InsertNewVehicleMessage.AppendLine("1) Fuel-Based Motorcycle");
+			InsertNewVehicleMessage.AppendLine("2) Electric Motorcycle");
+			InsertNewVehicleMessage.AppendLine("3) Fuel-Based Car");
+			InsertNewVehicleMessage.AppendLine("4) Electric Car");
+			InsertNewVehicleMessage.AppendLine("5) Fuel-Based Truck");
+			InsertNewVehicleMessage.AppendLine("6) Back to Main Menu");
 
-            return message;
+            return InsertNewVehicleMessage;
+
         }
 
 
