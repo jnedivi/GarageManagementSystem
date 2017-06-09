@@ -14,8 +14,8 @@ namespace GarageLogic
         private string m_LicenseNumber;
         private string m_OwnerName;
         private float m_RemainingEnergyPercentage;
-        private List<Wheel> m_Tires;
-        private int m_NumberOfWheels;
+        private List<Wheel> m_Wheels;
+        //private int m_NumberOfWheels;
         private eVehicleStatus m_VehicleStatus;
         
 
@@ -37,13 +37,13 @@ namespace GarageLogic
             return vehicleInformation;
         }
 
-        /*protected Vehicle()
+        protected Vehicle()
         {
             m_ModelName = string.Empty;
             m_LicenseNumber = string.Empty;
             m_RemainingEnergyPercentage = 0.0f;
             m_RemainingEnergyPercentage = 0.0f;
-        }*/
+        }
 
 		/*** Getters and Setters ***/
 
@@ -71,16 +71,16 @@ namespace GarageLogic
 			set { this.m_RemainingEnergyPercentage = value; }
 		}
 
-        public int NumberOfWheels
+        /*public int NumberOfWheels
         {
             get { return this.m_NumberOfWheels; }
             set { this.m_NumberOfWheels = value; }
-        }
+        }*/
 
-        public List<Wheel> Tires
+        public List<Wheel> Wheels
         {
-            get { return this.m_Tires; }
-            protected set { this.m_Tires = value; }
+            get { return this.m_Wheels; }
+            set { this.m_Wheels = value; }
         }
 
         public eVehicleStatus VehicleStatus
@@ -92,7 +92,7 @@ namespace GarageLogic
 		/*** Class Logic ***/
 
 		/*** Nested Class ***/
-		private class Wheel
+		public class Wheel
         {
 
 			/*** Data Members ***/
@@ -115,18 +115,13 @@ namespace GarageLogic
 				get { return this.m_ManufacturerName; }
 				set { this.m_ManufacturerName = value; }
 			}
+
 			public float CurrentAirPressure
 			{
 				get { return this.m_CurrentAirPressure; }
-				set {
-                    float airPressureValue;
-                    try
-                    {
-                        this.m_CurrentAirPressure = value;
-                    }
-                    
-                }
+				set { this.m_CurrentAirPressure = value; } 
 			}
+
 			public float MaxAirPressure
 			{
 				get { return this.m_MaxAirPressure; }
@@ -152,16 +147,16 @@ namespace GarageLogic
         public void CreateTires(int i_NumOfWheels, Wheel i_Tire)
         {
 
-            for (int i = 0; i < this.NumberOfWheels; i++)
+            for (int i = 0; i < i_NumOfWheels; i++)
             {
                 Wheel tire = i_Tire;
-                Tires.Add(tire);
+                Wheels.Add(tire);
             }
         }
 
-        public void InflateTiresToMax()
+        public void InflateAllTiresToMax()
         {
-            foreach(Wheel tire in m_Tires)
+            foreach(Wheel tire in m_Wheels)
             {
                 tire.InflateAction(tire.MaxAirPressure - tire.CurrentAirPressure);
             }
