@@ -1,5 +1,6 @@
 ﻿﻿using GarageLogic;
 using System;
+using System.Text;
 namespace ConsoleUI
 {
     public class UserInterface
@@ -84,8 +85,15 @@ namespace ConsoleUI
 		/* 1) Insert new Vehicle into Garage */
 		private void insertNewVehicleIntoGarage()
         {
-            string insertMessage = string.Format("Insert a new vehicle into garage:{0} " +
-                                                 "Please Select a Vehile type you wish to insert: ",System.Environment.NewLine);
+            StringBuilder insertMessage = new StringBuilder();
+            insertMessage.AppendLine("Insert a new vehicle into garage:");
+            insertMessage.AppendLine("Please Select a Vehile type you wish to insert:");
+            insertMessage.AppendLine("1) Fuel-Based Motorcycle");
+            insertMessage.AppendLine("2) Electric Motorcycle");
+            insertMessage.AppendLine("3) Fuel-Based Car");
+            insertMessage.AppendLine("4) Electric Car");
+            insertMessage.AppendLine();
+                                                
             string userInputVehicleType = System.Console.ReadLine();
             int vehicleTypeNumber;
             while(!isValidVehicleTypeInput(userInputVehicleType , out vehicleTypeNumber))
@@ -98,7 +106,7 @@ namespace ConsoleUI
 
 		private bool isValidVehicleTypeInput(string i_UserInput, out int o_MainMenuNumber)
 		{
-			return int.TryParse(i_UserInput, out o_MainMenuNumber) && o_MainMenuNumber >= 1 && o_MainMenuNumber <= 8;
+			return int.TryParse(i_UserInput, out o_MainMenuNumber) && o_MainMenuNumber >= 1 && o_MainMenuNumber <= 5;
 		}
 
 
@@ -106,7 +114,9 @@ namespace ConsoleUI
 		/* 2) Display list of licence numbers */
 		private void displayListOfLicenceNumbers()
 		{
-
+			string insertMessage = string.Format("Display List Of Licence Numbers. Please choose a filter:{0} " +
+                                                 "{1} ", System.Environment.NewLine);
+            this.m_Garage.DisplayListOfLicenceNumbers(i_Status: Garage.eVehicleStatus.InRepair);
 		}
 
         /* 3) Change a Vehicle's status */
