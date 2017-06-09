@@ -4,38 +4,37 @@ namespace GarageLogic
 	public class FuelBasedEngine
 	{
 
+        
 		/*** Data Members ***/
-
 		private float m_CurrentAmountOfFuel;
 		private float m_MaxAmountOfFuel;
-        private bool m_IsFullAmountOfFuel;
         private eFuelType m_FuelType;
 
+        public FuelBasedEngine(float i_CurrentAmountOfFuel, float i_MaxAmountOfFuel, eFuelType i_FuelType)
+        {
+            if ((i_CurrentAmountOfFuel > i_MaxAmountOfFuel) || (i_CurrentAmountOfFuel < 0))
+            {
+                throw new ValueOutOfRangeException("Current Amount Of Fuel", 0.0f, i_MaxAmountOfFuel);
+            }
 
-		/*** Getters and Setters ***/
+            m_CurrentAmountOfFuel = i_CurrentAmountOfFuel;
+            m_MaxAmountOfFuel = i_MaxAmountOfFuel;
+            m_FuelType = i_FuelType;
+        }
 
-		public float CurrentAmountOfFuel
-		{
-			get { return this.m_CurrentAmountOfFuel; }
-			set { this.m_CurrentAmountOfFuel = value; }
-		}
-		public float MaxAmountOfFuel
+        /*** Getters and Setters ***/
+
+        public float MaxAmountOfFuel
 		{
 			get { return this.m_MaxAmountOfFuel; }
 			set { this.m_MaxAmountOfFuel = value; }
 		}
-		public bool IsFullAmountOfFuel
-		{
-			get { return this.m_IsFullAmountOfFuel; }
-			set { this.m_IsFullAmountOfFuel = value; }
-		}
+
 		public eFuelType FuelType
 		{
 			get { return this.m_FuelType; }
 			set { this.m_FuelType = value; }
 		}
-
-	
 
 		public enum eFuelType
 		{
@@ -45,16 +44,15 @@ namespace GarageLogic
 			Octane98
 		};
 
-
-
         /*** Class Logic ***/
 
 
         public void Refuel(float i_FuelToAdd, eFuelType i_FuelType, ref Vehicle io_Vehicle)
         {
-            if (((CurrentAmountOfFuel + i_FuelToAdd) > MaxAmountOfFuel) || i_FuelToAdd < 0)
+
+            if (((m_CurrentAmountOfFuel + i_FuelToAdd) > MaxAmountOfFuel) || i_FuelToAdd < 0)
 			{
-                throw new ValueOutOfRangeException("Fuel based engine", 0f, MaxAmountOfFuel - CurrentAmountOfFuel);
+                throw new ValueOutOfRangeException("Fuel based engine", 0f, MaxAmountOfFuel - m_CurrentAmountOfFuel);
 			}
 
             if(i_FuelType != this.FuelType)
@@ -63,8 +61,17 @@ namespace GarageLogic
                 throw new System.ArgumentException("Wrong fuel type for this engine", givenFuelType);
             }
 
-            CurrentAmountOfFuel += i_FuelToAdd;
-            io_Vehicle.RemainingEnergyPercentage = ((CurrentAmountOfFuel / MaxAmountOfFuel) * 100);
+            m_CurrentAmountOfFuel += i_FuelToAdd;
+            io_Vehicle.RemainingEnergyPercentage = ((m_CurrentAmountOfFuel / MaxAmountOfFuel) * 100);
 		}
-	}
+
+        public override string ToString()
+        {
+            string output = string.Format(@"Current Amount Of Fuel In Liters: {0}
+Max Amount Of Fuel In Liters: {1}
+Fuel Type: {2}", m_CurrentAmountOfFuel, MaxAmountOfFuel, FuelType);
+
+            return output;
+        }
+    }
 }

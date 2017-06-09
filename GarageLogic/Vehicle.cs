@@ -8,10 +8,6 @@ namespace GarageLogic
     {
         /*** Data Members ***/
 
-        private const string k_LicenseNumber = "License Number:";
-        private const string k_ModelName = "Model Name:";
-        private const string k_Owner = "Owner:";
-        private const string k_VehicleStatus = "Vehicle Status:";
         private const byte k_LegalLicenseNumberLength = 7;
         private const byte k_MinPhoneNumLength = 6;
         private const byte k_MaxPhoneNumLength = 9;
@@ -19,7 +15,7 @@ namespace GarageLogic
         private string m_ModelName;
         private string m_LicenseNumber;
         private string m_OwnerName;
-        private string m_OwnerPhone;
+        private string m_OwnerPhoneNumber;
         private float m_RemainingEnergyPercentage;
         private List<Wheel> m_Wheels;
         private eVehicleStatus m_VehicleStatus;
@@ -29,6 +25,54 @@ namespace GarageLogic
             InRepair,
             Repaired,
             PayedFor
+        }
+
+        private static bool isLegalLicenseNumber(string i_LicenseNumber)
+        {
+            bool isLegal = false;
+
+            if (i_LicenseNumber.Length == k_LegalLicenseNumberLength)
+            {
+                isLegal = true;
+
+                foreach(char character in i_LicenseNumber)
+                {
+                    isLegal = isLegal && char.IsDigit(character);
+                }
+
+                if (!isLegal)
+                {
+                    throw new System.ArgumentException("License Number");
+                }
+            }
+
+            return isLegal;
+        }
+
+        private static bool isLegalPhoneNumber(string i_PhoneNumber)
+        {
+            bool isLegal = false;
+
+            if(!((i_PhoneNumber.Length >= k_MinPhoneNumLength) && (i_PhoneNumber.Length <= k_MaxPhoneNumLength)))
+            {
+                throw new ValueOutOfRangeException("Phone Number", k_MinPhoneNumLength, k_MaxPhoneNumLength);
+            }
+            else
+            {
+                isLegal = true;
+
+                foreach(char digit in i_PhoneNumber)
+                {
+                    isLegal = isLegal && char.IsDigit(digit);
+                }
+
+                if (!isLegal)
+                {
+                    throw new System.ArgumentException("Phone Number");
+                }
+            }
+
+            return isLegal;
         }
 
         public virtual Dictionary<string, string> CreateVehicleInformation()
@@ -62,7 +106,30 @@ namespace GarageLogic
             get { return this.m_LicenseNumber; }
             set
             {
+                bool isLegal = isLegalLicenseNumber(value);
+
+                if (!isLegal)
+                {
+                    throw new System.ArgumentException("License Number");
+                }
+
                 this.m_LicenseNumber = value;
+            }
+        }
+
+        public string OwnerPhoneNumber
+        {
+            get { return this.m_OwnerPhoneNumber; }
+            set
+            {
+                bool isLegal = isLegalPhoneNumber(value);
+
+                if (!isLegal)
+                {
+                    throw new System.ArgumentException("Owner Phone Number");
+                }
+
+                this.m_OwnerPhoneNumber = value;
             }
         }
 
@@ -81,7 +148,7 @@ namespace GarageLogic
         public List<Wheel> Wheels
         {
             get { return this.m_Wheels; }
-            set { this.m_Wheels = value; }
+            protected set { this.m_Wheels = value; }
         }
 
         public eVehicleStatus VehicleStatus
@@ -102,10 +169,6 @@ namespace GarageLogic
             private string m_ManufacturerName;
             private float m_CurrentAirPressure;
             private float m_MaxAirPressure;
-
-
-
-
 
             /*** Getters and Setters ***/
 

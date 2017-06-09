@@ -7,12 +7,12 @@ namespace GarageLogic
     {
         /*** Data Members ***/
         private List<Dictionary<string, object>> m_Garage;
-		private List<Vehicle> m_GarageVehicles;
+		private Dictionary<string, Vehicle> m_GarageVehicles;
 
 
 		/*** Getters and Setters ***/
 
-		public List<Vehicle> GarageVehicles
+		public Dictionary<string, Vehicle> GarageVehicles
 		{
 			get { return this.m_GarageVehicles; }
 			set { this.m_GarageVehicles = value; }
@@ -32,19 +32,19 @@ namespace GarageLogic
             //TODO: add new vehicle (if does not exits already)
 		}
 
-		///* 2) Display list of licence numbers */
-  //      public string DisplayListOfLicenceNumbers(eVehicleStatus i_Status)
-		//{
-  //          //TODO: filter and display list 
+		/* 2) Display list of licence numbers */
+        public string DisplayListOfLicenceNumbers(eVehicleStatus i_Status)
+		{
+            //TODO: filter and display list 
 
-  //          return null;
-		//}
+            return null;
+		}
 
-		///* 3) Change a Vehicle's status */
-  //      public void ChangeVehicleStatus(Vehicle i_Vehicle , eVehicleStatus i_Status)
-		//{
+		/* 3) Change a Vehicle's status */
+        public void ChangeVehicleStatus(Vehicle i_Vehicle , eVehicleStatus i_Status)
+		{
             
-		//}
+		}
 
 		/* 4) Inflate tires */
 		public void InflateTiresToMax(Vehicle i_Vehicle)

@@ -29,6 +29,5 @@ namespace GarageLogic
 			get { return this.m_HasHazardousMaterials; }
 			set { this.m_HasHazardousMaterials = value; }
 		}
-
     }
 }

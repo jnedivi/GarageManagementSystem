@@ -18,11 +18,11 @@ namespace GarageLogic
             this.Wheels = CreateWheels(k_NumberOfWheelsForCar, k_MaxAirPressureCar);
         }
 
-        public override void CreateVehicleInformation()
+        /*public override void CreateVehicleInformation()
         {
             base.CreateVehicleInformation();
             this.m
-        }
+        }*/
 
         /*** Getters and Setters***/
 
@@ -37,8 +37,6 @@ namespace GarageLogic
 			get { return this.m_NumberOfDoors; }
 			set { this.m_NumberOfDoors = value; }
 		}
-
-
 
 		public enum eColor
 		{
