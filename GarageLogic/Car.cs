@@ -18,7 +18,7 @@ namespace GarageLogic
         public override void CreateVehicleInformation()
         {
             base.CreateVehicleInformation();
-            this.m
+            //this.m
         }
 
         /*** Getters and Setters***/

@@ -14,8 +14,8 @@ namespace GarageLogic
         public Motorcycle()
         {
             this.NumberOfWheels = 2;
-            this.Tire.MaxAirPressure = 33f;
-            this.CreateTires(NumberOfWheels, Tire);
+            this.Tires.MaxAirPressure = 33f;
+            this.CreateTires(NumberOfWheels, Tires);
         }
 
         /*** Getters and Setters***/

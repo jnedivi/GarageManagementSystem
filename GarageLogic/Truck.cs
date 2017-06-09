@@ -13,8 +13,8 @@ namespace GarageLogic
         public Truck()
         {
             this.NumberOfWheels = 12;
-            this.Tire.MaxAirPressure = 32f;
-            this.CreateTires(NumberOfWheels, this.Tire);
+            this.Tires.MaxAirPressure = 32f;
+            this.CreateTires(NumberOfWheels, this.Tires);
         }
 
         /*** Getters and Setters***/

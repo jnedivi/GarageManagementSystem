@@ -7,17 +7,32 @@ namespace GarageLogic
     public abstract class Vehicle
     {
         /*** Constants ***/
+<<<<<<< Updated upstream
         
 		/*** Data Members ***/
+=======
+        private const string k_LicenseNumber = "License Number:";
+        private const string k_ModelName = "Model Name:";
+        private const string k_Owner = "Owner:";
+        private const string k_VehicleStatus = "Vehicle Status:";
+        /*** Data Members ***/
+>>>>>>> Stashed changes
 
-		private string m_ModelName;
+        private string m_ModelName;
         private string m_LicenseNumber;
         private string m_OwnerName;
         private float m_RemainingEnergyPercentage;
-        private List<Wheel> m_Tires;
+       // private List<Vehicle.Wheel> m_Tires;
+        private Vehicle.Wheel m_Tires;
+
         private int m_NumberOfWheels;
         private eVehicleStatus m_VehicleStatus;
+<<<<<<< Updated upstream
         
+=======
+
+        internal Dictionary<string, string> m_VehicleInformation;
+>>>>>>> Stashed changes
 
         public enum eVehicleStatus
         {
@@ -45,19 +60,19 @@ namespace GarageLogic
             m_RemainingEnergyPercentage = 0.0f;
         }*/
 
-		/*** Getters and Setters ***/
+        /*** Getters and Setters ***/
 
-		public string ModelName
-		{
-			get { return this.m_ModelName; }
-			set { this.m_ModelName = value; }
-		}
+        public string ModelName
+        {
+            get { return this.m_ModelName; }
+            set { this.m_ModelName = value; }
+        }
 
-		public string LicenseNumber
-		{
-			get { return this.m_LicenseNumber; }
-			set { this.m_LicenseNumber = value; }
-		}
+        public string LicenseNumber
+        {
+            get { return this.m_LicenseNumber; }
+            set { this.m_LicenseNumber = value; }
+        }
 
         public string OwnerName
         {
@@ -65,12 +80,13 @@ namespace GarageLogic
             set { this.m_OwnerName = value; }
         }
 
-		public float RemainingEnergyPercentage
-		{
-			get { return this.m_RemainingEnergyPercentage; }
-			set { this.m_RemainingEnergyPercentage = value; }
-		}
+        public float RemainingEnergyPercentage
+        {
+            get { return this.m_RemainingEnergyPercentage; }
+            set { this.m_RemainingEnergyPercentage = value; }
+        }
 
+<<<<<<< Updated upstream
         public int NumberOfWheels
         {
             get { return this.m_NumberOfWheels; }
@@ -81,7 +97,25 @@ namespace GarageLogic
         {
             get { return this.m_Tires; }
             protected set { this.m_Tires = value; }
+=======
+        public int NumberOfWheels //byte
+        {
+            get { return this.m_NumberOfWheels; }
+            set { this.m_NumberOfWheels = value; }
+>>>>>>> Stashed changes
         }
+
+        //public List<Vehicle.Wheel> Tires
+        //{
+        //    get { return this.m_Tires; }
+        //    protected set { this.m_Tires = value; }
+        //}
+
+		public Vehicle.Wheel Tires
+		{
+			get { return this.m_Tires; }
+			protected set { this.m_Tires = value; }
+		}
 
         public eVehicleStatus VehicleStatus
         {
@@ -89,18 +123,18 @@ namespace GarageLogic
             set { this.m_VehicleStatus = value; }
         }
 
-		/*** Class Logic ***/
+        /*** Class Logic ***/
 
-		/*** Nested Class ***/
-		private class Wheel
+        /*** Nested Class ***/
+        public class Wheel
         {
 
-			/*** Data Members ***/
+            /*** Data Members ***/
 
-			private string m_ManufacturerName;
+            private string m_ManufacturerName;
             private float m_CurrentAirPressure;
             private float m_MaxAirPressure;
-            
+
             public Wheel()
             {
                 m_ManufacturerName = string.Empty;
@@ -108,30 +142,35 @@ namespace GarageLogic
                 MaxAirPressure = 0.0f;
             }
 
-			/*** Getters and Setters ***/
+            /*** Getters and Setters ***/
 
-			public string ManufacturerName
-			{
-				get { return this.m_ManufacturerName; }
-				set { this.m_ManufacturerName = value; }
-			}
-			public float CurrentAirPressure
-			{
-				get { return this.m_CurrentAirPressure; }
-				set {
+            public string ManufacturerName
+            {
+                get { return this.m_ManufacturerName; }
+                set { this.m_ManufacturerName = value; }
+            }
+            public float CurrentAirPressure
+            {
+                get { return this.m_CurrentAirPressure; }
+                set
+                {
                     float airPressureValue;
                     try
                     {
                         this.m_CurrentAirPressure = value;
                     }
-                    
+                    catch (Exception e)
+                    {
+
+                    }
+
                 }
-			}
-			public float MaxAirPressure
-			{
-				get { return this.m_MaxAirPressure; }
-				set { this.m_MaxAirPressure = value; }
-			}
+            }
+            public float MaxAirPressure
+            {
+                get { return this.m_MaxAirPressure; }
+                set { this.m_MaxAirPressure = value; }
+            }
 
 
             /*** Class Logic ***/
@@ -149,14 +188,19 @@ namespace GarageLogic
             }
         }
 
-        public void CreateTires(int i_NumOfWheels, Wheel i_Tire)
-        {
+                public void CreateTires(int i_NumOfWheels, Wheel i_Tire)
+                {
 
-            for (int i = 0; i < this.NumberOfWheels; i++)
-            {
-                Wheel tire = i_Tire;
-                Tires.Add(tire);
+                    for (int i = 0; i < this.NumberOfWheels; i++)
+                    {
+                        Wheel tire = i_Tire;
+                // Tires.Add(tire);
+                Tires = tire;
+                    }
+                }
+             //   private makeSingleWheel
             }
+<<<<<<< Updated upstream
         }
 
         public void InflateTiresToMax()
@@ -166,5 +210,7 @@ namespace GarageLogic
                 tire.InflateAction(tire.MaxAirPressure - tire.CurrentAirPressure);
             }
         }
+=======
+>>>>>>> Stashed changes
     }
-}
+
