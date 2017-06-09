@@ -15,13 +15,18 @@ namespace GarageLogic
             set { this.m_ElectricEngine = value; }
         }
 
+        public override void CreateVehicleInformation()
+        {
+            base.CreateVehicleInformation();
+        }
+
         /*** Class Logic ***/
 
         //4 tires with max air pressure of 30 (psi), Max battery life – 2.5 hours
 
         public ElectricCar()
         {
-            this.ElectricEngine.MaxTimeOfOperation = 2.7f;
+            this.ElectricEngine.MaxBatteryLife = 2.7f;
         }
     }
 }

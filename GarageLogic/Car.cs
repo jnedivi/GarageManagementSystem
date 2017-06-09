@@ -2,24 +2,28 @@
 namespace GarageLogic
 {
 
-	public class Car : Vehicle
+	public abstract class Car : Vehicle
 	{
 
 		/*** Data Members ***/
 	
 		private eColor m_Color;
         private eNumOfDoors m_NumberOfDoors;
-
+        
         public Car()
         {
             this.NumberOfWheels = 4;
-            this.Tire.MaxAirPressure = 30f;
-            this.CreateTires(NumberOfWheels, this.Tire);
         }
 
-		/*** Getters and Setters***/
+        public override void CreateVehicleInformation()
+        {
+            base.CreateVehicleInformation();
+            this.m
+        }
 
-		public eColor Color
+        /*** Getters and Setters***/
+
+        public eColor Color
         {
             get { return this.m_Color; }
             set { this.m_Color = value; }
@@ -43,7 +47,7 @@ namespace GarageLogic
 
 		public enum eNumOfDoors
 		{
-			Two,
+			Two = 2,
 			Three,
 			Four,
 			Five,
