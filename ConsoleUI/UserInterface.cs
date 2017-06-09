@@ -131,17 +131,29 @@ namespace ConsoleUI
 			string insertMessage = string.Format("Display List Of Licence Numbers. Please choose a filter:{0} " +
                                                  "{1} ", System.Environment.NewLine);
           //  this.m_Garage.DisplayListOfLicenceNumbers(i_Status: Garage.eVehicleStatus.InRepair);
+            //TODO: get input from garage 
 		}
 
         /* 3) Change a Vehicle's status */
 		private void changeVehicleStatus()
 		{
+            string licenceNumber;
+            this.promptUserForLicenseNumber(out licenceNumber);
+
+
+
+
 
 		}
+
+		
 
 		/* 4) Inflate tires */
 		private void inflateTires()
 		{
+			string licenceNumber;
+			this.promptUserForLicenseNumber(out licenceNumber);
+
 
 		}
 
@@ -162,6 +174,48 @@ namespace ConsoleUI
 		{
 
 		}
+
+        private Vehicle promptUserForLicenseNumber(out string o_licenceNumber)
+        {
+
+			System.Console.WriteLine("Please enter the licence number of your vehicle:");
+			string licencePlateNumber = System.Console.ReadLine();
+
+			while (!isLegalLicenceNumber(licencePlateNumber)) // might need try catch
+			{
+				System.Console.WriteLine("Invalid input. please enter a legal licence plate");
+				licencePlateNumber = System.Console.ReadLine();
+			}
+            o_licenceNumber = licencePlateNumber;
+
+			Vehicle currentVehicle;
+
+			if (this.m_Garage.GetVehicle(licencePlateNumber, out currentVehicle))
+			{
+
+                //TODO ask for status change 
+
+                return currentVehicle;
+
+			}
+			else
+			{
+				System.Console.WriteLine("Sorry, this vehicle is not in the garage now");
+				//TODO: try again??
+			}
+
+            return null;
+
+        }
+
+        public static bool isLegalLicenceNumber(string i_licence)
+        {
+
+
+
+
+            return false;
+        }
 
 	}
 
@@ -189,7 +243,6 @@ Please Select a task number you wish to complete:
 
         public static StringBuilder InsertNewVehicleIntoGarageMessage()
         {
-
             StringBuilder InsertNewVehicleMessage = new StringBuilder();
 			InsertNewVehicleMessage.AppendLine("Insert a new vehicle into garage:");
 			InsertNewVehicleMessage.AppendLine("Please Select a Vehile type you wish to insert:");
@@ -199,7 +252,6 @@ Please Select a task number you wish to complete:
 			InsertNewVehicleMessage.AppendLine("4) Electric Car");
 			InsertNewVehicleMessage.AppendLine("5) Fuel-Based Truck");
 			InsertNewVehicleMessage.AppendLine("6) Back to Main Menu");
-
             return InsertNewVehicleMessage;
 
         }
@@ -216,3 +268,16 @@ Please Select a task number you wish to complete:
 
     }
 }
+
+/* 
+ * 
+ * 
+ * 2. Display a list of license numbers currently in the garage, with a filtering option
+based on the status of each vehicle
+3. Change a certain vehicle’s status (Prompting the user for the license number and
+new desired status)
+4. Inflate tires to maximum (Prompting the user for the license number)
+5. Refuel a fuel-based vehicle (Prompting the user for the license number, fuel type
+and amount to fill)
+ * 
+ */
