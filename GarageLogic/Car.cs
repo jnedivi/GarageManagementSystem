@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+
 namespace GarageLogic
 {
 
@@ -9,15 +11,11 @@ namespace GarageLogic
 
         private const float k_MaxAirPressureCar = 30.0f;
         private const int k_NumberOfWheelsForCar = 4;
-
+        private const string k_Color = "Color";
+        private const string k_NumberOfDoors = "NumberOfDoors";
 		private eColor m_Color;
         private eNumOfDoors m_NumberOfDoors;
         
-        public Car()
-        {
-            this.Wheels = CreateWheels(k_NumberOfWheelsForCar, k_MaxAirPressureCar);
-        }
-
         /*public override void CreateVehicleInformation()
         {
             base.CreateVehicleInformation();
@@ -26,19 +24,51 @@ namespace GarageLogic
 
         /*** Getters and Setters***/
 
-        public eColor Color
+        public String Color
         {
-            get { return this.m_Color; }
-            set { this.m_Color = value; }
+            get { return this.m_Color.ToString(); }
+            set
+            {
+                if(!Enum.IsDefined(typeof(eColor), value))
+                {
+                    throw new FormatException(k_Color);
+                }
+
+                try
+                {
+                    m_Color = (eColor)Enum.Parse(typeof(eColor), value);
+                }
+                catch(ArgumentException)
+                {
+                    throw new ArgumentException(k_Color);
+                }                   
+            }
         }
 
-		public eNumOfDoors NumberOfDoors
+		public String NumberOfDoors
 		{
-			get { return this.m_NumberOfDoors; }
-			set { this.m_NumberOfDoors = value; }
+			get { return this.m_NumberOfDoors.ToString(); }
+			set
+            {
+                if (!Enum.IsDefined(typeof(eNumOfDoors), value))
+                {
+                    throw new FormatException(k_NumberOfDoors);
+                }
+
+                try
+                {
+                    m_NumberOfDoors = (eNumOfDoors)Enum.Parse(typeof(eNumOfDoors), value);
+                }
+                catch (ArgumentException)
+                {
+                    throw new ArgumentException(k_NumberOfDoors);
+                }
+            }
 		}
 
-		public enum eColor
+
+
+        public enum eColor
 		{
 			Yellow,
 			White,
@@ -53,5 +83,23 @@ namespace GarageLogic
 			Four,
 			Five,
 		}
-	}
+
+        public Car()
+        {
+            this.Wheels = CreateWheels(k_NumberOfWheelsForCar, k_MaxAirPressureCar);
+        }
+
+        public override string ToString()
+        {
+            StringBuilder output = new StringBuilder();
+
+            string carOutput = string.Format(@"Color: {0}
+Number Of Doors: {1}", m_Color, m_NumberOfDoors);
+
+            output.Append(base.ToString());
+            output.Append(carOutput);
+
+            return output.ToString();
+        }
+    }
 }

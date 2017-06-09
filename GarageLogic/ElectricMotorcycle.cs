@@ -1,28 +1,36 @@
 ﻿﻿using System;
+using System.Text;
+
 namespace GarageLogic
 {
     public class ElectricMotorcycle : Motorcycle
     {
 
-		/*** Data Members ***/
-
-        private ElectricBasedEngine m_ElectricEngine;
+        /*** Data Members ***/
+        private const float k_MaxBatteryLifeMotorcycle = 2.7f;
+        private readonly ElectricBasedEngine r_ElectricEngine;
 
 		/*** Getters and Setters ***/
-
         public ElectricBasedEngine ElectricEngine
         {
-            get { return this.m_ElectricEngine; }
-            set { this.m_ElectricEngine = value; }
+            get { return this.r_ElectricEngine; }
         }
 
         /*** Class Logic ***/
 
-        //2 tires with max air pressure of 33 (psi), Max battery life – 2.7 hours
-
         public ElectricMotorcycle()
         {
-            this.ElectricEngine.MaxBatteryLife = 2.7f;
+            this.r_ElectricEngine = new ElectricBasedEngine(0.0f, k_MaxBatteryLifeMotorcycle);
+        }
+        
+        public override string ToString()
+        {
+            StringBuilder output = new StringBuilder();
+
+            output.Append(base.ToString());
+            output.Append(r_ElectricEngine.ToString());
+
+            return output.ToString();
         }
     }
 }

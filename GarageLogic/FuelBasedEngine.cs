@@ -14,7 +14,7 @@ namespace GarageLogic
         {
             if ((i_CurrentAmountOfFuel > i_MaxAmountOfFuel) || (i_CurrentAmountOfFuel < 0))
             {
-                throw new ValueOutOfRangeException("Current Amount Of Fuel", 0.0f, i_MaxAmountOfFuel);
+                throw new ValueOutOfRangeException("Fuel Based Engine", 0.0f, i_MaxAmountOfFuel);
             }
 
             m_CurrentAmountOfFuel = i_CurrentAmountOfFuel;
@@ -23,7 +23,7 @@ namespace GarageLogic
         }
 
         /*** Getters and Setters ***/
-
+        
         public float MaxAmountOfFuel
 		{
 			get { return this.m_MaxAmountOfFuel; }
@@ -58,7 +58,7 @@ namespace GarageLogic
             if(i_FuelType != this.FuelType)
             {
                 string givenFuelType = string.Format("{0}", i_FuelType);
-                throw new System.ArgumentException("Wrong fuel type for this engine", givenFuelType);
+                throw new System.ArgumentException("Fuel Based Engine", givenFuelType);
             }
 
             m_CurrentAmountOfFuel += i_FuelToAdd;

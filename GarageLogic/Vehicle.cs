@@ -1,5 +1,6 @@
 ﻿﻿﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace GarageLogic
 {
@@ -8,6 +9,7 @@ namespace GarageLogic
     {
         /*** Data Members ***/
 
+        private const string k_VehicleStatus = "Vehicle Status";
         private const byte k_LegalLicenseNumberLength = 7;
         private const byte k_MinPhoneNumLength = 6;
         private const byte k_MaxPhoneNumLength = 9;
@@ -154,7 +156,15 @@ namespace GarageLogic
         public eVehicleStatus VehicleStatus
         {
             get { return this.m_VehicleStatus; }
-            set { this.m_VehicleStatus = value; }
+            set
+            {
+                if (!Enum.IsDefined(typeof(eVehicleStatus), value))
+                {
+                    throw new FormatException(k_VehicleStatus);
+                }
+
+                m_VehicleStatus = value;
+            }
         }
 
         /*** Class Logic ***/
@@ -228,6 +238,15 @@ namespace GarageLogic
 
                 return wheel;
             }
+
+            public override string ToString()
+            {
+                string output = string.Format(@"Manufacturer Name: {0}
+Current Air Pressure: {1}
+Maximum Air Pressure: {2}", m_ManufacturerName, m_CurrentAirPressure, m_MaxAirPressure);
+
+                return output;
+            }
         }
 
         public List<Wheel> CreateWheels(int i_NumOfWheels, float i_MaxAirPressure)
@@ -248,6 +267,36 @@ namespace GarageLogic
             {
                 tire.InflateAction(tire.MaxAirPressure - tire.CurrentAirPressure);
             }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder output = new StringBuilder();
+
+            string vehicleOutput = string.Format(@"Owner Name: {0}
+Phone Number: {1}
+Model Name: {2}
+License Number: {3}
+Remaining Energy Percentage: {4}%
+Vehicle Status: {5}
+", m_OwnerName, m_OwnerPhoneNumber ,m_ModelName, m_LicenseNumber, m_RemainingEnergyPercentage, m_VehicleStatus);
+
+            output.Append(vehicleOutput);
+            output.Append(Environment.NewLine);
+            output.Append("Wheels: ");
+            output.Append(Environment.NewLine);
+
+            int wheelIndex = 1;
+            foreach(Wheel wheel in Wheels)
+            {
+                string wheelOutput = string.Format(@"Wheel {0}: 
+{1}
+", wheelIndex, wheel.ToString());
+                output.Append(wheelOutput);
+                wheelIndex++;
+            }
+
+            return output.ToString();
         }
     }
 }

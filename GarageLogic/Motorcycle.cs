@@ -1,4 +1,6 @@
 ﻿﻿using System;
+using System.Text;
+
 namespace GarageLogic
 {
 
@@ -12,12 +14,6 @@ namespace GarageLogic
         private eLicenseType m_LicenceType;
         
 
-
-
-        public Motorcycle()
-        {
-            this.Wheels = CreateWheels(k_NumberOfWheelsForMotorcycle, k_MaxAirPressureForMotorcycle);
-        }
 
         /*** Getters and Setters***/
         public eLicenseType LicenceType
@@ -40,5 +36,23 @@ namespace GarageLogic
             A2,
             B1,
         };
+
+        public Motorcycle()
+        {
+            this.Wheels = CreateWheels(k_NumberOfWheelsForMotorcycle, k_MaxAirPressureForMotorcycle);
+        }
+
+        public override string ToString()
+        {
+            StringBuilder output = new StringBuilder();
+
+            string motorcycleOutput = string.Format(@"License Type: {0}
+Engine Volume: {1}", m_LicenceType, m_EngineVolume);
+
+            output.Append(base.ToString());
+            output.Append(motorcycleOutput);
+
+            return output.ToString();
+        }
     }
 }

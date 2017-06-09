@@ -7,10 +7,8 @@ namespace GarageLogic
         /*** Data Members ***/
         private const float k_MaxAirPressureTruck = 32.0f;
         private const int k_NumberOfWheelsForTruck = 12;
-
         private float m_MaxWeightAllowed;
         private bool m_HasHazardousMaterials;
-
 
         public Truck()
         {

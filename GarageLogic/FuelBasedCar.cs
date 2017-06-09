@@ -1,14 +1,14 @@
-﻿﻿﻿using System;
+﻿﻿using System;
 using System.Text;
 
 namespace GarageLogic
 {
-    public class FuelBasedMotorcycle : Motorcycle
+    public class FuelBasedCar : Car
     {
 
         /*** Data Members ***/
-        private const FuelBasedEngine.eFuelType k_FuelTypeForMotorcycle = FuelBasedEngine.eFuelType.Octance95;
-        private const float k_MaxAmountOfFuelForMotorcycle = 5.5f;
+        private const FuelBasedEngine.eFuelType k_FuelTypeForCar = FuelBasedEngine.eFuelType.Octane98;
+        private const float k_MaxAmountOfFuelForCar = 42.0f;
         private readonly FuelBasedEngine r_FuelEngine;
 
         /*** Getters and Setters ***/
@@ -19,9 +19,9 @@ namespace GarageLogic
 
         /*** Class Logic ***/
 
-        public FuelBasedMotorcycle()
+        public FuelBasedCar()
         {
-            r_FuelEngine = new FuelBasedEngine(0.0f, k_MaxAmountOfFuelForMotorcycle, k_FuelTypeForMotorcycle);
+            r_FuelEngine = new FuelBasedEngine(0.0f, k_MaxAmountOfFuelForCar, k_FuelTypeForCar);
         }
 
         public override string ToString()
