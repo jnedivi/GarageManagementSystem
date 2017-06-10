@@ -15,6 +15,7 @@ namespace GarageLogic
         }
 
         /*** Data Members ***/
+        private const string k_VehicleDoesntExist = "This vehicle is not in the garage";
         private Dictionary<string, Vehicle> m_GarageVehicles;
 
 
@@ -99,7 +100,13 @@ namespace GarageLogic
         public void ChangeVehicleStatus(string i_LicenseNumber , Vehicle.eVehicleStatus i_Status)
 		{
             Vehicle vehicle;
-            GarageVehicles.TryGetValue(i_LicenseNumber, out vehicle);
+            bool isInGarage = GarageVehicles.TryGetValue(i_LicenseNumber, out vehicle);
+
+            if (!isInGarage)
+            {
+                throw new System.ArgumentException(k_VehicleDoesntExist);
+            }
+
             vehicle.VehicleStatus = i_Status;
             GarageVehicles[i_LicenseNumber] = vehicle;
         }
@@ -108,7 +115,13 @@ namespace GarageLogic
 		public void InflateTiresToMax(string i_LicenseNumber)
 		{
             Vehicle vehicle;
-            GarageVehicles.TryGetValue(i_LicenseNumber, out vehicle);
+            bool isInGarage = GarageVehicles.TryGetValue(i_LicenseNumber, out vehicle);
+
+            if (!isInGarage)
+            {
+                throw new System.ArgumentException(k_VehicleDoesntExist);
+            }
+
             vehicle.InflateAllWheelsToMax();
             GarageVehicles[i_LicenseNumber] = vehicle;
         }
@@ -117,11 +130,11 @@ namespace GarageLogic
         public void RefuelVehicle(string i_LicenseNumber, FuelBasedEngine.eFuelType i_FuelType, float i_AmountToRefuel)
 		{
             Vehicle vehicle;
-            GarageVehicles.TryGetValue(i_LicenseNumber, out vehicle);
+            bool isInGarage = GarageVehicles.TryGetValue(i_LicenseNumber, out vehicle);
 
-            if(vehicle == null)
+            if(!isInGarage)
             {
-                throw new System.ArgumentException("This vehicle doesn't exist in the garage.");
+                throw new System.ArgumentException(k_VehicleDoesntExist);
             }
             // TODO: check if vehicle fuel based
 
