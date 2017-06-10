@@ -14,20 +14,20 @@ namespace GarageLogic
         private const byte k_MinPhoneNumLength = 6;
         private const byte k_MaxPhoneNumLength = 9;
 
-        private string m_ModelName;
-        private string m_LicenseNumber;
         private string m_OwnerName;
         private string m_OwnerPhoneNumber;
+        private string m_ModelName;
+        private string m_LicenseNumber;
         private float m_RemainingEnergyPercentage;
         private List<Wheel> m_Wheels;
         private eVehicleStatus m_VehicleStatus;
-
+        
         protected Vehicle()
         {
-            m_ModelName = string.Empty;
-            m_LicenseNumber = string.Empty;
             m_OwnerName = null;
             m_OwnerPhoneNumber = null;
+            m_ModelName = string.Empty;
+            m_LicenseNumber = string.Empty;
             m_RemainingEnergyPercentage = 0.0f;
             m_Wheels = new List<Wheel>();
             m_VehicleStatus = eVehicleStatus.InRepair;
@@ -266,7 +266,7 @@ Maximum Air Pressure: {2}", m_ManufacturerName, m_CurrentAirPressure, m_MaxAirPr
 
             return newWheels;
         }
-
+        
         public void UpdateWheelsManufacturerName(string i_ManufacturerName)
         {
             foreach(Wheel wheel in Wheels)

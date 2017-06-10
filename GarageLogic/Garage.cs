@@ -5,58 +5,119 @@ namespace GarageLogic
 {
     public class Garage
     {
-        /*** Data Members ***/
-        private List<Dictionary<string, object>> m_Garage;
-		private Dictionary<string, Vehicle> m_GarageVehicles;
-
-
-		/*** Getters and Setters ***/
-
-		public Dictionary<string, Vehicle> GarageVehicles
-		{
-			get { return this.m_GarageVehicles; }
-			set { this.m_GarageVehicles = value; }
-		}
-
-
-		public Garage()
+        public enum eVehicleType
         {
+            FuelBasedMotorcycle,
+            FuelBasedCar,
+            ElectricMotorcycle,
+            ElectricCar,
+            FuelBasedTruck
+        }
+
+        /*** Data Members ***/
+        private Dictionary<string, Vehicle> m_GarageVehicles;
+
+
+        /*** Getters and Setters ***/
+
+        public Dictionary<string, Vehicle> GarageVehicles
+        {
+            get { return this.m_GarageVehicles; }
+        }
+
+
+        public Garage()
+        {
+            m_GarageVehicles = new Dictionary<string, Vehicle>();
         }
 
 
         /*** Garage Logic Methods ***/
 
-		/* 1) Insert new Vehicle into Garage */
-        public void InsertNewVehicleIntoGarage(Vehicle i_Vehicle)
-		{
-            //TODO: add new vehicle (if does not exits already)
+        /* 1) Insert new Vehicle into Garage */
+        public void InsertNewVehicleIntoGarage(Vehicle i_Vehicle, )
+        {
+
+        }
+
+        public void CreateVehicleIfNotInGarage(eVehicleType i_VehicleType, string i_LicenseNumber, out bool io_VehicleExists, out Vehicle o_Vehicle)
+        {
+            io_VehicleExists = GarageVehicles.TryGetValue(i_LicenseNumber, out o_Vehicle);
+
+            if (!io_VehicleExists)
+            {
+                switch (i_VehicleType)
+                {
+                    case eVehicleType.FuelBasedMotorcycle:
+                        o_Vehicle = new FuelBasedMotorcycle();
+                        break;
+                    case eVehicleType.ElectricMotorcycle:
+                        o_Vehicle = new ElectricMotorcycle();
+                        break;
+                    case eVehicleType.FuelBasedCar:
+                        o_Vehicle = new FuelBasedCar();
+                        break;
+                    case eVehicleType.ElectricCar:
+                        o_Vehicle = new ElectricCar();
+                        break;
+                    case eVehicleType.FuelBasedTruck:
+                        o_Vehicle = new FuelBasedTruck();
+                        break;
+                    default:
+                        throw new ArgumentException("Vehicle type is not supported");
+                }
+            }
+        }
+
+        /* 2) Display list of licence numbers */
+        public string DisplayListOfLicenceNumbers()
+        { 
+            return GarageVehicles.Keys.ToString();
 		}
 
-		/* 2) Display list of licence numbers */
-        public string DisplayListOfLicenceNumbers(eVehicleStatus i_Status)
-		{
-            //TODO: filter and display list 
+        public string DisplayFilteredListOfLicenseNumbers(Vehicle.eVehicleStatus i_VehicleStatus)
+        {
+            return FilteredVehiclesByStatus(i_VehicleStatus).Keys.ToString();
+        }
 
-            return null;
-		}
+        public Dictionary<string, Vehicle> FilteredVehiclesByStatus(Vehicle.eVehicleStatus i_VehicleStatus)
+        {
+            Dictionary<string, Vehicle> filteredVehicles = new Dictionary<string, Vehicle>();
+
+            foreach(Vehicle vehicle in m_GarageVehicles.Values)
+            {
+                if(vehicle.VehicleStatus == i_VehicleStatus)
+                {
+                    filteredVehicles.Add(vehicle.LicenseNumber, vehicle);
+                }
+            }
+
+            return filteredVehicles;
+        }
 
 		/* 3) Change a Vehicle's status */
-        public void ChangeVehicleStatus(Vehicle i_Vehicle , eVehicleStatus i_Status)
+        public void ChangeVehicleStatus(string i_LicenseNumber , Vehicle.eVehicleStatus i_Status)
 		{
-            
-		}
+            Vehicle vehicle;
+            GarageVehicles.TryGetValue(i_LicenseNumber, out vehicle);
+            vehicle.VehicleStatus = i_Status;
+            GarageVehicles[i_LicenseNumber] = vehicle;
+        }
 
 		/* 4) Inflate tires */
-		public void InflateTiresToMax(Vehicle i_Vehicle)
+		public void InflateTiresToMax(string i_LicenseNumber)
 		{
-            //TODO: inflate to maximum
-		}
+            Vehicle vehicle;
+            GarageVehicles.TryGetValue(i_LicenseNumber, out vehicle);
+            vehicle.InflateAllWheelsToMax();
+            GarageVehicles[i_LicenseNumber] = vehicle;
+        }
 
 		/* 5) Refuel a vehicle */
         public void RefuelVehicle(string i_LicenseNumber, FuelBasedEngine.eFuelType i_FuelType, float i_AmountToRefuel)
 		{
             Vehicle vehicle;
-            GetVehicle(i_LicenseNumber, out vehicle);
+            GarageVehicles.TryGetValue(i_LicenseNumber, out vehicle);
 
             if(vehicle == null)
             {
@@ -64,7 +125,9 @@ namespace GarageLogic
             }
             // TODO: check if vehicle fuel based
 
-            FuelBasedEngine.Refuel(i_AmountToRefuel, i_FuelType, ref vehicle);
+            if(vehicle.)
+
+            vehicle.FuelBasedEngine.Refuel(i_AmountToRefuel, i_FuelType, ref vehicle);
 		}
 
 		/* 6) Charge a electric vehice. */
@@ -74,41 +137,8 @@ namespace GarageLogic
 		}
 
 		/* 7) Display vehicle information */
-        public void DisplayVehicleInformation(Vehicle i_Vehicle)
-		{
-            //Display vehicle information 
-            //(License number, Model name, Owner name, 
-            //Status in garage, Tire specifications (manufacturer and air pressure),
-            //Fuel status + Fuel type / Battery status, other relevant information based on vehicle type)
-
-            Dictionary<string, string> vehicleInformation = i_Vehicle.CreateVehicleInformation();
-            Dictionary<string, string>.KeyCollection keys = vehicleInformation.Keys;
-
-            foreach(string key in keys)
-            {
-
-            }
-		}
-
-        public bool GetVehicle(string i_LicenseNumber, out Vehicle o_Vehicle)
-        {
-            bool vehicleExists = false;
-            o_Vehicle = null;
-
-            foreach(Vehicle vehicle in m_GarageVehicles)
-            {
-                if(i_LicenseNumber == vehicle.LicenseNumber)
-                {
-                    vehicleExists = true;
-                    o_Vehicle = vehicle;
-                    break;
-                }
-            }
-
-            return vehicleExists;
-        }
-
-
+        // toString() method
+  
     }
 }
 
