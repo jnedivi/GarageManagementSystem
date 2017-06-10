@@ -15,7 +15,7 @@ namespace GarageLogic
         }
 
         /*** Data Members ***/
-        private const string k_VehicleDoesntExist = "This vehicle is not in the garage";
+        private const string k_VehicleDoesntExist = "This vehicle is not in the garage.";
         private Dictionary<string, Vehicle> m_GarageVehicles;
 
 
@@ -36,9 +36,9 @@ namespace GarageLogic
         /*** Garage Logic Methods ***/
 
         /* 1) Insert new Vehicle into Garage */
-        public void InsertNewVehicleIntoGarage(Vehicle i_Vehicle, )
+        public void InsertVehicleIntoGarage(Vehicle i_Vehicle)
         {
-
+            GarageVehicles.Add(i_Vehicle.LicenseNumber, i_Vehicle);
         }
 
         public void CreateVehicleIfNotInGarage(eVehicleType i_VehicleType, string i_LicenseNumber, out bool io_VehicleExists, out Vehicle o_Vehicle)
@@ -138,7 +138,7 @@ namespace GarageLogic
             }
             // TODO: check if vehicle fuel based
 
-            if(vehicle.)
+            if(vehicle )
 
             vehicle.FuelBasedEngine.Refuel(i_AmountToRefuel, i_FuelType, ref vehicle);
 		}
