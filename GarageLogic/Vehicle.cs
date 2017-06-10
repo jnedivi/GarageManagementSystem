@@ -22,6 +22,17 @@ namespace GarageLogic
         private List<Wheel> m_Wheels;
         private eVehicleStatus m_VehicleStatus;
 
+        protected Vehicle()
+        {
+            m_ModelName = string.Empty;
+            m_LicenseNumber = string.Empty;
+            m_OwnerName = null;
+            m_OwnerPhoneNumber = null;
+            m_RemainingEnergyPercentage = 0.0f;
+            m_Wheels = new List<Wheel>();
+            m_VehicleStatus = eVehicleStatus.InRepair;
+        }
+
         public enum eVehicleStatus
         {
             InRepair,
@@ -77,7 +88,7 @@ namespace GarageLogic
             return isLegal;
         }
 
-        public virtual Dictionary<string, string> CreateVehicleInformation()
+       /* public virtual Dictionary<string, string> CreateVehicleInformation()
         {
             Dictionary<string, string> vehicleInformation = new Dictionary<string, string>();
             vehicleInformation.Add("Owner Name", m_OwnerName);
@@ -86,14 +97,9 @@ namespace GarageLogic
             vehicleInformation.Add("Vehicle Status", m_VehicleStatus.ToString());
 
             return vehicleInformation;
-        }
+        }*/
 
-        protected Vehicle()
-        {
-            m_ModelName = string.Empty;
-            m_LicenseNumber = string.Empty;
-            m_RemainingEnergyPercentage = 0.0f;
-        }
+
 
         /*** Getters and Setters ***/
 
@@ -261,11 +267,19 @@ Maximum Air Pressure: {2}", m_ManufacturerName, m_CurrentAirPressure, m_MaxAirPr
             return newWheels;
         }
 
+        public void UpdateWheelsManufacturerName(string i_ManufacturerName)
+        {
+            foreach(Wheel wheel in Wheels)
+            {
+                wheel.ManufacturerName = i_ManufacturerName;
+            }
+        }
+
         public void InflateAllWheelsToMax()
         {
-            foreach (Wheel tire in m_Wheels)
+            foreach (Wheel wheel in m_Wheels)
             {
-                tire.InflateAction(tire.MaxAirPressure - tire.CurrentAirPressure);
+                wheel.InflateAction(wheel.MaxAirPressure - wheel.CurrentAirPressure);
             }
         }
 

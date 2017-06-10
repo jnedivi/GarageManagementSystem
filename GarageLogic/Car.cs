@@ -84,9 +84,12 @@ namespace GarageLogic
 			Five,
 		}
 
-        public Car()
+        protected Car()
         {
+            Color = eColor.Black.ToString();
+            NumberOfDoors = eNumOfDoors.Two.ToString();
             this.Wheels = CreateWheels(k_NumberOfWheelsForCar, k_MaxAirPressureCar);
+
         }
 
         public override string ToString()

@@ -4,7 +4,6 @@ namespace GarageLogic
 	public class FuelBasedEngine
 	{
 
-        
 		/*** Data Members ***/
 		private float m_CurrentAmountOfFuel;
 		private float m_MaxAmountOfFuel;

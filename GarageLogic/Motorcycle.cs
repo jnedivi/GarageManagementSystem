@@ -9,23 +9,47 @@ namespace GarageLogic
         /*** Data Members ***/
         private const float k_MaxAirPressureForMotorcycle = 33.0f;
         private const int k_NumberOfWheelsForMotorcycle = 2;
+        private const string k_LicenseType = "License Type";
 
         private float m_EngineVolume;
         private eLicenseType m_LicenceType;
-        
-
 
         /*** Getters and Setters***/
-        public eLicenseType LicenceType
+        public String LicenceType
         {
-            get { return this.m_LicenceType; }
-            set { this.m_LicenceType = value; }
+            get { return this.m_LicenceType.ToString(); }
+            set
+            {
+                if (!Enum.IsDefined(typeof(eLicenseType), value))
+                {
+                    throw new FormatException(k_LicenseType);
+                }
+
+                try
+                {
+                    m_LicenceType = (eLicenseType)Enum.Parse(typeof(eLicenseType), value);
+                }
+                catch (ArgumentException)
+                {
+                    throw new ArgumentException(k_LicenseType);
+                }
+            }
         }
 
-        public float EngineVolume
+        public string EngineVolume
         {
-            get { return this.m_EngineVolume; }
-            set { this.m_EngineVolume = value; }
+            get { return this.m_EngineVolume.ToString(); }
+            set
+            {
+                try
+                {
+                    m_EngineVolume = float.Parse(value);
+                }
+                catch (FormatException)
+                {
+                    throw new FormatException("Engine Volume");
+                }
+            }
         }
 
 
@@ -37,8 +61,10 @@ namespace GarageLogic
             B1,
         };
 
-        public Motorcycle()
+        protected Motorcycle()
         {
+            LicenceType = eLicenseType.A.ToString();
+            EngineVolume = 0f.ToString();
             this.Wheels = CreateWheels(k_NumberOfWheelsForMotorcycle, k_MaxAirPressureForMotorcycle);
         }
 

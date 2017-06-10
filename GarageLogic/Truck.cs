@@ -14,27 +14,50 @@ namespace GarageLogic
 
         /*** Getters and Setters***/
 
-        public float MaxWeightAllowed
+        public string MaxWeightAllowed
         {
-            get { return this.m_MaxWeightAllowed; }
-            set { this.m_MaxWeightAllowed = value; }
+            get { return this.m_MaxWeightAllowed.ToString(); }
+            set
+            {
+                try
+                {
+                    m_MaxWeightAllowed = float.Parse(value);
+                }
+                catch (FormatException)
+                {
+                    throw new FormatException("Max Weight Allowed");
+                }
+            }
         }
-		public bool HasHazardousMaterials
+
+		public String HasHazardousMaterials
 		{
-			get { return this.m_HasHazardousMaterials; }
-			set { this.m_HasHazardousMaterials = value; }
+			get { return toStringBoolYesOrNo(m_HasHazardousMaterials); }
+            set
+            {
+                try
+                {
+                    m_HasHazardousMaterials = bool.Parse(value);
+                }
+                catch (FormatException)
+                {
+                    throw new FormatException("Has Hazardous Materials");
+                }
+            }
 		}
 
-        public Truck()
+        protected Truck()
         {
+            MaxWeightAllowed = 0.0f.ToString();
+            HasHazardousMaterials = false.ToString();
             this.Wheels = CreateWheels(k_NumberOfWheelsForTruck, k_MaxAirPressureTruck);
         }
 
-        private string toStringHasHazardousMaterial()
+        private string toStringBoolYesOrNo(bool i_Bool)
         {
             string answer;
 
-            if (HasHazardousMaterials)
+            if (i_Bool)
             {
                 answer = "Yes";
             }
@@ -51,7 +74,7 @@ namespace GarageLogic
             StringBuilder output = new StringBuilder();
 
             string truckOutput = string.Format(@"Is Carrying Hazardous Material?: {0}
-Max Allowed Weight Load: {1}", toStringHasHazardousMaterial(), MaxWeightAllowed);
+Max Allowed Weight Load: {1}", toStringBoolYesOrNo(m_HasHazardousMaterials), MaxWeightAllowed);
 
             output.Append(base.ToString());
             output.Append(truckOutput);
