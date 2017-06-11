@@ -97,7 +97,7 @@ namespace GarageLogic
         }
 
 		/* 3) Change a Vehicle's status */
-        public void ChangeVehicleStatus(string i_LicenseNumber , string i_Status)
+        public void ChangeVehicleStatus(string i_LicenseNumber , Vehicle.eVehicleStatus i_Status)
 		{
             Vehicle vehicle;
             bool isInGarage = GarageVehicles.TryGetValue(i_LicenseNumber, out vehicle);
@@ -136,18 +136,43 @@ namespace GarageLogic
             {
                 throw new System.ArgumentException(k_VehicleDoesntExist);
             }
-            // TODO: check if vehicle fuel based
 
-            if(vehicle )
+            FuelBasedEngine engine = vehicle.Engine as FuelBasedEngine;
 
-            vehicle.FuelBasedEngine.Refuel(i_AmountToRefuel, i_FuelType, ref vehicle);
+            if(engine != null)
+            {
+                engine.Refuel(i_AmountToRefuel, i_FuelType);
+            }
+            else
+            {
+                throw new FormatException("Refuel");
+            }
+
 		}
 
 		/* 6) Charge a electric vehice. */
-		public void ChargeElectricVehice(Vehicle i_Vehicle, float i_MinutsToCharge)
+		public void ChargeElectricVehice(string i_LicenseNumber, float i_MinutesToCharge)
 		{
+            Vehicle vehicle;
+            bool isInGarage = GarageVehicles.TryGetValue(i_LicenseNumber, out vehicle);
 
-		}
+            if (!isInGarage)
+            {
+                throw new System.ArgumentException(k_VehicleDoesntExist);
+            }
+
+            ElectricBasedEngine engine = vehicle.Engine as ElectricBasedEngine;
+            float hoursToRecharge = i_MinutesToCharge / 60;
+
+            if(engine != null)
+            {
+                engine.Recharge(hoursToRecharge);
+            }
+            else
+            {
+                throw new FormatException("Recharge");
+            }
+        }
 
 		/* 7) Display vehicle information */
         // toString() method

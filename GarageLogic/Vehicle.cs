@@ -20,9 +20,10 @@ namespace GarageLogic
         private string m_OwnerPhoneNumber;
         private string m_ModelName;
         private string m_LicenseNumber;
-        private float m_RemainingEnergyPercentage;
+        
         private List<Wheel> m_Wheels;
         private eVehicleStatus m_VehicleStatus;
+        private Engine m_Engine;
         
         protected Vehicle()
         {
@@ -30,7 +31,6 @@ namespace GarageLogic
             m_OwnerPhoneNumber = null;
             m_ModelName = string.Empty;
             m_LicenseNumber = string.Empty;
-            m_RemainingEnergyPercentage = 0.0f;
             m_Wheels = new List<Wheel>();
             m_VehicleStatus = eVehicleStatus.InRepair;
         }
@@ -90,19 +90,6 @@ namespace GarageLogic
             return isLegal;
         }
 
-       /* public virtual Dictionary<string, string> CreateVehicleInformation()
-        {
-            Dictionary<string, string> vehicleInformation = new Dictionary<string, string>();
-            vehicleInformation.Add("Owner Name", m_OwnerName);
-            vehicleInformation.Add("Model Name", m_ModelName);
-            vehicleInformation.Add("License Number", m_LicenseNumber);
-            vehicleInformation.Add("Vehicle Status", m_VehicleStatus.ToString());
-
-            return vehicleInformation;
-        }*/
-
-
-
         /*** Getters and Setters ***/
 
         public string ModelName
@@ -149,12 +136,6 @@ namespace GarageLogic
             set { this.m_OwnerName = value; }
         }
 
-        public float RemainingEnergyPercentage
-        {
-            get { return this.m_RemainingEnergyPercentage; }
-            set { this.m_RemainingEnergyPercentage = value; }
-        }
-
         public List<Wheel> Wheels
         {
             get { return this.m_Wheels; }
@@ -173,6 +154,12 @@ namespace GarageLogic
 
                 m_VehicleStatus = value;
             }
+        }
+
+        public Engine Engine
+        {
+            get { return this.m_Engine; }
+            protected set { this.m_Engine = value; }
         }
 
         /*** Class Logic ***/
@@ -293,9 +280,8 @@ Maximum Air Pressure: {2}", m_ManufacturerName, m_CurrentAirPressure, m_MaxAirPr
 Phone Number: {1}
 Model Name: {2}
 License Number: {3}
-Remaining Energy Percentage: {4}%
-Vehicle Status: {5}
-", m_OwnerName, m_OwnerPhoneNumber ,m_ModelName, m_LicenseNumber, m_RemainingEnergyPercentage, m_VehicleStatus);
+Vehicle Status: {4}
+", m_OwnerName, m_OwnerPhoneNumber ,m_ModelName, m_LicenseNumber, m_VehicleStatus);
 
             output.Append(vehicleOutput);
             output.Append(Environment.NewLine);

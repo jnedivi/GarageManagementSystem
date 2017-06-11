@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Text;
+
 namespace GarageLogic
 {
-	public class FuelBasedEngine
+	public class FuelBasedEngine : Engine
 	{
 
 		/*** Data Members ***/
@@ -29,7 +31,13 @@ namespace GarageLogic
 			set { this.m_MaxAmountOfFuel = value; }
 		}
 
-		public eFuelType FuelType
+        public float CurrentAmountOfFuel
+        {
+            get { return this.m_CurrentAmountOfFuel; }
+            set { this.m_CurrentAmountOfFuel = value; }
+        }
+
+        public eFuelType FuelType
 		{
 			get { return this.m_FuelType; }
 			set { this.m_FuelType = value; }
@@ -46,12 +54,12 @@ namespace GarageLogic
         /*** Class Logic ***/
 
 
-        public void Refuel(float i_FuelToAdd, eFuelType i_FuelType, ref Vehicle io_Vehicle)
+        public void Refuel(float i_FuelToAdd, eFuelType i_FuelType)
         {
 
-            if (((m_CurrentAmountOfFuel + i_FuelToAdd) > MaxAmountOfFuel) || i_FuelToAdd < 0)
+            if (((CurrentAmountOfFuel + i_FuelToAdd) > MaxAmountOfFuel) || i_FuelToAdd < 0)
 			{
-                throw new ValueOutOfRangeException("Fuel based engine", 0f, MaxAmountOfFuel - m_CurrentAmountOfFuel);
+                throw new ValueOutOfRangeException("Fuel based engine", 0f, MaxAmountOfFuel - CurrentAmountOfFuel);
 			}
 
             if(i_FuelType != this.FuelType)
@@ -60,17 +68,22 @@ namespace GarageLogic
                 throw new System.ArgumentException("Fuel Based Engine", givenFuelType);
             }
 
-            m_CurrentAmountOfFuel += i_FuelToAdd;
-            io_Vehicle.RemainingEnergyPercentage = ((m_CurrentAmountOfFuel / MaxAmountOfFuel) * 100);
+            CurrentAmountOfFuel += i_FuelToAdd;
+            RemainingEnergyPercentage = ((CurrentAmountOfFuel / MaxAmountOfFuel) * 100);
 		}
 
         public override string ToString()
         {
-            string output = string.Format(@"Current Amount Of Fuel In Liters: {0}
-Max Amount Of Fuel In Liters: {1}
-Fuel Type: {2}", m_CurrentAmountOfFuel, MaxAmountOfFuel, FuelType);
+            StringBuilder output = new StringBuilder();
 
-            return output;
+            string fuelOutput = string.Format(@"Current Amount Of Fuel In Liters: {0}
+Max Amount Of Fuel In Liters: {1}
+Fuel Type: {2}", CurrentAmountOfFuel, MaxAmountOfFuel, FuelType);
+
+            output.Append(base.ToString());
+            output.Append(fuelOutput);
+
+            return output.ToString();
         }
     }
 }

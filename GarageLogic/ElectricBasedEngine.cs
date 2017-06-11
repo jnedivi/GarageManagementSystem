@@ -3,14 +3,13 @@ using System.Text;
 
 namespace GarageLogic
 {
-	public class ElectricBasedEngine
+	public class ElectricBasedEngine : Engine
 	{
 		/*** Data Members ***/
 
 		private float m_RemainingTimeOnBattery;
 		private float m_MaxBatteryLife;
 
-        
 
         /*** Getters and Setters ***/
 
@@ -38,7 +37,7 @@ namespace GarageLogic
             m_MaxBatteryLife = i_MaxBatteryLife;
         }
 
-        public void Recharge(float i_HoursToRecharge, ref Vehicle io_Vehicle)
+        public void Recharge(float i_HoursToRecharge)
 		{
             if(i_HoursToRecharge + RemainingTimeOnBattery > MaxBatteryLife)
             {
@@ -46,14 +45,20 @@ namespace GarageLogic
             }
 
             RemainingTimeOnBattery += i_HoursToRecharge;
-		}
+            RemainingEnergyPercentage = ((RemainingTimeOnBattery / MaxBatteryLife) * 100);
+        }
 
         public override string ToString()
         {
-            string output = string.Format(@"Remaining Time On Battery: {0}
+            StringBuilder output = new StringBuilder();
+
+            string electricOutput = string.Format(@"Remaining Time On Battery: {0}
 Max Battery Life: {1}", RemainingTimeOnBattery, MaxBatteryLife);
 
-            return output;
+            output.Append(base.ToString());
+            output.Append(electricOutput);
+
+            return output.ToString();
         }
     }
 }
