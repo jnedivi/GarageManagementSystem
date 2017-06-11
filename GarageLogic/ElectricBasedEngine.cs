@@ -10,7 +10,6 @@ namespace GarageLogic
 		private float m_RemainingTimeOnBattery;
 		private float m_MaxBatteryLife;
 
-
         /*** Getters and Setters ***/
 
         public float RemainingTimeOnBattery

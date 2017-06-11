@@ -100,7 +100,7 @@ namespace GarageLogic
         public void ChangeVehicleStatus(string i_LicenseNumber , Vehicle.eVehicleStatus i_Status)
 		{
             Vehicle vehicle;
-            bool isInGarage = GarageVehicles.TryGetValue(i_LicenseNumber, out vehicle);
+            bool isInGarage = GetVehicle(i_LicenseNumber, out vehicle);
 
             if (!isInGarage)
             {
@@ -115,7 +115,7 @@ namespace GarageLogic
 		public void InflateTiresToMax(string i_LicenseNumber)
 		{
             Vehicle vehicle;
-            bool isInGarage = GarageVehicles.TryGetValue(i_LicenseNumber, out vehicle);
+            bool isInGarage = GetVehicle(i_LicenseNumber, out vehicle);
 
             if (!isInGarage)
             {
@@ -130,7 +130,7 @@ namespace GarageLogic
         public void RefuelVehicle(string i_LicenseNumber, FuelBasedEngine.eFuelType i_FuelType, float i_AmountToRefuel)
 		{
             Vehicle vehicle;
-            bool isInGarage = GarageVehicles.TryGetValue(i_LicenseNumber, out vehicle);
+            bool isInGarage = GetVehicle(i_LicenseNumber, out vehicle);
 
             if(!isInGarage)
             {
@@ -154,7 +154,7 @@ namespace GarageLogic
 		public void ChargeElectricVehice(string i_LicenseNumber, float i_MinutesToCharge)
 		{
             Vehicle vehicle;
-            bool isInGarage = GarageVehicles.TryGetValue(i_LicenseNumber, out vehicle);
+            bool isInGarage = GetVehicle(i_LicenseNumber, out vehicle);
 
             if (!isInGarage)
             {
