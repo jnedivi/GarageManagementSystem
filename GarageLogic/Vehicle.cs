@@ -9,6 +9,8 @@ namespace GarageLogic
     {
         /*** Data Members ***/
 
+        private const string k_OwnerPhoneNumber = "Owner Phone Number";
+        private const string k_LicenseNumber = "License Number";
         private const string k_VehicleStatus = "Vehicle Status";
         private const byte k_LegalLicenseNumberLength = 7;
         private const byte k_MinPhoneNumLength = 6;
@@ -55,7 +57,7 @@ namespace GarageLogic
 
                 if (!isLegal)
                 {
-                    throw new System.ArgumentException("License Number");
+                    throw new System.ArgumentException(k_LicenseNumber);
                 }
             }
 
@@ -68,7 +70,7 @@ namespace GarageLogic
 
             if(!((i_PhoneNumber.Length >= k_MinPhoneNumLength) && (i_PhoneNumber.Length <= k_MaxPhoneNumLength)))
             {
-                throw new ValueOutOfRangeException("Phone Number", k_MinPhoneNumLength, k_MaxPhoneNumLength);
+                throw new ValueOutOfRangeException(k_OwnerPhoneNumber, k_MinPhoneNumLength, k_MaxPhoneNumLength);
             }
             else
             {
@@ -81,7 +83,7 @@ namespace GarageLogic
 
                 if (!isLegal)
                 {
-                    throw new System.ArgumentException("Phone Number");
+                    throw new System.ArgumentException(k_OwnerPhoneNumber);
                 }
             }
 
@@ -134,7 +136,7 @@ namespace GarageLogic
 
                 if (!isLegal)
                 {
-                    throw new System.ArgumentException("Owner Phone Number");
+                    throw new System.ArgumentException(k_OwnerPhoneNumber);
                 }
 
                 this.m_OwnerPhoneNumber = value;

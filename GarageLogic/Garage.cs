@@ -71,17 +71,17 @@ namespace GarageLogic
         }
 
         /* 2) Display list of licence numbers */
-        public string DisplayListOfLicenceNumbers()
+        public Dictionary<string, Vehicle>.KeyCollection GetListOfLicenceNumbers()
         { 
-            return GarageVehicles.Keys.ToString();
+            return GarageVehicles.Keys;
 		}
 
-        public string DisplayFilteredListOfLicenseNumbers(Vehicle.eVehicleStatus i_VehicleStatus)
+        public Dictionary<string, Vehicle>.KeyCollection GetFilteredListOfLicenseNumbers(Vehicle.eVehicleStatus i_VehicleStatus)
         {
-            return FilteredVehiclesByStatus(i_VehicleStatus).Keys.ToString();
+            return filteredVehiclesByStatus(i_VehicleStatus).Keys;
         }
 
-        public Dictionary<string, Vehicle> FilteredVehiclesByStatus(Vehicle.eVehicleStatus i_VehicleStatus)
+        private Dictionary<string, Vehicle> filteredVehiclesByStatus(Vehicle.eVehicleStatus i_VehicleStatus)
         {
             Dictionary<string, Vehicle> filteredVehicles = new Dictionary<string, Vehicle>();
 
@@ -97,7 +97,7 @@ namespace GarageLogic
         }
 
 		/* 3) Change a Vehicle's status */
-        public void ChangeVehicleStatus(string i_LicenseNumber , Vehicle.eVehicleStatus i_Status)
+        public void ChangeVehicleStatus(string i_LicenseNumber , string i_Status)
 		{
             Vehicle vehicle;
             bool isInGarage = GarageVehicles.TryGetValue(i_LicenseNumber, out vehicle);
@@ -151,7 +151,13 @@ namespace GarageLogic
 
 		/* 7) Display vehicle information */
         // toString() method
-  
+        public bool GetVehicle(string i_LicenseNumber, out Vehicle o_Vehicle)
+        {
+            
+            bool vehicleIsInGarage = m_GarageVehicles.TryGetValue(i_LicenseNumber, out o_Vehicle);
+
+            return vehicleIsInGarage;
+        }
     }
 }
 

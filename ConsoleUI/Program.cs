@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Collections.Generic;
 
 namespace ConsoleUI
 {
@@ -7,7 +8,6 @@ namespace ConsoleUI
     {
         public static void Main()
         {
-            System.Console.WriteLine("hello world!");
             UserInterface u = new UserInterface();
             u.startGarage();
         }

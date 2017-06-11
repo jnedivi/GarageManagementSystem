@@ -6,7 +6,7 @@ namespace ConsoleUI
     public class UserInterface
     {
 
-        private Garage m_Garage;
+        private Garage m_Garage = new Garage();
 
         public void startGarage()
         {
@@ -132,19 +132,49 @@ namespace ConsoleUI
                                                  "{1} ", System.Environment.NewLine);
           //  this.m_Garage.DisplayListOfLicenceNumbers(i_Status: Garage.eVehicleStatus.InRepair);
             //TODO: get input from garage 
+
 		}
 
         /* 3) Change a Vehicle's status */
 		private void changeVehicleStatus()
 		{
-            string licenceNumber;
-            this.promptUserForLicenseNumber(out licenceNumber);
+            
+            System.Console.WriteLine("Please enter the licence number of your vehicle:");
+            string licenseNumber = System.Console.ReadLine();
 
+            while (!isLegalLicenceNumber(licenseNumber)) // might need try catch
+            {
+                System.Console.WriteLine("Invalid input. Please enter a legal licence plate");
+                licenseNumber = System.Console.ReadLine();
+            }
+            StringBuilder vehicleStatusOut = new StringBuilder();
+            vehicleStatusOut.Append("Please enter the new desired vehicle status:");
+            vehicleStatusOut.Append("1. In Repair");
+            vehicleStatusOut.Append("2. Repaired");
+            vehicleStatusOut.Append("3. Payed For");
+            System.Console.WriteLine(vehicleStatusOut.ToString());
+            string userInput = System.Console.ReadLine();
+            int numUserInput;
+            int.TryParse(userInput, out numUserInput);
+            Vehicle.eVehicleStatus newVehicleStatus;
 
+            switch (numUserInput)
+            {
+                case 1:
+                    newVehicleStatus = Vehicle.eVehicleStatus.InRepair;
+                    break;
+                case 2:
+                    newVehicleStatus = Vehicle.eVehicleStatus.Repaired;
+                    break;
+                case 3:
+                    newVehicleStatus = Vehicle.eVehicleStatus.PayedFor;
+                    break;
+                default:
+                    throw new ArgumentException("Change Vehicle Status");
+            }
 
-
-
-		}
+            m_Garage.ChangeVehicleStatus(licenseNumber, newVehicleStatus);
+        }
 
 		
 
