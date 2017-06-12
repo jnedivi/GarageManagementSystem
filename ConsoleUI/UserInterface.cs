@@ -1,6 +1,7 @@
 ﻿﻿﻿﻿using GarageLogic;
 using System;
 using System.Text;
+using System.Collections.Generic;
 namespace ConsoleUI
 {
     public class UserInterface
@@ -16,17 +17,11 @@ namespace ConsoleUI
 
         private void mainMenu()
         {
-
+            
             System.Console.WriteLine(UserMessages.MainMenuMessage());
 
             string userMainMenuInput = System.Console.ReadLine();
             int mainMenuInputNumber;
-
-            //while(!isValidMainMenuInput(userMainMenuInput , out mainMenuInputNumber))
-            //{
-            //    System.Console.WriteLine("Invalid Input. Please enter the number of the task you wish to complete.");
-            //    userMainMenuInput = System.Console.ReadLine();
-            //}
 
 			while (!int.TryParse(userMainMenuInput, out mainMenuInputNumber) && mainMenuInputNumber >= 1 && mainMenuInputNumber <= 8)
 			{
@@ -57,10 +52,11 @@ namespace ConsoleUI
                     refuelVehicle();
 					break;
 				case 6:
-					// 6) Charge a electric vehice.
+                    // 6) Charge a electric vehice.
+                    chargeElectricVehice();
 					break;
 				case 7:
-					// 7) Display vehicle information.
+                    displayVehicleInformation();
 					break;
                 default:
                     System.Environment.Exit(1);
@@ -77,33 +73,36 @@ namespace ConsoleUI
                                                 
             string userInputVehicleType = System.Console.ReadLine();
             int vehicleTypeNumber;
+
             while(!isValidVehicleTypeInput(userInputVehicleType , out vehicleTypeNumber))
             {
 				System.Console.WriteLine("Invalid Input. Please enter the number of the task you wish to complete.");
 				userInputVehicleType = System.Console.ReadLine();
             }
-            Vehicle vehicleToAdd;
+
+            Factory.eVehicleType vehicleToAdd;
+
 			switch (vehicleTypeNumber)
 			{
 				case 1:
                     /* 1) Fuel-Based Motorcycle */
-                    vehicleToAdd = new FuelBasedMotorcycle();
+                    vehicleToAdd = Factory.eVehicleType.FuelBasedMotorcycle;
 					break;
 				case 2:
-					/* 2) Electric Motorcycle */
-                    vehicleToAdd = new ElectricMotorcycle();
+                    /* 2) Electric Motorcycle */
+                    vehicleToAdd = Factory.eVehicleType.ElectricMotorcycle;
 					break;
 				case 3:
-					/* 3) Fuel-Based Car */
-                    vehicleToAdd = new FuelBasedCar();
+                    /* 3) Fuel-Based Car */
+                    vehicleToAdd = Factory.eVehicleType.FuelBasedCar;
 					break;
 				case 4:
-					/* 4) Electric Car */
-                    vehicleToAdd = new ElectricCar();
+                    /* 4) Electric Car */
+                    vehicleToAdd = Factory.eVehicleType.ElectricCar;
 					break;
 				case 5:
-					/* 5) Fuel-Based Truck */
-                    vehicleToAdd = new FuelBasedTruck();
+                    /* 5) Fuel-Based Truck */
+                    vehicleToAdd = Factory.eVehicleType.FuelBasedTruck;
 					break;
                 default:
                     /* 5) back to main menu */
@@ -111,10 +110,44 @@ namespace ConsoleUI
                     return; 
 			}
 
-            this.promptUserForLicenseNumber();
+            string licenseNumber;
+            this.promptUserForLicenseNumber(out licenseNumber);
 
-            //TODO: get new licence number and insert new vehicle
+            if(this.m_Garage.IsInGarage(licenseNumber))
+            {
+                this.m_Garage.StatusInRepairedUpdate(licenseNumber);
+            }
+            else
+            {
+				System.Console.WriteLine("Please enter Owner name:");
+				string ownerName = System.Console.ReadLine();
+				System.Console.WriteLine("Please enter Owners phone number:");
+				string ownerPhoneNumber = System.Console.ReadLine();
+				System.Console.WriteLine("Please enter Vehicles Model Name:");
+				string vehicleModelName = System.Console.ReadLine();
+                System.Console.WriteLine(string.Format("Please enter condition of the tires{0}1)All tires have same air pressure{1}2)Enter each tire seperately" , System.Environment.NewLine , System.Environment.NewLine));
+                string tireInflationChoice = System.Console.ReadLine();
+                while(! (tireInflationChoice == "1") || (tireInflationChoice == "2"))
+                {
+                    System.Console.WriteLine("Invalid Input. Please enter 1 or 2");
+                    tireInflationChoice = System.Console.ReadLine();
+                }
+                List<float> tirePressures = new List<float>();
+                switch(tireInflationChoice)
+                {
+                    case "1":
+						/* 1)All tires have same air pressure */
+                        break;
+                    case "2":
+						/* 2)Enter each tire seperately */
+                        break;
+                }
 
+				System.Console.WriteLine("Please enter Tires Manufacturer Name:");
+				string tiresManufacturerName = System.Console.ReadLine();
+                this.m_Garage.InsertNewVehicle(vehicleToAdd , licenseNumber , ownerName , ownerPhoneNumber , vehicleModelName , tirePressures , tiresManufacturerName);
+            }
+            mainMenu();
         }
 
 		private bool isValidVehicleTypeInput(string i_UserInput, out int o_MainMenuNumber)
@@ -123,14 +156,38 @@ namespace ConsoleUI
 		}
 
 
-		/* 2) Display list of licence numbers */
-		private void displayListOfLicenceNumbers()
+        /* 2) Display list of licence numbers */
+        private void displayListOfLicenceNumbers()
 		{
-			string insertMessage = string.Format("Display List Of Licence Numbers. Please choose a filter:{0} " +
-                                                 "{1} ", System.Environment.NewLine);
-          //  this.m_Garage.DisplayListOfLicenceNumbers(i_Status: Garage.eVehicleStatus.InRepair);
-            //TODO: get input from garage 
+		
+            System.Console.WriteLine(UserMessages.FilteredListOfVehiclesMessage());
+            string filter = System.Console.ReadLine();
+            Dictionary<string, Vehicle>.KeyCollection list;
+            switch(filter){
 
+                case "1":
+                    list = m_Garage.GetFilteredListOfLicenseNumbers(Vehicle.eVehicleStatus.InRepair);
+                    break;
+				case "2":
+                    list = m_Garage.GetFilteredListOfLicenseNumbers(Vehicle.eVehicleStatus.Repaired);
+					break;
+				case "3":
+                    list = m_Garage.GetFilteredListOfLicenseNumbers(Vehicle.eVehicleStatus.PayedFor);
+					break;
+				case "4":
+                    list = m_Garage.GetListOfLicenceNumbers();
+                    break;
+                    default :
+                    System.Console.WriteLine("Invalid Input. Please Try again");
+                    displayListOfLicenceNumbers();
+                    return;
+            }
+
+            foreach(string license in list)
+            {
+                System.Console.WriteLine(license);
+            }
+            mainMenu();
 		}
 
         /* 3) Change a Vehicle's status */
@@ -172,6 +229,7 @@ namespace ConsoleUI
             }
 
             m_Garage.ChangeVehicleStatus(licenseNumber, newVehicleStatus);
+            mainMenu();
         }
 
 		
@@ -229,11 +287,7 @@ namespace ConsoleUI
 						/* 5) back to main menu */
 						mainMenu();
 						return;
-
-
-
 				}
-
 
             }
             else 
@@ -252,11 +306,11 @@ namespace ConsoleUI
 			this.promptUserForLicenseNumber(out licenceNumber);
 			if (this.m_Garage.GetVehicle(licenceNumber, out vehicleToRecharge))
 			{
-				// recharge .... 
+                //TODO: recharge vehicle
 			}
 			else
             {
-                
+                // throw error
             }
 
 
@@ -265,7 +319,20 @@ namespace ConsoleUI
 		/* 7) Display vehicle information */
 		private void displayVehicleInformation()
 		{
+			string licenceNumber;
+			Vehicle vehicleToRecharge;
+			this.promptUserForLicenseNumber(out licenceNumber);
+			if (this.m_Garage.GetVehicle(licenceNumber, out vehicleToRecharge))
+			{
+                System.Console.WriteLine(vehicleToRecharge.ToString());
+			}
+			else
+			{
+                System.Console.WriteLine("Vehicle not in garage");
+				// throw error
+			}
 
+            mainMenu();
 		}
 
         private Vehicle promptUserForLicenseNumber(out string o_licenceNumber)
@@ -380,7 +447,16 @@ Please Select a task number you wish to complete:
 			return FuelTypeMessage;
         }
 
-	
+        public static StringBuilder FilteredListOfVehiclesMessage()
+        {
+            StringBuilder ListOfVehiclesMessage = new StringBuilder();
+            ListOfVehiclesMessage.AppendLine("Please Select FilterType");
+            ListOfVehiclesMessage.AppendLine("1) In Repair");
+            ListOfVehiclesMessage.AppendLine("2) Repaired");
+            ListOfVehiclesMessage.AppendLine("3) Payed For");
+            ListOfVehiclesMessage.AppendLine("4) All Vehicles");
+            return ListOfVehiclesMessage;
+        }
 
 
 

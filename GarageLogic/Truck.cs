@@ -1,5 +1,6 @@
-﻿using System;
+﻿﻿using System;
 using System.Text;
+using System.Collections.Generic;
 
 namespace GarageLogic
 {
@@ -46,7 +47,8 @@ namespace GarageLogic
             }
 		}
 
-        protected Truck() : base()
+		protected Truck(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName, List<Vehicle.Wheel> i_Wheels)
+			: base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName, i_Wheels)
         {
             MaxWeightAllowed = 0.0f.ToString();
             HasHazardousMaterials = false.ToString();

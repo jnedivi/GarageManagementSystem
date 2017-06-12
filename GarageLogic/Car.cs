@@ -1,5 +1,6 @@
-﻿using System;
+﻿﻿using System;
 using System.Text;
+using System.Collections.Generic;
 
 namespace GarageLogic
 {
@@ -78,7 +79,8 @@ namespace GarageLogic
 			Five,
 		}
 
-        protected Car() : base()
+		protected Car(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName, List<Vehicle.Wheel> i_Wheels)
+			: base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName, i_Wheels)
         {
             Color = eColor.Black.ToString();
             NumberOfDoors = eNumOfDoors.Two.ToString();

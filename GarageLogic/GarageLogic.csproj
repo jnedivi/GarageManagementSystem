@@ -40,7 +40,7 @@
     <Compile Include="FuelBasedCar.cs" />
     <Compile Include="FuelBasedMotorcycle.cs" />
     <Compile Include="FuelBasedTruck.cs" />
-    <Compile Include="NewVehicle.cs" />
+    <Compile Include="Factory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ActualCars\" />

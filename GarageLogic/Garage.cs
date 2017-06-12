@@ -1,18 +1,11 @@
-﻿﻿using System;
+﻿﻿﻿using System;
 using System.Collections.Generic;
 
 namespace GarageLogic
 {
     public class Garage
     {
-        public enum eVehicleType
-        {
-            FuelBasedMotorcycle,
-            FuelBasedCar,
-            ElectricMotorcycle,
-            ElectricCar,
-            FuelBasedTruck
-        }
+		
 
         /*** Data Members ***/
         private const string k_VehicleDoesntExist = "This vehicle is not in the garage.";
@@ -36,39 +29,50 @@ namespace GarageLogic
         /*** Garage Logic Methods ***/
 
         /* 1) Insert new Vehicle into Garage */
-        public void InsertVehicleIntoGarage(Vehicle i_Vehicle)
+        //public void InsertVehicleIntoGarage(Vehicle i_Vehicle)
+        //{
+        //    GarageVehicles.Add(i_Vehicle.LicenseNumber, i_Vehicle);
+        //}
+
+        //public void CreateVehicleIfNotInGarage(Factory.eVehicleType i_VehicleType, string i_LicenseNumber, out bool io_VehicleExists, out Vehicle o_Vehicle)
+        //{
+        //    io_VehicleExists = m_GarageVehicles.TryGetValue(i_LicenseNumber, out o_Vehicle);
+
+
+        //    if (!io_VehicleExists)
+        //    {
+                
+
+        //    }
+        //}
+
+        /*** alternative instet functions ***/
+        public bool IsInGarage(string i_LicenseNumber)
         {
-            GarageVehicles.Add(i_Vehicle.LicenseNumber, i_Vehicle);
+            return this.m_GarageVehicles.ContainsKey(i_LicenseNumber);
         }
 
-        public void CreateVehicleIfNotInGarage(eVehicleType i_VehicleType, string i_LicenseNumber, out bool io_VehicleExists, out Vehicle o_Vehicle)
+        public void StatusInRepairedUpdate(string i_LicenseNumber)
         {
-            io_VehicleExists = GarageVehicles.TryGetValue(i_LicenseNumber, out o_Vehicle);
-
-            if (!io_VehicleExists)
-            {
-                switch (i_VehicleType)
-                {
-                    case eVehicleType.FuelBasedMotorcycle:
-                        o_Vehicle = new FuelBasedMotorcycle();
-                        break;
-                    case eVehicleType.ElectricMotorcycle:
-                        o_Vehicle = new ElectricMotorcycle();
-                        break;
-                    case eVehicleType.FuelBasedCar:
-                        o_Vehicle = new FuelBasedCar();
-                        break;
-                    case eVehicleType.ElectricCar:
-                        o_Vehicle = new ElectricCar();
-                        break;
-                    case eVehicleType.FuelBasedTruck:
-                        o_Vehicle = new FuelBasedTruck();
-                        break;
-                    default:
-                        throw new ArgumentException("Vehicle type is not supported");
-                }
-            }
+			Vehicle vehicleToChange;
+			if (this.m_GarageVehicles.TryGetValue(i_LicenseNumber, out vehicleToChange))
+			{
+				vehicleToChange.VehicleStatus = Vehicle.eVehicleStatus.InRepair;
+			}
         }
+
+		/** created by j.w might not be necessary **/
+		public void InsertNewVehicle(Factory.eVehicleType i_VehicleType, string i_LicenseNumber, string i_OwnerName,
+                                     string i_OwnerPhoneNumber, string i_ModelName, List<float> i_WheelPressures, string i_WheelsManufactureName)
+        {
+            Vehicle currentVehicle;
+            currentVehicle = Factory.CreateNewVehicle(i_VehicleType, i_LicenseNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName, i_WheelPressures , i_WheelsManufactureName);
+            this.m_GarageVehicles.Add(i_LicenseNumber , currentVehicle);
+
+        }
+
+
+
 
         /* 2) Display list of licence numbers */
         public Dictionary<string, Vehicle>.KeyCollection GetListOfLicenceNumbers()
