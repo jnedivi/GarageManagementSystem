@@ -49,7 +49,8 @@ namespace ConsoleUI
                     inflateTires();
 					break;
 				case 5:
-					// 5) Refuel a vehicle.
+                    /* 5) Refuel a vehicle. */
+                    refuelVehicle();
 					break;
 				case 6:
 					// 6) Charge a electric vehice.
@@ -182,20 +183,85 @@ namespace ConsoleUI
 		private void inflateTires()
 		{
 			string licenceNumber;
+            Vehicle vehicleToInflate;
 			this.promptUserForLicenseNumber(out licenceNumber);
-
-
+            if (this.m_Garage.GetVehicle(licenceNumber, out vehicleToInflate))
+            {
+                vehicleToInflate.InflateAllWheelsToMax();
+            }
+            else
+            {
+                System.Console.WriteLine("Vehicle not found");
+                //TODO: throw vehicle not found exception
+            }
 		}
 
 		/* 5) Refuel a vehicle */
 		private void refuelVehicle()
 		{
+			string licenceNumber;
+            Vehicle vehicleToRefuel;
+			this.promptUserForLicenseNumber(out licenceNumber);
+            if( m_Garage.GetVehicle(licenceNumber , out vehicleToRefuel))
+            {
+              
+
+                System.Console.WriteLine(UserMessages.SelectFuelTypeMessage());
+                string userInputString = System.Console.ReadLine();
+                int userInputNumber;
+                while(int.TryParse(userInputString , out userInputNumber)) // fix to string
+                {
+                    System.Console.WriteLine("Please enter a number between 1 and 5");
+                    userInputString = System.Console.ReadLine();
+                }
+                switch(userInputNumber)
+                {
+					case 1:
+						
+						break;
+					case 2:
+						
+						break;
+					case 3:
+						
+						break;
+					case 4:
+						
+						break;
+					default:
+						/* 5) back to main menu */
+						mainMenu();
+						return;
+
+
+
+				}
+
+
+            }
+            else 
+            {
+
+                //TODO: throw exception
+            }
 
 		}
 
 		/* 6) Charge a electric vehice. */
 		private void chargeElectricVehice()
 		{
+			string licenceNumber;
+            Vehicle vehicleToRecharge;
+			this.promptUserForLicenseNumber(out licenceNumber);
+			if (this.m_Garage.GetVehicle(licenceNumber, out vehicleToRecharge))
+			{
+				// recharge .... 
+			}
+			else
+            {
+                
+            }
+
 
 		}
 
@@ -236,6 +302,12 @@ namespace ConsoleUI
 
             return null;
 
+        }
+
+        /* handle case of vehicle not found ... */
+        private void VehicleNotFound()
+        {
+            
         }
 
         public static bool isLegalLicenceNumber(string i_licence)
@@ -287,16 +359,26 @@ Please Select a task number you wish to complete:
         }
 
 
+        public static StringBuilder SelectFuelTypeMessage()
+        {
+            StringBuilder FuelTypeMessage = new StringBuilder();
+			FuelTypeMessage.AppendLine("Please Select a Vehile type you wish to insert:");
+			FuelTypeMessage.AppendLine("1) Soler");
+			FuelTypeMessage.AppendLine("2) Octance95");
+			FuelTypeMessage.AppendLine("3) Octance96");
+			FuelTypeMessage.AppendLine("4) Octane98");
+			FuelTypeMessage.AppendLine("5) Revoke Action. Back to Main Menu");
+			return FuelTypeMessage;
+        }
+
+	
 
 
 
 
 
 
-
-
-
-    }
+	}
 }
 
 /* 

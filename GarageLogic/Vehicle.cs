@@ -1,4 +1,4 @@
-﻿﻿﻿using System;
+﻿﻿﻿﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,11 +7,21 @@ namespace GarageLogic
 
     public abstract class Vehicle
     {
+        /*** Constants ***/
+
+        
+		/*** Data Members ***/
+
+        private const string k_LicenseNumber = "License Number:";
+        private const string k_ModelName = "Model Name:";
+        private const string k_Owner = "Owner:";
+        private const string k_VehicleStatus = "Vehicle Status:";
+
         /*** Data Members ***/
 
         private const string k_OwnerPhoneNumber = "Owner Phone Number";
-        private const string k_LicenseNumber = "License Number";
-        private const string k_VehicleStatus = "Vehicle Status";
+       // private const string k_LicenseNumber = "License Number";
+        //private const string k_VehicleStatus = "Vehicle Status";
         private const byte k_LegalLicenseNumberLength = 7;
         private const byte k_MinPhoneNumLength = 6;
         private const byte k_MaxPhoneNumLength = 9;
@@ -41,6 +51,16 @@ namespace GarageLogic
             Repaired,
             PayedFor
         }
+
+		public enum eEngineType
+		{
+			Fuel,
+			Electric,
+            // TODO : update constructors
+		}
+
+
+
 
         private static bool isLegalLicenseNumber(string i_LicenseNumber)
         {
