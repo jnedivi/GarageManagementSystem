@@ -61,7 +61,7 @@ namespace GarageLogic
             B1,
         };
 
-        protected Motorcycle()
+        protected Motorcycle() : base()
         {
             LicenceType = eLicenseType.A.ToString();
             EngineVolume = 0f.ToString();

@@ -1,4 +1,4 @@
-﻿﻿﻿using GarageLogic;
+﻿﻿﻿﻿using GarageLogic;
 using System;
 using System.Text;
 namespace ConsoleUI
@@ -17,18 +17,22 @@ namespace ConsoleUI
         private void mainMenu()
         {
 
-          
-
             System.Console.WriteLine(UserMessages.MainMenuMessage());
 
             string userMainMenuInput = System.Console.ReadLine();
             int mainMenuInputNumber;
 
-            while(!isValidMainMenuInput(userMainMenuInput , out mainMenuInputNumber))
-            {
-                System.Console.WriteLine("Invalid Input. Please enter the number of the task you wish to complete.");
-                userMainMenuInput = System.Console.ReadLine();
-            }
+            //while(!isValidMainMenuInput(userMainMenuInput , out mainMenuInputNumber))
+            //{
+            //    System.Console.WriteLine("Invalid Input. Please enter the number of the task you wish to complete.");
+            //    userMainMenuInput = System.Console.ReadLine();
+            //}
+
+			while (!int.TryParse(userMainMenuInput, out mainMenuInputNumber) && mainMenuInputNumber >= 1 && mainMenuInputNumber <= 8)
+			{
+				System.Console.WriteLine("Invalid Input. Please enter the number of the task you wish to complete.");
+				userMainMenuInput = System.Console.ReadLine();
+			}
 
             switch(mainMenuInputNumber)
             {
@@ -64,15 +68,6 @@ namespace ConsoleUI
 					
             }
         }
-
-
-        private bool isValidMainMenuInput(string i_UserInput , out int o_MainMenuNumber)
-        {
-            return int.TryParse(i_UserInput , out o_MainMenuNumber) && o_MainMenuNumber >= 1 && o_MainMenuNumber <= 8;
-        }
-
-
-
 
 		/* 1) Insert new Vehicle into Garage */
 		private void insertNewVehicleIntoGarage()
@@ -116,13 +111,15 @@ namespace ConsoleUI
                     return; 
 			}
 
+            this.promptUserForLicenseNumber();
+
             //TODO: get new licence number and insert new vehicle
 
         }
 
 		private bool isValidVehicleTypeInput(string i_UserInput, out int o_MainMenuNumber)
 		{
-			return int.TryParse(i_UserInput, out o_MainMenuNumber) && o_MainMenuNumber >= 1 && o_MainMenuNumber <= 5;
+			return int.TryParse(i_UserInput, out o_MainMenuNumber) && o_MainMenuNumber >= 1 && o_MainMenuNumber <= 6;
 		}
 
 
@@ -274,51 +271,63 @@ namespace ConsoleUI
         private Vehicle promptUserForLicenseNumber(out string o_licenceNumber)
         {
 
-			System.Console.WriteLine("Please enter the licence number of your vehicle:");
-			string licencePlateNumber = System.Console.ReadLine();
+            System.Console.WriteLine("Please enter the licence number of your vehicle or Q to cancel:");
+            string licencePlateNumber = System.Console.ReadLine();
+            if(licencePlateNumber == "q" || licencePlateNumber == "q")
+            {
+                mainMenu();
+                o_licenceNumber = null;
+                return null; //  might need to change 
+            }
 
-			while (!isLegalLicenceNumber(licencePlateNumber)) // might need try catch
-			{
-				System.Console.WriteLine("Invalid input. please enter a legal licence plate");
-				licencePlateNumber = System.Console.ReadLine();
-			}
+            while (!isLegalLicenceNumber(licencePlateNumber)) // might need try catch
+            {
+                System.Console.WriteLine("Invalid input. please enter a legal licence plate number.");
+                licencePlateNumber = System.Console.ReadLine();
+
+            }
             o_licenceNumber = licencePlateNumber;
 
-			Vehicle currentVehicle;
+            Vehicle currentVehicle;
 
-			if (this.m_Garage.GetVehicle(licencePlateNumber, out currentVehicle))
-			{
+            if (this.m_Garage.GetVehicle(licencePlateNumber, out currentVehicle))
+            {
 
                 //TODO ask for status change 
 
                 return currentVehicle;
 
-			}
-			else
-			{
-				System.Console.WriteLine("Sorry, this vehicle is not in the garage now");
-				//TODO: try again??
-			}
+            }
+            else
+            {
+                System.Console.WriteLine("Sorry, this vehicle is not in the garage now");
+                //TODO: try again??
+            }
 
             return null;
 
         }
 
-        /* handle case of vehicle not found ... */
-        private void VehicleNotFound()
+        public bool isLegalLicenceNumber(string i_licence)
         {
-            
+            char[] licenceNumber = i_licence.ToCharArray();
+            bool isLegalNumber = true;
+            foreach(char digit in licenceNumber)
+            {
+                if(!char.IsDigit(digit))
+                {
+                    isLegalNumber = false;
+                    break;
+                }
+            }
+            return licenceNumber.Length < 9 && licenceNumber.Length > 5 ? isLegalNumber : false;
         }
 
-        public static bool isLegalLicenceNumber(string i_licence)
-        {
+		/* handle case of vehicle not found ... */
+		private void VehicleNotFound()
+		{
 
-
-
-
-            return false;
-        }
-
+		}
 	}
 
 

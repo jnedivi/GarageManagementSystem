@@ -46,7 +46,7 @@ namespace GarageLogic
             }
 		}
 
-        protected Truck()
+        protected Truck() : base()
         {
             MaxWeightAllowed = 0.0f.ToString();
             HasHazardousMaterials = false.ToString();

@@ -1,25 +1,32 @@
 ﻿<Properties StartupConfiguration="{A64F1C84-B9AF-4CD0-B8FE-D48409E2BA91}|Default">
   <MonoDevelop.Ide.ItemProperties.ConsoleUI PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ConsoleUI/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ConsoleUI/UserInterface.cs">
     <Files>
-      <File FileName="ConsoleUI/UserInterface.cs" Line="209" Column="10" />
-      <File FileName="GarageLogic/Garage.cs" Line="110" Column="37" />
-      <File FileName="../../Projects/Ex2/B17_ex2/Program.cs" Line="1" Column="1" />
-      <File FileName="GarageLogic/Motorcycle.cs" Line="17" Column="1" />
-      <File FileName="GarageLogic/Car.cs" Line="1" Column="1" />
-      <File FileName="ConsoleUI/Program.cs" Line="11" Column="29" />
-      <File FileName="GarageLogic/ElectricBasedEngine.cs" Line="12" Column="1" />
-      <File FileName="GarageLogic/Vehicle.cs" Line="24" Column="11" />
-      <File FileName="GarageLogic/Truck.cs" Line="15" Column="22" />
-      <File FileName="GarageLogic/ElectricCar.cs" Line="1" Column="1" />
-      <File FileName="GarageLogic/ValueOutOfRangeException.cs" Line="1" Column="1" />
-      <File FileName="GarageLogic/ElectricMotorcycle.cs" Line="1" Column="1" />
-      <File FileName="GarageLogic/FuelBasedEngine.cs" Line="1" Column="1" />
-      <File FileName="GarageLogic/FuelBasedTruck.cs" Line="1" Column="1" />
-      <File FileName="GarageLogic/FuelBasedMotorcycle.cs" Line="1" Column="1" />
-      <File FileName="GarageLogic/NewVehicle.cs" Line="1" Column="1" />
-      <File FileName="GarageLogic/FuelBasedCar.cs" Line="1" Column="1" />
+      <File FileName="GarageLogic/Garage.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="../../Projects/Ex2/B17_ex2/Program.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="GarageLogic/Motorcycle.cs" Line="64" Column="40" NotebookId="1" />
+      <File FileName="GarageLogic/Car.cs" Line="88" Column="10" NotebookId="1" />
+      <File FileName="ConsoleUI/Program.cs" Line="11" Column="29" NotebookId="1" />
+      <File FileName="GarageLogic/ElectricBasedEngine.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="GarageLogic/Vehicle.cs" Line="296" Column="10" NotebookId="1" />
+      <File FileName="GarageLogic/Truck.cs" Line="51" Column="4" NotebookId="1" />
+      <File FileName="GarageLogic/ElectricCar.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="GarageLogic/ValueOutOfRangeException.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="GarageLogic/ElectricMotorcycle.cs" Line="16" Column="17" NotebookId="1" />
+      <File FileName="GarageLogic/FuelBasedEngine.cs" Line="14" Column="43" NotebookId="1" />
+      <File FileName="GarageLogic/FuelBasedTruck.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="GarageLogic/FuelBasedMotorcycle.cs" Line="18" Column="1" NotebookId="1" />
+      <File FileName="GarageLogic/NewVehicle.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="GarageLogic/FuelBasedCar.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="GarageLogic/Engine.cs" Line="1" Column="1" NotebookId="1" />
     </Files>
+    <FloatingWindows>
+      <FloatingWindow WindowId="1" X="3" Y="23" Width="1437" Height="774">
+        <Files>
+          <File FileName="ConsoleUI/UserInterface.cs" Line="258" Column="21" />
+        </Files>
+      </FloatingWindow>
+    </FloatingWindows>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
