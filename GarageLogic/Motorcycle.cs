@@ -77,6 +77,7 @@ Engine Volume: {1}", m_LicenceType, m_EngineVolume);
 
             output.Append(base.ToString());
             output.Append(motorcycleOutput);
+            output.Append(Environment.NewLine);
 
             return output.ToString();
         }

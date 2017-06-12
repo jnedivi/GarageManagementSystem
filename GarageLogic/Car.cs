@@ -16,12 +16,6 @@ namespace GarageLogic
 		private eColor m_Color;
         private eNumOfDoors m_NumberOfDoors;
         
-        /*public override void CreateVehicleInformation()
-        {
-            base.CreateVehicleInformation();
-            this.m
-        }*/
-
         /*** Getters and Setters***/
 
         public String Color
@@ -101,6 +95,7 @@ Number Of Doors: {1}", m_Color, m_NumberOfDoors);
 
             output.Append(base.ToString());
             output.Append(carOutput);
+            output.Append(Environment.NewLine);
 
             return output.ToString();
         }

@@ -52,16 +52,6 @@ namespace GarageLogic
             PayedFor
         }
 
-		public enum eEngineType
-		{
-			Fuel,
-			Electric,
-            // TODO : update constructors
-		}
-
-
-
-
         private static bool isLegalLicenseNumber(string i_LicenseNumber)
         {
             bool isLegal = false;
@@ -301,20 +291,19 @@ Phone Number: {1}
 Model Name: {2}
 License Number: {3}
 Vehicle Status: {4}
+Wheels:
 ", m_OwnerName, m_OwnerPhoneNumber ,m_ModelName, m_LicenseNumber, m_VehicleStatus);
 
             output.Append(vehicleOutput);
-            output.Append(Environment.NewLine);
-            output.Append("Wheels: ");
             output.Append(Environment.NewLine);
 
             int wheelIndex = 1;
             foreach(Wheel wheel in Wheels)
             {
                 string wheelOutput = string.Format(@"Wheel {0}: 
-{1}
-", wheelIndex, wheel.ToString());
+{1}", wheelIndex, wheel.ToString());
                 output.Append(wheelOutput);
+                output.Append(Environment.NewLine);
                 wheelIndex++;
             }
 

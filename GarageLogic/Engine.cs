@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 
 namespace GarageLogic
 {
@@ -19,7 +19,7 @@ namespace GarageLogic
 
         public override string ToString()
         {
-            string output = string.Format("Remaining Energy Percentage: {0}%", RemainingEnergyPercentage);
+            string output = string.Format("Remaining Energy Percentage: {0}%{1}", RemainingEnergyPercentage, Environment.NewLine);
 
             return output;
         }
