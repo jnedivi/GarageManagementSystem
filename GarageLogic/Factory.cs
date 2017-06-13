@@ -11,7 +11,8 @@ namespace GarageLogic
 			FuelBasedCar,
 			ElectricMotorcycle,
 			ElectricCar,
-			FuelBasedTruck
+			FuelBasedTruck,
+            Tractor
 		}
 
 
