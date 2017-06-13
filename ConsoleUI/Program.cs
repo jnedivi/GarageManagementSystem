@@ -8,8 +8,8 @@ namespace ConsoleUI
     {
         public static void Main()
         {
-            UserInterface u = new UserInterface();
-            u.startGarage();
+            UserInterface garage = new UserInterface();
+            garage.startGarage();
         }
     }
 }

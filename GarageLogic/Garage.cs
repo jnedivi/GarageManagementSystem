@@ -1,18 +1,11 @@
-﻿﻿using System;
+﻿﻿﻿using System;
 using System.Collections.Generic;
 
 namespace GarageLogic
 {
     public class Garage
     {
-        public enum eVehicleType
-        {
-            FuelBasedMotorcycle,
-            FuelBasedCar,
-            ElectricMotorcycle,
-            ElectricCar,
-            FuelBasedTruck
-        }
+		
 
         /*** Data Members ***/
         private const string k_VehicleDoesntExist = "This vehicle is not in the garage.";
@@ -36,38 +29,26 @@ namespace GarageLogic
         /*** Garage Logic Methods ***/
 
         /* 1) Insert new Vehicle into Garage */
-        public void InsertVehicleIntoGarage(Vehicle i_Vehicle)
+        public bool IsInGarage(string i_LicenseNumber)
         {
-            GarageVehicles.Add(i_Vehicle.LicenseNumber, i_Vehicle);
+            return this.m_GarageVehicles.ContainsKey(i_LicenseNumber);
         }
 
-        public void CreateVehicleIfNotInGarage(eVehicleType i_VehicleType, string i_LicenseNumber, out bool io_VehicleExists, out Vehicle o_Vehicle)
+        public void StatusInRepairedUpdate(string i_LicenseNumber)
         {
-            io_VehicleExists = GarageVehicles.TryGetValue(i_LicenseNumber, out o_Vehicle);
+			Vehicle vehicleToChange;
+			if (this.m_GarageVehicles.TryGetValue(i_LicenseNumber, out vehicleToChange))
+			{
+				vehicleToChange.VehicleStatus = Vehicle.eVehicleStatus.InRepair;
+			}
+        }
 
-            if (!io_VehicleExists)
-            {
-                switch (i_VehicleType)
-                {
-                    case eVehicleType.FuelBasedMotorcycle:
-                        o_Vehicle = new FuelBasedMotorcycle();
-                        break;
-                    case eVehicleType.ElectricMotorcycle:
-                        o_Vehicle = new ElectricMotorcycle();
-                        break;
-                    case eVehicleType.FuelBasedCar:
-                        o_Vehicle = new FuelBasedCar();
-                        break;
-                    case eVehicleType.ElectricCar:
-                        o_Vehicle = new ElectricCar();
-                        break;
-                    case eVehicleType.FuelBasedTruck:
-                        o_Vehicle = new FuelBasedTruck();
-                        break;
-                    default:
-                        throw new ArgumentException("Vehicle type is not supported");
-                }
-            }
+		public void InsertNewVehicle(Factory.eVehicleType i_VehicleType, string i_LicenseNumber, string i_OwnerName,
+                                     string i_OwnerPhoneNumber, string i_ModelName, List<float> i_WheelPressures, string i_WheelsManufactureName)
+        {
+            Vehicle currentVehicle;
+            currentVehicle = Factory.CreateNewVehicle(i_VehicleType, i_LicenseNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName, i_WheelPressures , i_WheelsManufactureName);
+            this.m_GarageVehicles.Add(i_LicenseNumber , currentVehicle);
         }
 
         /* 2) Display list of licence numbers */
@@ -178,35 +159,11 @@ namespace GarageLogic
         // toString() method
         public bool GetVehicle(string i_LicenseNumber, out Vehicle o_Vehicle)
         {
-            
             bool vehicleIsInGarage = m_GarageVehicles.TryGetValue(i_LicenseNumber, out o_Vehicle);
 
             return vehicleIsInGarage;
         }
+
     }
 }
 
-/*
- * 
- * 1. “Insert” a new vehicle into the garage. The user will be asked to select a
-vehicle type out of the supported vehicle types, and to input the license
-number of the vehicle. If the vehicle is already in the garage (based on
-license number) the system will display an appropriate message and will use
-the vehicle in the garage (and will change the vehicle status to “In Repair”), if
-not, a new object of that vehicle type will be created and the user will be
-prompted to input the values for the properties of his vehicle, according to the
-type of vehicle he wishes to add.
-2. Display a list of license numbers currently in the garage, with a filtering option
-based on the status of each vehicle
-3. Change a certain vehicle’s status (Prompting the user for the license number and
-new desired status)
-4. Inflate tires to maximum (Prompting the user for the license number)
-5. Refuel a fuel-based vehicle (Prompting the user for the license number, fuel type
-and amount to fill)
-6. Charge an electric-based vehicle (Prompting the user for the license number
-and number of minutes to charge)
-7. Display vehicle information (License number, Model name, Owner name, Status in
-garage, Tire specifications (manufacturer and air pressure), Fuel status + Fuel type /
-Battery status, other relevant information based on vehicle type)
- * 
- */

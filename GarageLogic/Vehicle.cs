@@ -1,4 +1,4 @@
-﻿﻿﻿﻿using System;
+﻿﻿﻿﻿﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -34,14 +34,14 @@ namespace GarageLogic
         private List<Wheel> m_Wheels;
         private eVehicleStatus m_VehicleStatus;
         private Engine m_Engine;
-        
-        protected Vehicle()
+
+		protected Vehicle(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName, List<Wheel> i_Wheels)
         {
-            m_OwnerName = null;
-            m_OwnerPhoneNumber = null;
-            m_ModelName = string.Empty;
-            m_LicenseNumber = string.Empty;
-            m_Wheels = new List<Wheel>();
+            m_OwnerName = i_OwnerName;
+            m_OwnerPhoneNumber = i_OwnerPhoneNumber;
+            m_ModelName = i_ModelName;
+            m_LicenseNumber = i_LicenceNumber;
+            m_Wheels = i_Wheels;
             m_VehicleStatus = eVehicleStatus.InRepair;
         }
 
