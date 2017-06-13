@@ -82,7 +82,9 @@ namespace GarageLogic
 Engine Volume: {1}", m_LicenceType, m_EngineVolume);
 
             output.Append(base.ToString());
+            output.Append(Environment.NewLine);
             output.Append(motorcycleOutput);
+            output.Append(Environment.NewLine);
             output.Append(Environment.NewLine);
 
             return output.ToString();

@@ -16,12 +16,10 @@ namespace GarageLogic
         private const string k_ModelName = "Model Name:";
         private const string k_Owner = "Owner:";
         private const string k_VehicleStatus = "Vehicle Status:";
+        private const string k_OwnerPhoneNumber = "Owner Phone Number";
 
         /*** Data Members ***/
-
-        private const string k_OwnerPhoneNumber = "Owner Phone Number";
-       // private const string k_LicenseNumber = "License Number";
-        //private const string k_VehicleStatus = "Vehicle Status";
+        
         private const byte k_LegalLicenseNumberLength = 7;
         private const byte k_MinPhoneNumLength = 6;
         private const byte k_MaxPhoneNumLength = 9;
@@ -30,7 +28,7 @@ namespace GarageLogic
         private string m_OwnerPhoneNumber;
         private string m_ModelName;
         private string m_LicenseNumber;
-        
+        private readonly byte r_NumberOfWheels;
         private List<Wheel> m_Wheels;
         private eVehicleStatus m_VehicleStatus;
         private Engine m_Engine;
@@ -43,6 +41,7 @@ namespace GarageLogic
             m_LicenseNumber = i_LicenceNumber;
             m_Wheels = i_Wheels;
             m_VehicleStatus = eVehicleStatus.InRepair;
+            r_NumberOfWheels = 0;
         }
 
         public enum eVehicleStatus
@@ -101,6 +100,10 @@ namespace GarageLogic
         }
 
         /*** Getters and Setters ***/
+        public byte NumberOfWheels
+        {
+            get { return this.r_NumberOfWheels; }
+        }
 
         public string ModelName
         {
@@ -291,6 +294,7 @@ Phone Number: {1}
 Model Name: {2}
 License Number: {3}
 Vehicle Status: {4}
+
 Wheels:
 ", m_OwnerName, m_OwnerPhoneNumber ,m_ModelName, m_LicenseNumber, m_VehicleStatus);
 
@@ -303,6 +307,7 @@ Wheels:
                 string wheelOutput = string.Format(@"Wheel {0}: 
 {1}", wheelIndex, wheel.ToString());
                 output.Append(wheelOutput);
+                output.Append(Environment.NewLine);
                 output.Append(Environment.NewLine);
                 wheelIndex++;
             }

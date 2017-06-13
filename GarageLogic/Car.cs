@@ -11,9 +11,9 @@ namespace GarageLogic
         /*** Data Members ***/
 
         private const float k_MaxAirPressureCar = 30.0f; 
-        private const int k_NumberOfWheelsForCar = 4;
         private const string k_Color = "Color";
         private const string k_NumberOfDoors = "NumberOfDoors";
+        private const byte k_NumberOfWheelsForCar = 4;
 		private eColor m_Color;
         private eNumOfDoors m_NumberOfDoors;
         
@@ -61,9 +61,6 @@ namespace GarageLogic
             }
 		}
 
-<<<<<<< HEAD
-        public enum eColor
-=======
 		/*** Constructor ***/
 
 		protected Car(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName, List<Vehicle.Wheel> i_Wheels)
@@ -78,7 +75,6 @@ namespace GarageLogic
 		/*** Class Logic ***/
 
 		public enum eColor
->>>>>>> 708e50f138ece22150ae05f73bf8c359ea6619f9
 		{
 			Yellow,
 			White,
@@ -102,7 +98,9 @@ namespace GarageLogic
 Number Of Doors: {1}", m_Color, m_NumberOfDoors);
 
             output.Append(base.ToString());
+            output.Append(Environment.NewLine);
             output.Append(carOutput);
+            output.Append(Environment.NewLine);
             output.Append(Environment.NewLine);
 
             return output.ToString();

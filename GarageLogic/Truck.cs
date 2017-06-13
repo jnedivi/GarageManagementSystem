@@ -86,6 +86,7 @@ Max Allowed Weight Load: {1}", toStringBoolYesOrNo(m_HasHazardousMaterials), Max
             output.Append(base.ToString());
             output.Append(truckOutput);
             output.Append(Environment.NewLine);
+            output.Append(Environment.NewLine);
 
             return output.ToString();
         }
