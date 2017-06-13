@@ -151,7 +151,7 @@ namespace GarageLogic
             }
             else
             {
-                throw new FormatException("Recharge");
+                throw new FormatException("Charge");
             }
         }
 

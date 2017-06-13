@@ -25,6 +25,7 @@ namespace GarageLogic
         private const byte k_LegalLicenseNumberLength = 7;
         private const byte k_MinPhoneNumLength = 6;
         private const byte k_MaxPhoneNumLength = 9;
+        private readonly byte r_NumberOfWheels;
 
         private string m_OwnerName;
         private string m_OwnerPhoneNumber;
@@ -35,14 +36,15 @@ namespace GarageLogic
         private eVehicleStatus m_VehicleStatus;
         private Engine m_Engine;
 
-		protected Vehicle(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName, List<Wheel> i_Wheels)
+
+		protected Vehicle(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName, byte i_NumberOfWheels)
         {
             m_OwnerName = i_OwnerName;
             m_OwnerPhoneNumber = i_OwnerPhoneNumber;
             m_ModelName = i_ModelName;
             m_LicenseNumber = i_LicenceNumber;
-            m_Wheels = i_Wheels;
             m_VehicleStatus = eVehicleStatus.InRepair;
+            r_NumberOfWheels = i_NumberOfWheels;
         }
 
         public enum eVehicleStatus
