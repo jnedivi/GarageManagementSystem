@@ -8,6 +8,7 @@ namespace GarageLogic
     {
 
         /*** Data Members ***/
+
         private const float k_MaxAirPressureTruck = 32.0f;
         private const int k_NumberOfWheelsForTruck = 12;
         private float m_MaxWeightAllowed;
@@ -47,6 +48,8 @@ namespace GarageLogic
             }
 		}
 
+		/*** Constructor ***/
+
 		protected Truck(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName, List<Vehicle.Wheel> i_Wheels)
 			: base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName, i_Wheels)
         {
@@ -55,7 +58,9 @@ namespace GarageLogic
             this.Wheels = CreateWheels(k_NumberOfWheelsForTruck, k_MaxAirPressureTruck);
         }
 
-        private string toStringBoolYesOrNo(bool i_Bool)
+		/*** Class Logic ***/
+
+		private string toStringBoolYesOrNo(bool i_Bool)
         {
             string answer;
 

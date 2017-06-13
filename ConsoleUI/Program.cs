@@ -9,7 +9,6 @@ namespace ConsoleUI
         public static void Main()
         {
             UserInterface garage = new UserInterface();
-            garage.startGarage();
         }
     }
 }

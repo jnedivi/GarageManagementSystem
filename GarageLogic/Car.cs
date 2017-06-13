@@ -61,7 +61,24 @@ namespace GarageLogic
             }
 		}
 
+<<<<<<< HEAD
         public enum eColor
+=======
+		/*** Constructor ***/
+
+		protected Car(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName, List<Vehicle.Wheel> i_Wheels)
+		: base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName, i_Wheels)
+		{
+			Color = eColor.Black.ToString();
+			NumberOfDoors = eNumOfDoors.Two.ToString();
+			this.Wheels = CreateWheels(k_NumberOfWheelsForCar, k_MaxAirPressureCar);
+
+		}
+
+		/*** Class Logic ***/
+
+		public enum eColor
+>>>>>>> 708e50f138ece22150ae05f73bf8c359ea6619f9
 		{
 			Yellow,
 			White,
@@ -76,15 +93,6 @@ namespace GarageLogic
 			Four,
 			Five,
 		}
-
-		protected Car(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName, List<Vehicle.Wheel> i_Wheels)
-			: base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName, i_Wheels)
-        {
-            Color = eColor.Black.ToString();
-            NumberOfDoors = eNumOfDoors.Two.ToString();
-            this.Wheels = CreateWheels(k_NumberOfWheelsForCar, k_MaxAirPressureCar);
-
-        }
 
         public override string ToString()
         {

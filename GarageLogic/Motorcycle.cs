@@ -8,14 +8,15 @@ namespace GarageLogic
     public abstract class Motorcycle : Vehicle
     {
         /*** Data Members ***/
+
         private const float k_MaxAirPressureForMotorcycle = 33.0f;
         private const int k_NumberOfWheelsForMotorcycle = 2;
         private const string k_LicenseType = "License Type";
-
         private float m_EngineVolume;
         private eLicenseType m_LicenceType;
 
         /*** Getters and Setters***/
+
         public String LicenceType
         {
             get { return this.m_LicenceType.ToString(); }
@@ -53,22 +54,25 @@ namespace GarageLogic
             }
         }
 
+		/*** Constructor ***/
 
-        public enum eLicenseType
+		protected Motorcycle(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName, List<Vehicle.Wheel> i_Wheels)
+		  : base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName, i_Wheels)
+		{
+			LicenceType = eLicenseType.A.ToString();
+			EngineVolume = 0f.ToString();
+			this.Wheels = CreateWheels(k_NumberOfWheelsForMotorcycle, k_MaxAirPressureForMotorcycle);
+		}
+
+		/*** Class Logic ***/
+
+		public enum eLicenseType
         {
             A,
             AB,
             A2,
             B1,
         };
-
-        protected Motorcycle(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName, List<Vehicle.Wheel> i_Wheels)
-            : base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName, i_Wheels)
-        {
-            LicenceType = eLicenseType.A.ToString();
-            EngineVolume = 0f.ToString();
-            this.Wheels = CreateWheels(k_NumberOfWheelsForMotorcycle, k_MaxAirPressureForMotorcycle);
-        }
 
         public override string ToString()
         {

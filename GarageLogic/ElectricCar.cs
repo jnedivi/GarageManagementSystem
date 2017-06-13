@@ -11,7 +11,7 @@ namespace GarageLogic
 
         const float k_MaxBatteryLifeCar = 2.5f;
 
-		/*** Class Logic ***/
+		/*** Constructor ***/
 
 		public ElectricCar(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName, List<Wheel> i_Wheels)
 			: base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName, i_Wheels)
@@ -19,7 +19,9 @@ namespace GarageLogic
             Engine = new ElectricBasedEngine(0.0f, k_MaxBatteryLifeCar);
         }
 
-        public override string ToString()
+		/*** Class Logic ***/
+
+		public override string ToString()
         {
             StringBuilder output = new StringBuilder();
 
