@@ -44,10 +44,10 @@ namespace GarageLogic
         }
 
 		public void InsertNewVehicle(Factory.eVehicleType i_VehicleType, string i_LicenseNumber, string i_OwnerName,
-                                     string i_OwnerPhoneNumber, string i_ModelName, List<float> i_WheelPressures, string i_WheelsManufactureName)
+                                     string i_OwnerPhoneNumber, string i_ModelName)
         {
             Vehicle currentVehicle;
-            currentVehicle = Factory.CreateNewVehicle(i_VehicleType, i_LicenseNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName, i_WheelPressures , i_WheelsManufactureName);
+            currentVehicle = Factory.CreateNewVehicle(i_VehicleType, i_LicenseNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName);
             this.m_GarageVehicles.Add(i_LicenseNumber , currentVehicle);
         }
 
