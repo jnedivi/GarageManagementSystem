@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿using System;
+﻿﻿﻿﻿﻿﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -26,7 +26,7 @@ namespace GarageLogic
         private const byte k_MinPhoneNumLength = 6;
         private const byte k_MaxPhoneNumLength = 9;
         private readonly byte r_NumberOfWheels;
-
+       
         private string m_OwnerName;
         private string m_OwnerPhoneNumber;
         private string m_ModelName;
@@ -42,12 +42,8 @@ namespace GarageLogic
             m_OwnerName = i_OwnerName;
             m_OwnerPhoneNumber = i_OwnerPhoneNumber;
             m_ModelName = i_ModelName;
-
-
             m_LicenseNumber = i_LicenceNumber;
-
             m_VehicleStatus = eVehicleStatus.InRepair;
-
             r_NumberOfWheels = i_NumberOfWheels;
 
         }
@@ -179,6 +175,17 @@ namespace GarageLogic
             get { return this.m_Engine; }
             protected set { this.m_Engine = value; }
         }
+
+        public byte NumberOfWheels
+        {
+            get
+            {
+                return this.r_NumberOfWheels;  
+            }
+
+
+        }
+            
 
         /*** Class Logic ***/
 

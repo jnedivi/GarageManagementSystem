@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿﻿﻿using System;
 using System.Text;
 using System.Collections.Generic;
 
@@ -62,6 +62,7 @@ namespace GarageLogic
 		}
 
 		/*** Constructor ***/
+
 
 		protected Car(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName)
             : base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName , k_NumberOfWheelsForCar )

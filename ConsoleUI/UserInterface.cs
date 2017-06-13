@@ -1,4 +1,4 @@
-﻿﻿﻿﻿using GarageLogic;
+﻿﻿﻿﻿﻿using GarageLogic;
 using System;
 using System.Text;
 using System.Collections.Generic;
@@ -91,7 +91,7 @@ namespace ConsoleUI
                 Vehicle createdVehicle;
                 m_Garage.GetVehicle(licenseNumber, out createdVehicle);
                 List<float> tirePressures = new List<float>();
-
+                float tireAirPressure;
                 if(tireStatusNumber == 1)
                 {
 
@@ -113,6 +113,20 @@ namespace ConsoleUI
 
             mainMenu();
         }
+
+        private float getTirePressureFromUser(Vehicle i_Vehicle, int i_WheelNumber)
+        {
+            float result;
+            string pressure = System.Console.ReadLine();
+
+            while (!(float.TryParse(pressure , out result) && result >i_Vehicle.Wheels[0].MaxAirPressure))
+            {
+                
+            }
+
+            return 0;
+        }
+
 
         private bool isValidVehicleTypeInput(string i_UserInput, out int o_MainMenuNumber)
         {
