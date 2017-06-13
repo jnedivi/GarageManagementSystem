@@ -262,7 +262,14 @@ Maximum Air Pressure: {2}", m_ManufacturerName, m_CurrentAirPressure, m_MaxAirPr
             }
         }
 
-        public List<Wheel> CreateWheels(int i_NumOfWheels, float i_MaxAirPressure)
+		public enum eTireAirPressureStatus
+		{
+			Yes,
+			No
+		}
+
+
+		public List<Wheel> CreateWheels(int i_NumOfWheels, float i_MaxAirPressure)
         {
             List<Wheel> newWheels = new List<Wheel>();
             for (int i = 0; i < i_NumOfWheels; i++)

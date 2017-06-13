@@ -23,25 +23,24 @@ namespace GarageLogic
                                                string i_OwnerPhoneNumber, string i_ModelName)
         {
             Vehicle newVehicle;
-            List<Vehicle.Wheel> wheels;
-           
+       
 
             switch(i_VehicleType)
             {
                 case eVehicleType.FuelBasedMotorcycle:
-                    newVehicle = new FuelBasedMotorcycle(i_LicenseNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName, wheels);
+                    newVehicle = new FuelBasedMotorcycle(i_LicenseNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName);
                     break;
 				case eVehicleType.FuelBasedCar:
-                    newVehicle = new FuelBasedCar(i_LicenseNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName, wheels);
+                    newVehicle = new FuelBasedCar(i_LicenseNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName);
 					break;
 				case eVehicleType.ElectricMotorcycle:
-					newVehicle = new ElectricMotorcycle(i_LicenseNumber , i_OwnerName, i_OwnerPhoneNumber,  i_ModelName,  wheels);
+					newVehicle = new ElectricMotorcycle(i_LicenseNumber , i_OwnerName, i_OwnerPhoneNumber,  i_ModelName);
 					break;
 				case eVehicleType.ElectricCar:
-                    newVehicle = new ElectricCar(i_LicenseNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName, wheels);
+                    newVehicle = new ElectricCar(i_LicenseNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName);
 					break;
                 default:
-                    newVehicle = new FuelBasedTruck(i_LicenseNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName, wheels);
+                    newVehicle = new FuelBasedTruck(i_LicenseNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName);
                     break;
             }
 
