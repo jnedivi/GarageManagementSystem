@@ -6,19 +6,19 @@ namespace ConsoleUI
 {
     public class UserInterface
     {
-		/*** Data Members ***/
+        /*** Data Members ***/
 
         private Garage m_Garage;
 
-		/*** Constructor ***/
+        /*** Constructor ***/
 
-		public UserInterface()
-		{
-			m_Garage = new Garage();
-			mainMenu();
-		}
+        public UserInterface()
+        {
+            m_Garage = new Garage();
+            mainMenu();
+        }
 
-		/*** Class Logic ***/
+        /*** Class Logic ***/
 
         private void mainMenu()
         {
@@ -62,6 +62,15 @@ namespace ConsoleUI
             }
         }
 
+        public enum eTiresFoo
+        {
+            Hwy,
+            Laa
+
+        }
+
+
+
         /* 1) Insert new Vehicle into Garage */
         private void insertNewVehicleIntoGarage()
         {
@@ -83,6 +92,9 @@ namespace ConsoleUI
                 string ownerPhoneNumber = System.Console.ReadLine();
                 System.Console.WriteLine("Please enter Vehicles Model Name:");
                 string vehicleModelName = System.Console.ReadLine();
+
+
+
                 System.Console.WriteLine(string.Format("Please enter condition of the tires{0}1)All tires have same air pressure{1}2)Enter each tire seperately", System.Environment.NewLine, System.Environment.NewLine));
                 string tireInflationChoice = System.Console.ReadLine();
                 while (!(tireInflationChoice == "1") || (tireInflationChoice == "2"))
@@ -90,6 +102,7 @@ namespace ConsoleUI
                     System.Console.WriteLine("Invalid Input. Please enter 1 or 2");
                     tireInflationChoice = System.Console.ReadLine();
                 }
+
                 List<float> tirePressures = new List<float>();
                 switch (tireInflationChoice)
                 {
@@ -104,6 +117,7 @@ namespace ConsoleUI
                 System.Console.WriteLine("Please enter Tires Manufacturer Name:");
                 string tiresManufacturerName = System.Console.ReadLine();
                 this.m_Garage.InsertNewVehicle(vehicleToAdd, licenseNumber, ownerName, ownerPhoneNumber, vehicleModelName, tirePressures, tiresManufacturerName);
+
             }
 
             mainMenu();
@@ -248,7 +262,8 @@ namespace ConsoleUI
                     break;
                 }
             }
-            return licenceNumber.Length < 9 && licenceNumber.Length > 5 ? isLegalNumber : false;
+
+            return licenceNumber.Length == 7 ? isLegalNumber : false;
         }
 
         private static string createMenuStringFromEnum(Type i_EnumType, string i_Title)
