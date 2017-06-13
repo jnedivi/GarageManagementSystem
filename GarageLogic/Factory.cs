@@ -11,16 +11,11 @@ namespace GarageLogic
 			FuelBasedCar,
 			ElectricMotorcycle,
 			ElectricCar,
-<<<<<<< HEAD
-			FuelBasedTruck,
-=======
 			FuelBasedTruck
->>>>>>> 52a8aa24024f45eeb5c925f61687b6eb9be2c59a
 		}
 
 
-        public static Vehicle CreateNewVehicle(eVehicleType i_VehicleType, string i_LicenseNumber, string i_OwnerName,
-                                               string i_OwnerPhoneNumber, string i_ModelName)
+        public static Vehicle CreateNewVehicle(eVehicleType i_VehicleType, string i_LicenseNumber, string i_OwnerName,string i_OwnerPhoneNumber, string i_ModelName)
         {
             Vehicle newVehicle;
        

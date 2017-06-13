@@ -62,15 +62,6 @@ namespace ConsoleUI
             }
         }
 
-        public enum eTiresFoo
-        {
-            Hwy,
-            Laa
-
-        }
-
-
-
         /* 1) Insert new Vehicle into Garage */
         private void insertNewVehicleIntoGarage()
         {
@@ -93,30 +84,30 @@ namespace ConsoleUI
                 System.Console.WriteLine("Please enter Vehicles Model Name:");
                 string vehicleModelName = System.Console.ReadLine();
 
+                this.m_Garage.InsertNewVehicle(vehicleToAdd, licenseNumber, ownerName, ownerPhoneNumber, vehicleModelName);
 
-
-                System.Console.WriteLine(string.Format("Please enter condition of the tires{0}1)All tires have same air pressure{1}2)Enter each tire seperately", System.Environment.NewLine, System.Environment.NewLine));
-                string tireInflationChoice = System.Console.ReadLine();
-                while (!(tireInflationChoice == "1") || (tireInflationChoice == "2"))
-                {
-                    System.Console.WriteLine("Invalid Input. Please enter 1 or 2");
-                    tireInflationChoice = System.Console.ReadLine();
-                }
-
+                System.Console.WriteLine(createMenuStringFromEnum(typeof(Vehicle.eTireAirPressureStatus), "Do all tires have the same air pressure"));
+				int tireStatusNumber = promptUserForMenuSelection(Enum.GetNames(typeof(Factory.eVehicleType)).Length);
+                Vehicle createdVehicle;
+                m_Garage.GetVehicle(licenseNumber, out createdVehicle);
                 List<float> tirePressures = new List<float>();
-                switch (tireInflationChoice)
+
+                if(tireStatusNumber == 1)
                 {
-                    case "1":
-                        /* 1)All tires have same air pressure */
-                        break;
-                    case "2":
-                        /* 2)Enter each tire seperately */
-                        break;
+
+
                 }
+                else 
+                {
+
+
+
+                }
+
 
                 System.Console.WriteLine("Please enter Tires Manufacturer Name:");
                 string tiresManufacturerName = System.Console.ReadLine();
-                this.m_Garage.InsertNewVehicle(vehicleToAdd, licenseNumber, ownerName, ownerPhoneNumber, vehicleModelName, tirePressures, tiresManufacturerName);
+
 
             }
 
