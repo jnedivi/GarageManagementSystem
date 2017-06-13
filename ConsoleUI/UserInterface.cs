@@ -9,6 +9,7 @@ namespace ConsoleUI
 
         private Garage m_Garage = new Garage();
 
+
         public void startGarage()
         {
             mainMenu();
@@ -18,12 +19,14 @@ namespace ConsoleUI
         private void mainMenu()
         {
             
+            System.Console.WriteLine(createMenuStringFromEnum(typeof(Factory.eVehicleType), "Main Menu") );
+            System.Console.WriteLine((Factory.eVehicleType)0);
             System.Console.WriteLine(UserMessages.MainMenuMessage());
 
             string userMainMenuInput = System.Console.ReadLine();
             int mainMenuInputNumber;
 
-			while (!int.TryParse(userMainMenuInput, out mainMenuInputNumber) && mainMenuInputNumber >= 1 && mainMenuInputNumber <= 8)
+            while (!(int.TryParse(userMainMenuInput, out mainMenuInputNumber) && mainMenuInputNumber >= 1 && mainMenuInputNumber <= 7))
 			{
 				System.Console.WriteLine("Invalid Input. Please enter the number of the task you wish to complete.");
 				userMainMenuInput = System.Console.ReadLine();
@@ -52,11 +55,12 @@ namespace ConsoleUI
                     refuelVehicle();
 					break;
 				case 6:
-                    // 6) Charge a electric vehice.
+                    /* 6) Charge a electric vehice. */
                     chargeElectricVehice();
 					break;
 				case 7:
-                    displayVehicleInformation();
+					/* 7) Display Vehicle information. */
+					displayVehicleInformation();
 					break;
                 default:
                     System.Environment.Exit(1);
@@ -68,47 +72,40 @@ namespace ConsoleUI
 		/* 1) Insert new Vehicle into Garage */
 		private void insertNewVehicleIntoGarage()
         {
-         
-            System.Console.WriteLine(UserMessages.InsertNewVehicleIntoGarageMessage());
-                                                
-            string userInputVehicleType = System.Console.ReadLine();
-            int vehicleTypeNumber;
 
-            while(!isValidVehicleTypeInput(userInputVehicleType , out vehicleTypeNumber))
-            {
-				System.Console.WriteLine("Invalid Input. Please enter the number of the task you wish to complete.");
-				userInputVehicleType = System.Console.ReadLine();
-            }
+            System.Console.WriteLine(createMenuStringFromEnum(typeof(Factory.eVehicleType) , "Insert New Vehicle"));
 
-            Factory.eVehicleType vehicleToAdd;
+            int vehicleTypeNumber = promptUserForMenuSelection(Enum.GetNames(typeof(Factory.eVehicleType)).Length);
 
-			switch (vehicleTypeNumber)
-			{
-				case 1:
-                    /* 1) Fuel-Based Motorcycle */
-                    vehicleToAdd = Factory.eVehicleType.FuelBasedMotorcycle;
-					break;
-				case 2:
-                    /* 2) Electric Motorcycle */
-                    vehicleToAdd = Factory.eVehicleType.ElectricMotorcycle;
-					break;
-				case 3:
-                    /* 3) Fuel-Based Car */
-                    vehicleToAdd = Factory.eVehicleType.FuelBasedCar;
-					break;
-				case 4:
-                    /* 4) Electric Car */
-                    vehicleToAdd = Factory.eVehicleType.ElectricCar;
-					break;
-				case 5:
-                    /* 5) Fuel-Based Truck */
-                    vehicleToAdd = Factory.eVehicleType.FuelBasedTruck;
-					break;
-                default:
-                    /* 5) back to main menu */
-                    mainMenu();
-                    return; 
-			}
+            Factory.eVehicleType vehicleToAdd = (Factory.eVehicleType)vehicleTypeNumber - 1;
+
+			//switch (vehicleTypeNumber)
+			//{
+			//	case 1:
+   //                 /* 1) Fuel-Based Motorcycle */
+   //                 vehicleToAdd = Factory.eVehicleType.FuelBasedMotorcycle;
+			//		break;
+			//	case 2:
+   //                 /* 2) Electric Motorcycle */
+   //                 vehicleToAdd = Factory.eVehicleType.ElectricMotorcycle;
+			//		break;
+			//	case 3:
+   //                 /* 3) Fuel-Based Car */
+   //                 vehicleToAdd = Factory.eVehicleType.FuelBasedCar;
+			//		break;
+			//	case 4:
+   //                 /* 4) Electric Car */
+   //                 vehicleToAdd = Factory.eVehicleType.ElectricCar;
+			//		break;
+			//	case 5:
+   //                 /* 5) Fuel-Based Truck */
+   //                 vehicleToAdd = Factory.eVehicleType.FuelBasedTruck;
+			//		break;
+   //             default:
+   //                 /* 5) back to main menu */
+   //                 mainMenu();
+   //                 return; 
+			//}
 
             string licenseNumber;
             this.promptUserForLicenseNumber(out licenseNumber);
@@ -160,28 +157,16 @@ namespace ConsoleUI
         private void displayListOfLicenceNumbers()
 		{
 		
-            System.Console.WriteLine(UserMessages.FilteredListOfVehiclesMessage());
+            System.Console.WriteLine(createMenuStringFromEnum(typeof(Vehicle.eVehicleStatus), "Enter a Vehicle type"));
             string filter = System.Console.ReadLine();
-            Dictionary<string, Vehicle>.KeyCollection list;
-            switch(filter){
-
-                case "1":
-                    list = m_Garage.GetFilteredListOfLicenseNumbers(Vehicle.eVehicleStatus.InRepair);
-                    break;
-				case "2":
-                    list = m_Garage.GetFilteredListOfLicenseNumbers(Vehicle.eVehicleStatus.Repaired);
-					break;
-				case "3":
-                    list = m_Garage.GetFilteredListOfLicenseNumbers(Vehicle.eVehicleStatus.PayedFor);
-					break;
-				case "4":
-                    list = m_Garage.GetListOfLicenceNumbers();
-                    break;
-                    default :
-                    System.Console.WriteLine("Invalid Input. Please Try again");
-                    displayListOfLicenceNumbers();
-                    return;
+            int userChoice;
+            while(!int.TryParse(filter , out userChoice))
+            {
+                System.Console.WriteLine("Invalid Input. Please try again");
+                filter = System.Console.ReadLine();
             }
+            int l = Enum.GetNames(typeof(Vehicle.eVehicleStatus)).Length;
+            Dictionary<string, Vehicle>.KeyCollection list = m_Garage.GetFilteredListOfLicenseNumbers((Vehicle.eVehicleStatus)(userChoice - 1));
 
             foreach(string license in list)
             {
@@ -335,6 +320,22 @@ namespace ConsoleUI
             mainMenu();
 		}
 
+
+        private int promptUserForMenuSelection(int i_NumberOfItems)
+        {
+			string userInputString = System.Console.ReadLine();
+			int userInputNumber;
+            string messageToUser = string.Format("Please enter a number between 1 and {0}", i_NumberOfItems);
+
+			while (!int.TryParse(userInputString, out userInputNumber)) 
+			{
+                System.Console.WriteLine("Invalid Input. " + messageToUser);
+				userInputString = System.Console.ReadLine();
+			}
+
+            return userInputNumber;
+        }
+
         private Vehicle promptUserForLicenseNumber(out string o_licenceNumber)
         {
 
@@ -395,6 +396,25 @@ namespace ConsoleUI
 		{
 
 		}
+
+      
+
+        private static string createMenuStringFromEnum(Type i_EnumType , string i_Title)
+		{
+			int i = 1;
+            StringBuilder menuString = new StringBuilder();
+            menuString.AppendLine(i_Title);
+
+            foreach (string menuValue in Enum.GetNames(i_EnumType))
+			{
+				menuString.Append(i.ToString()).Append(". ");
+				menuString.Append(menuValue).Append(Environment.NewLine);
+				i++;
+			}
+
+			return menuString.ToString();
+		}
+
 	}
 
 
@@ -419,6 +439,7 @@ Please Select a task number you wish to complete:
             return mainMenuMessage;
         }
 
+     
         public static StringBuilder InsertNewVehicleIntoGarageMessage()
         {
             StringBuilder InsertNewVehicleMessage = new StringBuilder();
