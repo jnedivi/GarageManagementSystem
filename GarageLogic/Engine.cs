@@ -27,7 +27,8 @@ namespace GarageLogic
 
 		public override string ToString()
         {
-            string output = string.Format("Remaining Energy Percentage: {0}%{1}", RemainingEnergyPercentage, Environment.NewLine);
+            string output = string.Format(@"Engine Information:
+Remaining Energy Percentage: {0}%", RemainingEnergyPercentage);
 
             return output;
         }

@@ -84,7 +84,7 @@ namespace GarageLogic
 
 		public enum eNumOfDoors
 		{
-			Two = 2, // ?
+			Two = 2, 
 			Three,
 			Four,
 			Five,
@@ -94,8 +94,10 @@ namespace GarageLogic
         {
             StringBuilder output = new StringBuilder();
 
-            string carOutput = string.Format(@"Color: {0}
-Number Of Doors: {1}", m_Color, m_NumberOfDoors);
+            string carOutput = string.Format(@"Car Information:
+Color: {0}
+Number Of Doors: {1}
+", m_Color, m_NumberOfDoors);
 
             output.Append(base.ToString());
             output.Append(carOutput);
