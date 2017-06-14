@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿﻿﻿using System;
 using System.Collections.Generic;
 namespace GarageLogic
 {
@@ -51,6 +51,24 @@ namespace GarageLogic
             }
 
             i_Vehicle.Wheels = newVehiclesWheels;
+        }
+
+        public static void SetLicenseType(Motorcycle i_Motorcycle , Motorcycle.eLicenseType i_LicenceType)
+        {
+
+
+        }
+
+        public static void SetCarDoorsAndColor(Car i_Car, Car.eNumOfDoors i_NumOfDoors , Car.eColor i_Color)
+        {
+
+
+        }
+
+        public static void SetTruckHasHazardousMaterials(Truck i_Truck)
+        {
+
+
         }
 
     }

@@ -51,7 +51,6 @@ namespace GarageLogic
 
         }
 
-
         public enum eVehicleStatus
         {
             InRepair,
@@ -59,52 +58,36 @@ namespace GarageLogic
             PayedFor
         }
 
-        private static bool isLegalLicenseNumber(string i_LicenseNumber)
+        public static bool isLegalLicenseNumber(string i_LicenseNumber)
         {
-            bool isLegal = false;
-
-            if (i_LicenseNumber.Length == k_LegalLicenseNumberLength)
+            char[] licenceNumber = i_LicenseNumber.ToCharArray();
+            bool isLegalNumber = true;
+            foreach (char digit in licenceNumber)
             {
-                isLegal = true;
-
-                foreach(char character in i_LicenseNumber)
+                if (!char.IsDigit(digit))
                 {
-                    isLegal = isLegal && char.IsDigit(character);
-                }
-
-                if (!isLegal)
-                {
-                    throw new System.ArgumentException(k_LicenseNumber);
+                    isLegalNumber = false;
+                    break;
                 }
             }
 
-            return isLegal;
+            return licenceNumber.Length == k_LegalLicenseNumberLength ? isLegalNumber : false;
         }
 
         private static bool isLegalPhoneNumber(string i_PhoneNumber)
         {
-            bool isLegal = false;
+            char[] phoneNumber = i_PhoneNumber.ToCharArray();
+			bool isLegalNumber = true;
+			foreach (char digit in phoneNumber)
+			{
+				if (!char.IsDigit(digit))
+				{
+					isLegalNumber = false;
+					break;
+				}
+			}
 
-            if(!((i_PhoneNumber.Length >= k_MinPhoneNumLength) && (i_PhoneNumber.Length <= k_MaxPhoneNumLength)))
-            {
-                throw new ValueOutOfRangeException(k_OwnerPhoneNumber, k_MinPhoneNumLength, k_MaxPhoneNumLength);
-            }
-            else
-            {
-                isLegal = true;
-
-                foreach(char digit in i_PhoneNumber)
-                {
-                    isLegal = isLegal && char.IsDigit(digit);
-                }
-
-                if (!isLegal)
-                {
-                    throw new System.ArgumentException(k_OwnerPhoneNumber);
-                }
-            }
-
-            return isLegal;
+            return (phoneNumber.Length >= k_MinPhoneNumLength && phoneNumber.Length <= k_MinPhoneNumLength ) ? isLegalNumber : false;
         }
 
         /*** Getters and Setters ***/
@@ -281,8 +264,6 @@ Maximum Air Pressure: {2}", m_ManufacturerName, m_CurrentAirPressure, m_MaxAirPr
 			No
 		}
 
-
-        
         public void UpdateWheelsManufacturerName(string i_ManufacturerName)
         {
             foreach(Wheel wheel in Wheels)
