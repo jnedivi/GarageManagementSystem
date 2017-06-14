@@ -47,7 +47,6 @@ namespace GarageLogic
 
         }
 
-
         public enum eVehicleStatus
         {
             InRepair,
@@ -177,12 +176,7 @@ namespace GarageLogic
 
         public byte NumberOfWheels
         {
-            get
-            {
-                return this.r_NumberOfWheels;  
-            }
-
-
+            get { return this.r_NumberOfWheels; }
         }
             
 
