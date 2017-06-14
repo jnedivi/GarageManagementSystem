@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 namespace GarageLogic
 {
@@ -12,11 +12,11 @@ namespace GarageLogic
 			ElectricMotorcycle,
 			ElectricCar,
 			FuelBasedTruck,
+
 		}
 
 
-        public static Vehicle CreateNewVehicle(eVehicleType i_VehicleType, string i_LicenseNumber, string i_OwnerName,
-                                               string i_OwnerPhoneNumber, string i_ModelName)
+        public static Vehicle CreateNewVehicle(eVehicleType i_VehicleType, string i_LicenseNumber, string i_OwnerName,string i_OwnerPhoneNumber, string i_ModelName)
         {
             Vehicle newVehicle;
 

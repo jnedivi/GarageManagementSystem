@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿﻿﻿using System;
 using System.Text;
 using System.Collections.Generic;
 
@@ -11,9 +11,9 @@ namespace GarageLogic
         /*** Data Members ***/
 
         private const float k_MaxAirPressureCar = 30.0f; 
+        private const byte k_NumberOfWheelsForCar = 4;
         private const string k_Color = "Color";
         private const string k_NumberOfDoors = "NumberOfDoors";
-        private const byte k_NumberOfWheelsForCar = 4;
 		private eColor m_Color;
         private eNumOfDoors m_NumberOfDoors;
         
@@ -63,8 +63,9 @@ namespace GarageLogic
 
 		/*** Constructor ***/
 
-		protected Car(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName, List<Vehicle.Wheel> i_Wheels)
-		: base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName, k_NumberOfWheelsForCar)
+
+		protected Car(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName)
+            : base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName , k_NumberOfWheelsForCar )
 		{
 			Color = eColor.Black.ToString();
 			NumberOfDoors = eNumOfDoors.Two.ToString();
@@ -98,9 +99,7 @@ namespace GarageLogic
 Number Of Doors: {1}", m_Color, m_NumberOfDoors);
 
             output.Append(base.ToString());
-            output.Append(Environment.NewLine);
             output.Append(carOutput);
-            output.Append(Environment.NewLine);
             output.Append(Environment.NewLine);
 
             return output.ToString();

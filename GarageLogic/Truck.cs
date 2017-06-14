@@ -10,7 +10,7 @@ namespace GarageLogic
         /*** Data Members ***/
 
         private const float k_MaxAirPressureTruck = 32.0f;
-        private const int k_NumberOfWheelsForTruck = 12;
+        private const byte k_NumberOfWheelsForTruck = 12;
         private float m_MaxWeightAllowed;
         private bool m_HasHazardousMaterials;
 
@@ -50,8 +50,8 @@ namespace GarageLogic
 
 		/*** Constructor ***/
 
-		protected Truck(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName, List<Vehicle.Wheel> i_Wheels)
-			: base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName, i_Wheels)
+		protected Truck(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName)
+            : base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName , k_NumberOfWheelsForTruck)
         {
             MaxWeightAllowed = 0.0f.ToString();
             HasHazardousMaterials = false.ToString();
@@ -85,7 +85,6 @@ Max Allowed Weight Load: {1}", toStringBoolYesOrNo(m_HasHazardousMaterials), Max
 
             output.Append(base.ToString());
             output.Append(truckOutput);
-            output.Append(Environment.NewLine);
             output.Append(Environment.NewLine);
 
             return output.ToString();
