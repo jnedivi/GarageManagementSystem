@@ -57,11 +57,10 @@ namespace GarageLogic
 		/*** Constructor ***/
 
 		protected Motorcycle(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName)
-            : base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName , k_NumberOfWheelsForMotorcycle)
+            : base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName , k_NumberOfWheelsForMotorcycle , k_MaxAirPressureForMotorcycle)
 		{
 			LicenceType = eLicenseType.A.ToString();
 			EngineVolume = 0f.ToString();
-			this.Wheels = CreateWheels(k_NumberOfWheelsForMotorcycle, k_MaxAirPressureForMotorcycle);
 		}
 
 		/*** Class Logic ***/

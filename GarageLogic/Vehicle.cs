@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿using System;
+﻿﻿﻿﻿﻿﻿﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -19,12 +19,15 @@ namespace GarageLogic
         private const string k_OwnerPhoneNumber = "Owner Phone Number";
         /*** Data Members ***/
 
+        //private const string k_OwnerPhoneNumber = "Owner Phone Number";
         // private const string k_LicenseNumber = "License Number";
         //private const string k_VehicleStatus = "Vehicle Status";
+
         private const byte k_LegalLicenseNumberLength = 7;
         private const byte k_MinPhoneNumLength = 6;
         private const byte k_MaxPhoneNumLength = 9;
         private readonly byte r_NumberOfWheels;
+        private readonly float r_MaxWheelAirPressure;
        
         private string m_OwnerName;
         private string m_OwnerPhoneNumber;
@@ -36,7 +39,7 @@ namespace GarageLogic
         private Engine m_Engine;
 
 
-		protected Vehicle(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName, byte i_NumberOfWheels)
+		protected Vehicle(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName, byte i_NumberOfWheels, float i_MaxAirPressure)
         {
             m_OwnerName = i_OwnerName;
             m_OwnerPhoneNumber = i_OwnerPhoneNumber;
@@ -44,6 +47,7 @@ namespace GarageLogic
             m_LicenseNumber = i_LicenceNumber;
             m_VehicleStatus = eVehicleStatus.InRepair;
             r_NumberOfWheels = i_NumberOfWheels;
+            r_MaxWheelAirPressure = i_MaxAirPressure;
 
         }
 
@@ -54,52 +58,36 @@ namespace GarageLogic
             PayedFor
         }
 
-        private static bool isLegalLicenseNumber(string i_LicenseNumber)
+        public static bool isLegalLicenseNumber(string i_LicenseNumber)
         {
-            bool isLegal = false;
-
-            if (i_LicenseNumber.Length == k_LegalLicenseNumberLength)
+            char[] licenceNumber = i_LicenseNumber.ToCharArray();
+            bool isLegalNumber = true;
+            foreach (char digit in licenceNumber)
             {
-                isLegal = true;
-
-                foreach(char character in i_LicenseNumber)
+                if (!char.IsDigit(digit))
                 {
-                    isLegal = isLegal && char.IsDigit(character);
-                }
-
-                if (!isLegal)
-                {
-                    throw new System.ArgumentException(k_LicenseNumber);
+                    isLegalNumber = false;
+                    break;
                 }
             }
 
-            return isLegal;
+            return licenceNumber.Length == k_LegalLicenseNumberLength ? isLegalNumber : false;
         }
 
         private static bool isLegalPhoneNumber(string i_PhoneNumber)
         {
-            bool isLegal = false;
+            char[] phoneNumber = i_PhoneNumber.ToCharArray();
+			bool isLegalNumber = true;
+			foreach (char digit in phoneNumber)
+			{
+				if (!char.IsDigit(digit))
+				{
+					isLegalNumber = false;
+					break;
+				}
+			}
 
-            if(!((i_PhoneNumber.Length >= k_MinPhoneNumLength) && (i_PhoneNumber.Length <= k_MaxPhoneNumLength)))
-            {
-                throw new ValueOutOfRangeException(k_OwnerPhoneNumber, k_MinPhoneNumLength, k_MaxPhoneNumLength);
-            }
-            else
-            {
-                isLegal = true;
-
-                foreach(char digit in i_PhoneNumber)
-                {
-                    isLegal = isLegal && char.IsDigit(digit);
-                }
-
-                if (!isLegal)
-                {
-                    throw new System.ArgumentException(k_OwnerPhoneNumber);
-                }
-            }
-
-            return isLegal;
+            return (phoneNumber.Length >= k_MinPhoneNumLength && phoneNumber.Length <= k_MinPhoneNumLength ) ? isLegalNumber : false;
         }
 
         /*** Getters and Setters ***/
@@ -108,6 +96,11 @@ namespace GarageLogic
         {
             get { return this.m_ModelName; }
             set { this.m_ModelName = value; }
+        }
+
+        public float MaxAirPressure
+        {
+            get { return this.r_MaxWheelAirPressure; }
         }
 
         public string LicenseNumber
@@ -151,7 +144,7 @@ namespace GarageLogic
         public List<Wheel> Wheels
         {
             get { return this.m_Wheels; }
-            protected set { this.m_Wheels = value; }
+            set { this.m_Wheels = value; }
         }
 
         public eVehicleStatus VehicleStatus
@@ -192,6 +185,14 @@ namespace GarageLogic
             private string m_ManufacturerName;
             private float m_CurrentAirPressure;
             private float m_MaxAirPressure;
+
+
+            public Wheel(string i_ManufacturerName, float i_currentAirPressure, float i_MaxAirPressure)
+            {
+				this.ManufacturerName = i_ManufacturerName;
+				this.MaxAirPressure = i_MaxAirPressure;
+				this.CurrentAirPressure = i_currentAirPressure;
+            }
 
             /*** Getters and Setters ***/
 
@@ -242,16 +243,6 @@ namespace GarageLogic
                 }
             }
 
-            internal static Wheel CreateNewWheel(float i_MaxAirPressure)
-            {
-                Wheel wheel = new Wheel();
-                wheel.ManufacturerName = null;
-                wheel.MaxAirPressure = i_MaxAirPressure;
-                wheel.CurrentAirPressure = 0.0f;
-
-                return wheel;
-            }
-
             public override string ToString()
             {
                 string output = string.Format(@"Manufacturer Name: {0}
@@ -268,19 +259,6 @@ Maximum Air Pressure: {2}", m_ManufacturerName, m_CurrentAirPressure, m_MaxAirPr
 			No
 		}
 
-
-		public List<Wheel> CreateWheels(int i_NumOfWheels, float i_MaxAirPressure)
-        {
-            List<Wheel> newWheels = new List<Wheel>();
-            for (int i = 0; i < i_NumOfWheels; i++)
-            {
-                Wheel tire = Wheel.CreateNewWheel(i_MaxAirPressure);
-                newWheels.Add(tire);
-            }
-
-            return newWheels;
-        }
-        
         public void UpdateWheelsManufacturerName(string i_ManufacturerName)
         {
             foreach(Wheel wheel in Wheels)
