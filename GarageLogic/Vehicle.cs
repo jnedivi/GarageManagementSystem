@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿using System;
+﻿﻿﻿﻿﻿﻿﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -19,12 +19,10 @@ namespace GarageLogic
         private const string k_OwnerPhoneNumber = "Owner Phone Number";
         /*** Data Members ***/
 
-<<<<<<< HEAD
-        private const string k_OwnerPhoneNumber = "Owner Phone Number";
-=======
+        //private const string k_OwnerPhoneNumber = "Owner Phone Number";
         // private const string k_LicenseNumber = "License Number";
         //private const string k_VehicleStatus = "Vehicle Status";
->>>>>>> origin/master
+
         private const byte k_LegalLicenseNumberLength = 7;
         private const byte k_MinPhoneNumLength = 6;
         private const byte k_MaxPhoneNumLength = 9;
