@@ -19,7 +19,7 @@ namespace GarageLogic
                                                string i_OwnerPhoneNumber, string i_ModelName)
         {
             Vehicle newVehicle;
-           
+
             switch(i_VehicleType)
             {
                 case eVehicleType.FuelBasedMotorcycle:
