@@ -80,8 +80,10 @@ namespace GarageLogic
         {
             StringBuilder output = new StringBuilder();
 
-            string truckOutput = string.Format(@"Is Carrying Hazardous Material?: {0}
-Max Allowed Weight Load: {1}", toStringBoolYesOrNo(m_HasHazardousMaterials), MaxWeightAllowed);
+            string truckOutput = string.Format(@"Truck Information:
+Is Carrying Hazardous Material?: {0}
+Max Allowed Weight Load: {1}
+", toStringBoolYesOrNo(m_HasHazardousMaterials), MaxWeightAllowed);
 
             output.Append(base.ToString());
             output.Append(truckOutput);

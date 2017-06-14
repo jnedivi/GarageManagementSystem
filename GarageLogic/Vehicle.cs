@@ -16,11 +16,10 @@ namespace GarageLogic
         private const string k_ModelName = "Model Name:";
         private const string k_Owner = "Owner:";
         private const string k_VehicleStatus = "Vehicle Status:";
-
+        private const string k_OwnerPhoneNumber = "Owner Phone Number";
         /*** Data Members ***/
 
-        private const string k_OwnerPhoneNumber = "Owner Phone Number";
-       // private const string k_LicenseNumber = "License Number";
+        // private const string k_LicenseNumber = "License Number";
         //private const string k_VehicleStatus = "Vehicle Status";
         private const byte k_LegalLicenseNumberLength = 7;
         private const byte k_MinPhoneNumLength = 6;
@@ -308,13 +307,14 @@ Maximum Air Pressure: {2}", m_ManufacturerName, m_CurrentAirPressure, m_MaxAirPr
         {
             StringBuilder output = new StringBuilder();
 
-            string vehicleOutput = string.Format(@"Owner Name: {0}
+            string vehicleOutput = string.Format(@"General Vehicle Information:
+Owner Name: {0}
 Phone Number: {1}
 Model Name: {2}
 License Number: {3}
 Vehicle Status: {4}
-Wheels:
-", m_OwnerName, m_OwnerPhoneNumber ,m_ModelName, m_LicenseNumber, m_VehicleStatus);
+
+Wheels Information:", m_OwnerName, m_OwnerPhoneNumber ,m_ModelName, m_LicenseNumber, m_VehicleStatus);
 
             output.Append(vehicleOutput);
             output.Append(Environment.NewLine);
@@ -323,7 +323,8 @@ Wheels:
             foreach(Wheel wheel in Wheels)
             {
                 string wheelOutput = string.Format(@"Wheel {0}: 
-{1}", wheelIndex, wheel.ToString());
+{1}
+", wheelIndex, wheel.ToString());
                 output.Append(wheelOutput);
                 output.Append(Environment.NewLine);
                 wheelIndex++;

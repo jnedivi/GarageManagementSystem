@@ -78,8 +78,10 @@ namespace GarageLogic
         {
             StringBuilder output = new StringBuilder();
 
-            string motorcycleOutput = string.Format(@"License Type: {0}
-Engine Volume: {1}", m_LicenceType, m_EngineVolume);
+            string motorcycleOutput = string.Format(@"Motorcycle Information:
+License Type: {0}
+Engine Volume: {1}
+", m_LicenceType, m_EngineVolume);
 
             output.Append(base.ToString());
             output.Append(Environment.NewLine);
