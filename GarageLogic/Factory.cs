@@ -15,7 +15,6 @@ namespace GarageLogic
 
 		}
 
-
         public static Vehicle CreateNewVehicle(eVehicleType i_VehicleType, string i_LicenseNumber, string i_OwnerName,string i_OwnerPhoneNumber, string i_ModelName)
         {
             Vehicle newVehicle;
@@ -42,14 +41,17 @@ namespace GarageLogic
             return newVehicle;
         }
 
-        public static List<Vehicle.Wheel> CreateWheels(string i_ManufactureName , List<float> i_CurrentAirPressures)
+        public static void CreateWheels(Vehicle i_Vehicle , string i_ManufactureName , List<float> i_CurrentAirPressures)
         {
-            //TODO: make wheels with air pressure
+            List < Vehicle.Wheel > newVehiclesWheels = new List<Vehicle.Wheel>();
 
+            foreach(float wheelPressure in i_CurrentAirPressures)
+            {
+                newVehiclesWheels.Add(new Vehicle.Wheel(i_ManufactureName , wheelPressure , i_Vehicle.MaxAirPressure));
+            }
 
-            return null;
+            i_Vehicle.Wheels = newVehiclesWheels;
         }
-
 
     }
 }

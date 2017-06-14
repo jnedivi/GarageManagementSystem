@@ -20,12 +20,11 @@ namespace GarageLogic
         /*** Data Members ***/
 
         private const string k_OwnerPhoneNumber = "Owner Phone Number";
-       // private const string k_LicenseNumber = "License Number";
-        //private const string k_VehicleStatus = "Vehicle Status";
         private const byte k_LegalLicenseNumberLength = 7;
         private const byte k_MinPhoneNumLength = 6;
         private const byte k_MaxPhoneNumLength = 9;
         private readonly byte r_NumberOfWheels;
+        private readonly float r_MaxWheelAirPressure;
        
         private string m_OwnerName;
         private string m_OwnerPhoneNumber;
@@ -37,7 +36,7 @@ namespace GarageLogic
         private Engine m_Engine;
 
 
-		protected Vehicle(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName, byte i_NumberOfWheels)
+		protected Vehicle(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName, byte i_NumberOfWheels, float i_MaxAirPressure)
         {
             m_OwnerName = i_OwnerName;
             m_OwnerPhoneNumber = i_OwnerPhoneNumber;
@@ -45,6 +44,7 @@ namespace GarageLogic
             m_LicenseNumber = i_LicenceNumber;
             m_VehicleStatus = eVehicleStatus.InRepair;
             r_NumberOfWheels = i_NumberOfWheels;
+            r_MaxWheelAirPressure = i_MaxAirPressure;
 
         }
 
@@ -112,6 +112,11 @@ namespace GarageLogic
             set { this.m_ModelName = value; }
         }
 
+        public float MaxAirPressure
+        {
+            get { return this.r_MaxWheelAirPressure; }
+        }
+
         public string LicenseNumber
         {
             get { return this.m_LicenseNumber; }
@@ -153,7 +158,7 @@ namespace GarageLogic
         public List<Wheel> Wheels
         {
             get { return this.m_Wheels; }
-            protected set { this.m_Wheels = value; }
+            set { this.m_Wheels = value; }
         }
 
         public eVehicleStatus VehicleStatus
@@ -199,6 +204,14 @@ namespace GarageLogic
             private string m_ManufacturerName;
             private float m_CurrentAirPressure;
             private float m_MaxAirPressure;
+
+
+            public Wheel(string i_ManufacturerName, float i_currentAirPressure, float i_MaxAirPressure)
+            {
+				this.ManufacturerName = i_ManufacturerName;
+				this.MaxAirPressure = i_MaxAirPressure;
+				this.CurrentAirPressure = i_currentAirPressure;
+            }
 
             /*** Getters and Setters ***/
 
@@ -249,16 +262,6 @@ namespace GarageLogic
                 }
             }
 
-            internal static Wheel CreateNewWheel(float i_MaxAirPressure)
-            {
-                Wheel wheel = new Wheel();
-                wheel.ManufacturerName = null;
-                wheel.MaxAirPressure = i_MaxAirPressure;
-                wheel.CurrentAirPressure = 0.0f;
-
-                return wheel;
-            }
-
             public override string ToString()
             {
                 string output = string.Format(@"Manufacturer Name: {0}
@@ -276,17 +279,6 @@ Maximum Air Pressure: {2}", m_ManufacturerName, m_CurrentAirPressure, m_MaxAirPr
 		}
 
 
-		public List<Wheel> CreateWheels(int i_NumOfWheels, float i_MaxAirPressure)
-        {
-            List<Wheel> newWheels = new List<Wheel>();
-            for (int i = 0; i < i_NumOfWheels; i++)
-            {
-                Wheel tire = Wheel.CreateNewWheel(i_MaxAirPressure);
-                newWheels.Add(tire);
-            }
-
-            return newWheels;
-        }
         
         public void UpdateWheelsManufacturerName(string i_ManufacturerName)
         {

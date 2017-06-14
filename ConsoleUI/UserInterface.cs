@@ -76,48 +76,48 @@ namespace ConsoleUI
                 Vehicle createdVehicle;
                 m_Garage.GetVehicle(licenseNumber, out createdVehicle);
                 List<float> tirePressures = new List<float>();
-                float tireAirPressure;
-                if(tireStatusNumber == 1)
+
+                if (tireStatusNumber == 1)
                 {
-
-
+                    float singleTireAirPressure = this.getTirePressureFromUser(createdVehicle);
+                    for (int i = 0; i < createdVehicle.NumberOfWheels; i++)
+                    {
+                        tirePressures.Add(singleTireAirPressure);
+                    }
                 }
-                else 
+                else
                 {
-
-
-
+                    for (int i = 0; i < createdVehicle.NumberOfWheels; i++)
+                    {
+                        tirePressures.Add(getTirePressureFromUser(createdVehicle));
+                    }
                 }
-
 
                 System.Console.WriteLine("Please enter Tires Manufacturer Name:");
                 string tiresManufacturerName = System.Console.ReadLine();
 
-
+                Factory.CreateWheels(createdVehicle , tiresManufacturerName , tirePressures);
             }
 
             mainMenu();
         }
 
-        private float getTirePressureFromUser(Vehicle i_Vehicle, int i_WheelNumber)
+        private float getTirePressureFromUser(Vehicle i_Vehicle)
         {
             float result;
+            string maxAirPressumeMessage = string.Format("Please enter a number below the max air pressure: {0}.", i_Vehicle.MaxAirPressure);
+
+            System.Console.WriteLine(maxAirPressumeMessage);
             string pressure = System.Console.ReadLine();
 
-            while (!(float.TryParse(pressure , out result) && result >i_Vehicle.Wheels[0].MaxAirPressure))
+            while (!(float.TryParse(pressure , out result) && result > i_Vehicle.MaxAirPressure && result >= 0))
             {
-                
+                System.Console.WriteLine(string.Format("Invalid Input. {0}" , maxAirPressumeMessage));
+                pressure = System.Console.ReadLine();
             }
 
-            return 0;
+            return result;
         }
-
-
-        private bool isValidVehicleTypeInput(string i_UserInput, out int o_MainMenuNumber)
-        {
-            return int.TryParse(i_UserInput, out o_MainMenuNumber) && o_MainMenuNumber >= 1 && o_MainMenuNumber <= 6;
-        }
-
 
         /* 2) Display list of licence numbers */
         private void displayListOfLicenceNumbers()
@@ -141,6 +141,7 @@ namespace ConsoleUI
 
             mainMenu();
         }
+
         /*** Options 3 - 7 ***/
         private void menuOptions(int i_MainMenuSelection)
         {
@@ -153,14 +154,17 @@ namespace ConsoleUI
                 switch(i_MainMenuSelection)
                 {
                     case 3:
+						/* 3) Change a vehicle status */
 						System.Console.WriteLine(createMenuStringFromEnum(typeof(Vehicle.eVehicleStatus), "Enter a Vehicle Status"));
 						userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Vehicle.eVehicleStatus)).Length);
 						m_Garage.ChangeVehicleStatus(licenseNumber, (Vehicle.eVehicleStatus)(userChoice - 1));
                         break;
 					case 4:
-                        currentVehicle.InflateAllWheelsToMax();
+						/* 4) Inflate tires to max */
+						currentVehicle.InflateAllWheelsToMax();
 						break;
 					case 5:
+						/* 5) Refuel vehicle */
 						System.Console.WriteLine(createMenuStringFromEnum(typeof(FuelBasedEngine.eFuelType), "Enter a Fuel Type"));
 						userChoice = this.promptUserForMenuSelection(Enum.GetNames(typeof(FuelBasedEngine.eFuelType)).Length);
 						System.Console.WriteLine("Please enter amount to refuel");
@@ -170,9 +174,10 @@ namespace ConsoleUI
 						this.m_Garage.RefuelVehicle(licenseNumber, (FuelBasedEngine.eFuelType)(userChoice - 1), amountToRefuel);
 						break;
 					case 6:
-                        /* charge vehicle */
+                        /* 6) charge vehicle */
 						break;
 					case 7:
+						/* 7) Display vehicle information */
 						System.Console.WriteLine(currentVehicle.ToString());
 						break;
                 }
@@ -220,6 +225,7 @@ namespace ConsoleUI
             }
 
             Vehicle currentVehicle;
+
             return m_Garage.GetVehicle(o_licenceNumber, out currentVehicle) ? currentVehicle : null;
         }
 

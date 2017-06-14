@@ -51,11 +51,11 @@ namespace GarageLogic
 		/*** Constructor ***/
 
 		protected Truck(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName)
-            : base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName , k_NumberOfWheelsForTruck)
+            : base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName , k_NumberOfWheelsForTruck, k_MaxAirPressureTruck)
         {
             MaxWeightAllowed = 0.0f.ToString();
             HasHazardousMaterials = false.ToString();
-            this.Wheels = CreateWheels(k_NumberOfWheelsForTruck, k_MaxAirPressureTruck);
+   
         }
 
 		/*** Class Logic ***/

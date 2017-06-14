@@ -65,11 +65,10 @@ namespace GarageLogic
 
 
 		protected Car(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName)
-            : base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName , k_NumberOfWheelsForCar )
+            : base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName , k_NumberOfWheelsForCar , k_MaxAirPressureCar )
 		{
 			Color = eColor.Black.ToString();
-			NumberOfDoors = eNumOfDoors.Two.ToString();
-			this.Wheels = CreateWheels(k_NumberOfWheelsForCar, k_MaxAirPressureCar);
+            NumberOfDoors = eNumOfDoors.Two.ToString();
 
 		}
 
