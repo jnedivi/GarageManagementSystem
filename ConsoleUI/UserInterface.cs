@@ -156,6 +156,7 @@ namespace ConsoleUI
                 {
                     case 3:
 						/* 3) Change a vehicle status */
+                        // TODO: add catches
 						System.Console.WriteLine(createMenuStringFromEnum(typeof(Vehicle.eVehicleStatus), "Enter a Vehicle Status"));
 						userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Vehicle.eVehicleStatus)).Length);
 						m_Garage.ChangeVehicleStatus(licenseNumber, (Vehicle.eVehicleStatus)(userChoice - 1));
@@ -166,15 +167,33 @@ namespace ConsoleUI
 						break;
 					case 5:
 						/* 5) Refuel vehicle */
+                        // TODO: get function to work, as well as the catches
 						System.Console.WriteLine(createMenuStringFromEnum(typeof(FuelBasedEngine.eFuelType), "Enter a Fuel Type"));
 						userChoice = this.promptUserForMenuSelection(Enum.GetNames(typeof(FuelBasedEngine.eFuelType)).Length);
-						System.Console.WriteLine("Please enter amount to refuel");
-                        float amountToRefuel = this.getFloatFromUser(0 , int.MaxValue);
-						this.m_Garage.RefuelVehicle(licenseNumber, (FuelBasedEngine.eFuelType)(userChoice - 1), amountToRefuel);
+                        System.Console.WriteLine("Please enter amount to refuel");
+                        float amountToRefuel = this.getFloatFromUser(0, int.MaxValue);
+                        try
+                        {
+                            this.m_Garage.RefuelVehicle(licenseNumber, (FuelBasedEngine.eFuelType)(userChoice - 1), amountToRefuel);
+                        }
+                        catch(FormatException ex)
+                        {
+                            Console.WriteLine(ex.ToString());
+                        }
+                        catch (ValueOutOfRangeException ex)
+                        {
+                            Console.WriteLine(ex.ToString());
+
+                        }
+                        catch(ArgumentException ex)
+                        {
+                            Console.WriteLine(ex.ToString());
+                        }
 						break;
 					case 6:
-						/* 6) charge vehicle */
-						System.Console.WriteLine("Please enter amount to recharge:");
+                        /* 6) charge vehicle */
+                        // TODO: get function to work, add catches
+                        System.Console.WriteLine("Please enter amount to recharge:");
 						float amountToRecharge = this.getFloatFromUser(0, int.MaxValue);
                         m_Garage.ChargeElectricVehice(licenseNumber , amountToRecharge);
 						break;
@@ -248,12 +267,12 @@ namespace ConsoleUI
 		private float getTirePressureFromUser(Vehicle i_Vehicle)
 		{
             float tirePressure;
-			string maxAirPressumeMessage = string.Format("Please enter a number below the max air pressure: {0}.", i_Vehicle.MaxAirPressure);
+			string maxAirPressumeMessage = string.Format("Please enter a number below or equal to the max air pressure: {0}.", i_Vehicle.MaxAirPressure);
 
 			System.Console.WriteLine(maxAirPressumeMessage);
             string userInputPressure = System.Console.ReadLine();
 
-			while (!(float.TryParse(userInputPressure, out tirePressure) && tirePressure < i_Vehicle.MaxAirPressure && tirePressure >= 0))
+			while (!(float.TryParse(userInputPressure, out tirePressure) && tirePressure <= i_Vehicle.MaxAirPressure && tirePressure >= 0))
 			{
 				System.Console.WriteLine(string.Format("Invalid Input. {0}", maxAirPressumeMessage));
 				userInputPressure = System.Console.ReadLine();
@@ -278,6 +297,11 @@ namespace ConsoleUI
 
             return menuString.ToString();
         }
+
+        /*private static void refuelVehicle(ref Vehicle io_Vehicle)
+        {
+         
+        }*/
 
 
 
