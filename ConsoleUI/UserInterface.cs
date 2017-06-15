@@ -175,8 +175,15 @@ namespace ConsoleUI
 					case 6:
 						/* 6) charge vehicle */
 						System.Console.WriteLine("Please enter amount to recharge:");
-						float amountToRecharge = this.getFloatFromUser(0, int.MaxValue);
-                        m_Garage.ChargeElectricVehice(licenseNumber , amountToRecharge);
+                        try{
+							float amountToRecharge = this.getFloatFromUser(0, int.MaxValue);
+							m_Garage.ChargeElectricVehice(licenseNumber, amountToRecharge);
+                        }
+                        catch (Exception e)
+                        {
+                            System.Console.WriteLine("we caught a exception");
+                        }
+						
 						break;
 					case 7:
 						/* 7) Display vehicle information */
@@ -198,7 +205,7 @@ namespace ConsoleUI
             string input = System.Console.ReadLine();
             while (!(float.TryParse(input , out userInputNumber) && userInputNumber >= i_MinNumber && userInputNumber <= i_MaxNumber))
             {
-                System.Console.Write(string.Format("Invalid Input. Please eneter a number between {0} and {1}.") , i_MinNumber , i_MaxNumber);
+                System.Console.Write(string.Format("Invalid Input. Please eneter a number between {0} and {1}.") , i_MinNumber , i_MaxNumber); //TODO: exception trown 
                 input = System.Console.ReadLine();
             }
 
