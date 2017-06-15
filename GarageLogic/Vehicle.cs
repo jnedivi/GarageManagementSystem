@@ -74,7 +74,7 @@ namespace GarageLogic
             return licenceNumber.Length == k_LegalLicenseNumberLength ? isLegalNumber : false;
         }
 
-        private static bool isLegalPhoneNumber(string i_PhoneNumber)
+        public static bool isLegalPhoneNumber(string i_PhoneNumber)
         {
             char[] phoneNumber = i_PhoneNumber.ToCharArray();
 			bool isLegalNumber = true;
