@@ -126,7 +126,7 @@ namespace GarageLogic
             }
             else
             {
-                throw new FormatException("Refuel");
+                throw new FormatException("Not Fuel Based Vehicle");
             }
 
 		}

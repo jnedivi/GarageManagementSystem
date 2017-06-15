@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GarageLogic
 {
-    class ValueOutOfRangeException : Exception
+    public class ValueOutOfRangeException : Exception
     {
         private float m_MinimumValue;
         private float m_MaximumValue;
@@ -28,7 +28,7 @@ namespace GarageLogic
 
         public override string ToString()
         {
-            return string.Format("value must be in range of {0}:{1}", MinValue, MaxVlaue);
+            return string.Format("Value must be in range of {0}:{1}", MinValue, MaxVlaue);
         }
     }
 }
