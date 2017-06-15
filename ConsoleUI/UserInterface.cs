@@ -120,7 +120,7 @@ namespace ConsoleUI
                     System.Console.WriteLine(createMenuStringFromEnum(typeof(Motorcycle.eLicenseType), "Enter the motorcycles's license type:"));
                     userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Motorcycle.eLicenseType)).Length);
                     ((Motorcycle)createdVehicle).LicenceType = (Motorcycle.eLicenseType)userChoice - 1;
-                    System.Console.WriteLine("please enter engine volume");
+                    System.Console.WriteLine("Please enter engine volume:");
                     userChoice = (int)getFloatFromUser(int.MaxValue, 0);
                     //TODO 
 
@@ -142,7 +142,7 @@ namespace ConsoleUI
                         ((Truck)createdVehicle).HasHazardousMaterials = false;
                     }
 
-                    System.Console.WriteLine("please enter Maximum allowed weight:");
+                    System.Console.WriteLine("Please enter maximum allowed weight:");
                     float maxWeightAllowed = getFloatFromUser(int.MaxValue, 0);
                     ((Truck)createdVehicle).MaxWeightAllowed = maxWeightAllowed;
                 }
@@ -165,6 +165,7 @@ namespace ConsoleUI
         /* 2) Display list of licence numbers */
         private void displayListOfLicenceNumbers()
         {
+            //TODO: Give user option if to filter or not
             System.Console.Clear();
 
             System.Console.WriteLine(createMenuStringFromEnum(typeof(Vehicle.eVehicleStatus), "Enter a Vehicle type"));
@@ -183,6 +184,7 @@ namespace ConsoleUI
                 System.Console.WriteLine("No Vehicles Available" + Environment.NewLine);
             }
 
+            System.Console.Clear();
             mainMenu();
         }
 
@@ -202,7 +204,14 @@ namespace ConsoleUI
                         // TODO: add catches
                         System.Console.WriteLine(createMenuStringFromEnum(typeof(Vehicle.eVehicleStatus), "Enter a Vehicle Status"));
                         userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Vehicle.eVehicleStatus)).Length);
-                        m_Garage.ChangeVehicleStatus(licenseNumber, (Vehicle.eVehicleStatus)(userChoice - 1));
+                        try
+                        {
+                            m_Garage.ChangeVehicleStatus(licenseNumber, (Vehicle.eVehicleStatus)(userChoice - 1));
+                        }
+                        catch(ArgumentException ex)
+                        {
+                            Console.WriteLine(ex.ToString());
+                        }
                         break;
                     case 4:
                         /* 4) Inflate tires to max */
