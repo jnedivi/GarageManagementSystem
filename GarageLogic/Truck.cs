@@ -16,35 +16,44 @@ namespace GarageLogic
 
         /*** Getters and Setters***/
 
-        public string MaxWeightAllowed
+        public float MaxWeightAllowed
         {
-            get { return this.m_MaxWeightAllowed.ToString(); }
+            get { return this.m_MaxWeightAllowed; }
             set
             {
-                try
-                {
-                    m_MaxWeightAllowed = float.Parse(value);
-                }
-                catch (FormatException)
-                {
-                    throw new FormatException("Max Weight Allowed");
-                }
+                //try
+                //{
+                //    m_MaxWeightAllowed = float.Parse(value);
+                //}
+                //catch (FormatException)
+                //{
+                //    throw new FormatException("Max Weight Allowed");
+                //}
+                this.m_MaxWeightAllowed = value;
             }
         }
 
-		public String HasHazardousMaterials
+        public enum eIsCarryingHazardousMaterials
+        {
+            Yes,
+            No
+        }
+
+		public bool HasHazardousMaterials
 		{
-			get { return toStringBoolYesOrNo(m_HasHazardousMaterials); }
+			get { return m_HasHazardousMaterials; }
             set
             {
-                try
-                {
-                    m_HasHazardousMaterials = bool.Parse(value);
-                }
-                catch (FormatException)
-                {
-                    throw new FormatException("Has Hazardous Materials");
-                }
+                //try
+                //{
+                //    m_HasHazardousMaterials = bool.Parse(value);
+                //}
+                //catch (FormatException)
+                //{
+                //    throw new FormatException("Has Hazardous Materials");
+                //}
+
+                this.m_HasHazardousMaterials = value;
             }
 		}
 
@@ -53,8 +62,8 @@ namespace GarageLogic
 		protected Truck(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName)
             : base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName , k_NumberOfWheelsForTruck, k_MaxAirPressureTruck)
         {
-            MaxWeightAllowed = 0.0f.ToString();
-            HasHazardousMaterials = false.ToString();
+           // MaxWeightAllowed = 0.0f.ToString();
+           // HasHazardousMaterials = false.ToString();
    
         }
 

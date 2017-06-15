@@ -1,4 +1,4 @@
-﻿﻿﻿using System;
+﻿﻿﻿﻿using System;
 using System.Collections.Generic;
 
 namespace GarageLogic
@@ -50,6 +50,7 @@ namespace GarageLogic
             currentVehicle = Factory.CreateNewVehicle(i_VehicleType, i_LicenseNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName);
             this.m_GarageVehicles.Add(i_LicenseNumber , currentVehicle);
         }
+
 
         /* 2) Display list of licence numbers */
         public Dictionary<string, Vehicle>.KeyCollection GetListOfLicenceNumbers()

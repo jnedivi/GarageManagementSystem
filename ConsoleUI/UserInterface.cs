@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿using GarageLogic;
+﻿﻿﻿﻿﻿﻿﻿using GarageLogic;
 using System;
 using System.Text;
 using System.Collections.Generic;
@@ -9,7 +9,8 @@ namespace ConsoleUI
         /*** Data Members ***/
 
         private Garage m_Garage;
-       
+        private const int k_NumberOfMainMenuItems = 8;
+
         /*** Constructor ***/
 
         public UserInterface()
@@ -22,14 +23,14 @@ namespace ConsoleUI
 
         private void mainMenu()
         {
-            
+
             System.Console.WriteLine(MainMenuMessage());
-            int mainMenuInputNumber = this.promptUserForMenuSelection(7);
-           
-            if(mainMenuInputNumber == 7)
+            int mainMenuInputNumber = this.promptUserForMenuSelection(k_NumberOfMainMenuItems);
+
+            if (mainMenuInputNumber == k_NumberOfMainMenuItems)
             {
-				System.Environment.Exit(1);
-			}
+                System.Environment.Exit(1);
+            }
 
             switch (mainMenuInputNumber)
             {
@@ -42,8 +43,8 @@ namespace ConsoleUI
                     displayListOfLicenceNumbers();
                     break;
                 default:
-					/* Options 3 - 7 */
-					menuOptions(mainMenuInputNumber);
+                    /* Options 3 - 7 */
+                    menuOptions(mainMenuInputNumber);
                     break;
             }
         }
@@ -74,7 +75,7 @@ namespace ConsoleUI
                 this.m_Garage.InsertNewVehicle(vehicleToAdd, licenseNumber, ownerName, ownerPhoneNumber, vehicleModelName);
 
                 System.Console.WriteLine(createMenuStringFromEnum(typeof(Vehicle.eTireAirPressureStatus), "Do all tires have the same air pressure"));
-				int tireStatusNumber = promptUserForMenuSelection(Enum.GetNames(typeof(Factory.eVehicleType)).Length);
+                int tireStatusNumber = promptUserForMenuSelection(Enum.GetNames(typeof(Factory.eVehicleType)).Length);
                 Vehicle createdVehicle;
                 m_Garage.GetVehicle(licenseNumber, out createdVehicle);
                 List<float> tirePressures = new List<float>();
@@ -98,21 +99,63 @@ namespace ConsoleUI
                 System.Console.WriteLine("Please enter Tires Manufacturer Name:");
                 string tiresManufacturerName = System.Console.ReadLine();
 
-                Factory.CreateWheels(createdVehicle , tiresManufacturerName , tirePressures);
+                Factory.CreateWheels(createdVehicle, tiresManufacturerName, tirePressures);
+                int userChoice;
 
-                if(createdVehicle is Car)
+                if (createdVehicle is Car)
                 {
-                    //TODO: get color and number of doors
+
+                    System.Console.WriteLine(createMenuStringFromEnum(typeof(Car.eColor), "Enter the car's color:"));
+                    userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Vehicle.eVehicleStatus)).Length);
+                    ((Car)createdVehicle).Color = (Car.eColor)userChoice - 1;
+
+                    System.Console.WriteLine(createMenuStringFromEnum(typeof(Car.eNumOfDoors), "Enter the car's number of doors:"));
+                    userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Vehicle.eVehicleStatus)).Length);
+                    ((Car)createdVehicle).NumberOfDoors = (Car.eNumOfDoors)userChoice - 1;
+
+                    Factory.SetCarDoorsAndColor((Car)createdVehicle, (Car.eNumOfDoors)userChoice, (Car.eColor)userChoice);
                 }
                 else if (createdVehicle is Motorcycle)
                 {
-                    //TODO: get licence tyoe
+                    System.Console.WriteLine(createMenuStringFromEnum(typeof(Motorcycle.eLicenseType), "Enter the motorcycles's license type:"));
+                    userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Motorcycle.eLicenseType)).Length);
+                    ((Motorcycle)createdVehicle).LicenceType = (Motorcycle.eLicenseType)userChoice - 1;
+                    System.Console.WriteLine("please enter engine volume");
+                    userChoice = (int)getFloatFromUser(int.MaxValue, 0);
+                    //TODO 
+
                 }
-                else
+                else if (createdVehicle is Truck)
                 {
-                    //TODO : get hazardous materials state
+
+                    System.Console.WriteLine(createMenuStringFromEnum(typeof(Truck.eIsCarryingHazardousMaterials), "Is the truck carrying hazardous materials?:"));
+                    userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Truck.eIsCarryingHazardousMaterials)).Length);
+
+
+
+                    if (userChoice == 0)
+                    {
+                        ((Truck)createdVehicle).HasHazardousMaterials = true;
+                    }
+                    else
+                    {
+                        ((Truck)createdVehicle).HasHazardousMaterials = false;
+                    }
+
+                    System.Console.WriteLine("please enter Maximum allowed weight:");
+                    float maxWeightAllowed = getFloatFromUser(int.MaxValue, 0);
+                    ((Truck)createdVehicle).MaxWeightAllowed = maxWeightAllowed;
                 }
 
+                if (createdVehicle.Engine is FuelBasedEngine)
+                {
+                    //TODO: amout to refuel
+                }
+                else if (createdVehicle.Engine is ElectricBasedEngine)
+                {
+                    // TODO                }
+
+                }
             }
 
             mainMenu();
@@ -123,19 +166,19 @@ namespace ConsoleUI
         private void displayListOfLicenceNumbers()
         {
             System.Console.Clear();
-           
+
             System.Console.WriteLine(createMenuStringFromEnum(typeof(Vehicle.eVehicleStatus), "Enter a Vehicle type"));
             int userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Vehicle.eVehicleStatus)).Length);
             Dictionary<string, Vehicle>.KeyCollection list = m_Garage.GetFilteredListOfLicenseNumbers((Vehicle.eVehicleStatus)(userChoice - 1));
-            int vehicleNumber = 1;  
+            int vehicleNumber = 1;
             foreach (string license in list)
             {
-                
-                System.Console.WriteLine(string.Format("{0}. Licence number: {1}{2}" , vehicleNumber, license , Environment.NewLine));
+
+                System.Console.WriteLine(string.Format("{0}. Licence number: {1}{2}", vehicleNumber, license, Environment.NewLine));
                 vehicleNumber++;
             }
 
-            if(list.Count == 0)
+            if (list.Count == 0)
             {
                 System.Console.WriteLine("No Vehicles Available" + Environment.NewLine);
             }
@@ -147,36 +190,36 @@ namespace ConsoleUI
         private void menuOptions(int i_MainMenuSelection)
         {
             int userChoice;
-			System.Console.Clear();
-			string licenseNumber;
-			Vehicle currentVehicle = this.promptUserForLicenseNumber(out licenseNumber);
+            System.Console.Clear();
+            string licenseNumber;
+            Vehicle currentVehicle = this.promptUserForLicenseNumber(out licenseNumber);
             if (currentVehicle != null)
-			{
-                switch(i_MainMenuSelection)
+            {
+                switch (i_MainMenuSelection)
                 {
                     case 3:
-						/* 3) Change a vehicle status */
+                        /* 3) Change a vehicle status */
                         // TODO: add catches
-						System.Console.WriteLine(createMenuStringFromEnum(typeof(Vehicle.eVehicleStatus), "Enter a Vehicle Status"));
-						userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Vehicle.eVehicleStatus)).Length);
-						m_Garage.ChangeVehicleStatus(licenseNumber, (Vehicle.eVehicleStatus)(userChoice - 1));
+                        System.Console.WriteLine(createMenuStringFromEnum(typeof(Vehicle.eVehicleStatus), "Enter a Vehicle Status"));
+                        userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Vehicle.eVehicleStatus)).Length);
+                        m_Garage.ChangeVehicleStatus(licenseNumber, (Vehicle.eVehicleStatus)(userChoice - 1));
                         break;
-					case 4:
-						/* 4) Inflate tires to max */
-						currentVehicle.InflateAllWheelsToMax();
-						break;
-					case 5:
-						/* 5) Refuel vehicle */
+                    case 4:
+                        /* 4) Inflate tires to max */
+                        currentVehicle.InflateAllWheelsToMax();
+                        break;
+                    case 5:
+                        /* 5) Refuel vehicle */
                         // TODO: get function to work, as well as the catches
-						System.Console.WriteLine(createMenuStringFromEnum(typeof(FuelBasedEngine.eFuelType), "Enter a Fuel Type"));
-						userChoice = this.promptUserForMenuSelection(Enum.GetNames(typeof(FuelBasedEngine.eFuelType)).Length);
+                        System.Console.WriteLine(createMenuStringFromEnum(typeof(FuelBasedEngine.eFuelType), "Enter a Fuel Type"));
+                        userChoice = this.promptUserForMenuSelection(Enum.GetNames(typeof(FuelBasedEngine.eFuelType)).Length);
                         System.Console.WriteLine("Please enter amount to refuel");
                         float amountToRefuel = this.getFloatFromUser(0, int.MaxValue);
                         try
                         {
                             this.m_Garage.RefuelVehicle(licenseNumber, (FuelBasedEngine.eFuelType)(userChoice - 1), amountToRefuel);
                         }
-                        catch(FormatException ex)
+                        catch (FormatException ex)
                         {
                             Console.WriteLine(ex.ToString());
                         }
@@ -185,53 +228,48 @@ namespace ConsoleUI
                             Console.WriteLine(ex.ToString());
 
                         }
-                        catch(ArgumentException ex)
+                        catch (ArgumentException ex)
                         {
                             Console.WriteLine(ex.ToString());
                         }
-						break;
-					case 6:
-<<<<<<< HEAD
-						/* 6) charge vehicle */
-						System.Console.WriteLine("Please enter amount to recharge:");
-                        try{
-							float amountToRecharge = this.getFloatFromUser(0, int.MaxValue);
-							m_Garage.ChargeElectricVehice(licenseNumber, amountToRecharge);
+                        break;
+                    case 6:
+                        /* 6) charge vehicle */
+                        System.Console.WriteLine("Please enter amount to recharge:");
+                        float amountToRecharge;
+                        try
+                        {
+                            amountToRecharge = this.getFloatFromUser(0, int.MaxValue);
+                            m_Garage.ChargeElectricVehice(licenseNumber, amountToRecharge);
                         }
                         catch (Exception e)
                         {
                             System.Console.WriteLine("we caught a exception");
                         }
-						
-=======
                         /* 6) charge vehicle */
                         // TODO: get function to work, add catches
-                        System.Console.WriteLine("Please enter amount to recharge:");
-						float amountToRecharge = this.getFloatFromUser(0, int.MaxValue);
-                        m_Garage.ChargeElectricVehice(licenseNumber , amountToRecharge);
->>>>>>> origin/master
-						break;
-					case 7:
-						/* 7) Display vehicle information */
-						System.Console.WriteLine(currentVehicle.ToString());
-						break;
+                        break;
+                    case 7:
+                        /* 7) Display vehicle information */
+                        System.Console.WriteLine(currentVehicle.ToString());
+                        break;
                 }
-			}
-			else
-			{
-				System.Console.WriteLine(string.Format("Vehicle with licence number {0} is not in the garage.{1}", licenseNumber, Environment.NewLine));
-			}
+            }
+            else
+            {
+                System.Console.WriteLine(string.Format("Vehicle with licence number {0} is not in the garage.{1}", licenseNumber, Environment.NewLine));
+            }
 
-			mainMenu();
+            mainMenu();
         }
 
-        private float getFloatFromUser(int i_MaxNumber , int i_MinNumber)
+        private float getFloatFromUser(int i_MaxNumber, int i_MinNumber)
         {
             float userInputNumber;
             string input = System.Console.ReadLine();
-            while (!(float.TryParse(input , out userInputNumber) && userInputNumber >= i_MinNumber && userInputNumber <= i_MaxNumber))
+            while (!(float.TryParse(input, out userInputNumber) && userInputNumber >= i_MinNumber && userInputNumber <= i_MaxNumber))
             {
-                System.Console.Write(string.Format("Invalid Input. Please eneter a number between {0} and {1}.") , i_MinNumber , i_MaxNumber); //TODO: exception trown 
+                System.Console.Write(string.Format("Invalid Input. Please eneter a number between {0} and {1}.", i_MinNumber, i_MaxNumber)); //TODO: exception trown 
                 input = System.Console.ReadLine();
             }
 
@@ -277,23 +315,23 @@ namespace ConsoleUI
             return m_Garage.GetVehicle(o_licenceNumber, out currentVehicle) ? currentVehicle : null;
         }
 
-		/* Get Tire pressures from user */
-		private float getTirePressureFromUser(Vehicle i_Vehicle)
-		{
+        /* Get Tire pressures from user */
+        private float getTirePressureFromUser(Vehicle i_Vehicle)
+        {
             float tirePressure;
-			string maxAirPressumeMessage = string.Format("Please enter a number below or equal to the max air pressure: {0}.", i_Vehicle.MaxAirPressure);
+            string maxAirPressumeMessage = string.Format("Please enter a number below or equal to the max air pressure: {0}.", i_Vehicle.MaxAirPressure);
 
-			System.Console.WriteLine(maxAirPressumeMessage);
+            System.Console.WriteLine(maxAirPressumeMessage);
             string userInputPressure = System.Console.ReadLine();
 
-			while (!(float.TryParse(userInputPressure, out tirePressure) && tirePressure <= i_Vehicle.MaxAirPressure && tirePressure >= 0))
-			{
-				System.Console.WriteLine(string.Format("Invalid Input. {0}", maxAirPressumeMessage));
-				userInputPressure = System.Console.ReadLine();
-			}
+            while (!(float.TryParse(userInputPressure, out tirePressure) && tirePressure <= i_Vehicle.MaxAirPressure && tirePressure >= 0))
+            {
+                System.Console.WriteLine(string.Format("Invalid Input. {0}", maxAirPressumeMessage));
+                userInputPressure = System.Console.ReadLine();
+            }
 
-			return tirePressure;
-		}
+            return tirePressure;
+        }
 
 
         private static string createMenuStringFromEnum(Type i_EnumType, string i_Title)
@@ -314,7 +352,7 @@ namespace ConsoleUI
 
         /*private static void refuelVehicle(ref Vehicle io_Vehicle)
         {
-         
+
         }*/
 
 
@@ -334,7 +372,8 @@ Please Select a task number you wish to complete:
 4) Inflate tires
 5) Refuel a vehicle.
 6) Charge a electric vehice.
-7) Display vehicle information.");
+7) Display vehicle information.
+8) Quit ");
 
             return mainMenuMessage;
         }
@@ -342,4 +381,5 @@ Please Select a task number you wish to complete:
 
 
 }
+
 

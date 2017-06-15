@@ -17,24 +17,25 @@ namespace GarageLogic
 
         /*** Getters and Setters***/
 
-        public String LicenceType
+        public eLicenseType LicenceType
         {
-            get { return this.m_LicenceType.ToString(); }
+            get { return this.m_LicenceType; }
             set
             {
-                if (!Enum.IsDefined(typeof(eLicenseType), value))
-                {
-                    throw new FormatException(k_LicenseType);
-                }
+                //if (!Enum.IsDefined(typeof(eLicenseType), value))
+                //{
+                //    throw new FormatException(k_LicenseType);
+                //}
 
-                try
-                {
-                    m_LicenceType = (eLicenseType)Enum.Parse(typeof(eLicenseType), value);
-                }
-                catch (ArgumentException)
-                {
-                    throw new ArgumentException(k_LicenseType);
-                }
+                //try
+                //{
+                //    m_LicenceType = (eLicenseType)Enum.Parse(typeof(eLicenseType), value);
+                //}
+                //catch (ArgumentException)
+                //{
+                //    throw new ArgumentException(k_LicenseType);
+                //}
+                this.m_LicenceType = value;
             }
         }
 
@@ -59,7 +60,6 @@ namespace GarageLogic
 		protected Motorcycle(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName)
             : base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName , k_NumberOfWheelsForMotorcycle , k_MaxAirPressureForMotorcycle)
 		{
-			LicenceType = eLicenseType.A.ToString();
 			EngineVolume = 0f.ToString();
 		}
 
