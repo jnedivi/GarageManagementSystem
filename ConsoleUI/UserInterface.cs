@@ -300,8 +300,7 @@ namespace ConsoleUI
                 }
                 catch(ValueOutOfRangeException ex)
                 {
-                    string outputMessage = string.Format("{0}, please enter a value in this range.", ex.ToString());
-                    System.Console.WriteLine(outputMessage);
+                    System.Console.WriteLine(ex.ToString());
                     input = System.Console.ReadLine();
                 }  
             }
