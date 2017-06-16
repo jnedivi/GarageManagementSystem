@@ -127,7 +127,7 @@ namespace ConsoleUI
                     System.Console.WriteLine(createMenuStringFromEnum(typeof(Motorcycle.eLicenseType), "Enter the motorcycles's license type:"));
                     userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Motorcycle.eLicenseType)).Length);
                     ((Motorcycle)createdVehicle).LicenceType = (Motorcycle.eLicenseType)userChoice - 1;
-                    System.Console.WriteLine("please enter engine volume");
+                    System.Console.WriteLine("Please enter engine volume:");
                     userChoice = (int)getFloatFromUser(int.MaxValue, 0);
                     ((Motorcycle)createdVehicle).EngineVolume = userChoice;
 
