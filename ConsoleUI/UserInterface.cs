@@ -128,7 +128,7 @@ namespace ConsoleUI
                     userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Motorcycle.eLicenseType)).Length);
                     ((Motorcycle)createdVehicle).LicenceType = (Motorcycle.eLicenseType)userChoice - 1;
                     System.Console.WriteLine("Please enter engine volume:");
-                    userChoice = (int)getFloatFromUser(int.MaxValue, 0);
+                    userChoice = (int)getFloatFromUser( 0, int.MaxValue);
                     ((Motorcycle)createdVehicle).EngineVolume = userChoice;
 
                 }
@@ -148,20 +148,20 @@ namespace ConsoleUI
                     }
 
                     System.Console.WriteLine("Please enter maximum allowed weight:");
-                    float maxWeightAllowed = getFloatFromUser(int.MaxValue, 0);
+                    float maxWeightAllowed = getFloatFromUser(0, int.MaxValue);
                     ((Truck)createdVehicle).MaxWeightAllowed = maxWeightAllowed;
                 }
 
                 if (createdVehicle.Engine is FuelBasedEngine)
                 {
 					System.Console.WriteLine("Please enter current amount of fuel:");
-                    float currentAmountOfFuel = getFloatFromUser( (int)((FuelBasedEngine)createdVehicle.Engine).MaxAmountOfFuel , 0);
+                    float currentAmountOfFuel = getFloatFromUser( 0, (int)((FuelBasedEngine)createdVehicle.Engine).MaxAmountOfFuel);
                     ((FuelBasedEngine)createdVehicle.Engine).CurrentAmountOfFuel = currentAmountOfFuel;
                 }
                 else if (createdVehicle.Engine is ElectricBasedEngine)
                 {
 					System.Console.WriteLine("Please enter remaining time of engine operation in hours:");
-                    float currentBatteryEnergy = getFloatFromUser((int)((ElectricBasedEngine)createdVehicle.Engine).MaxBatteryLife, 0);
+                    float currentBatteryEnergy = getFloatFromUser(0, (int)((ElectricBasedEngine)createdVehicle.Engine).MaxBatteryLife);
                     ((ElectricBasedEngine)createdVehicle.Engine).RemainingTimeOnBattery = currentBatteryEnergy;
                 }
             }
@@ -209,7 +209,6 @@ namespace ConsoleUI
                 {
                     case 3:
                         /* 3) Change a vehicle status */
-                        // TODO: add catches
                         System.Console.WriteLine(createMenuStringFromEnum(typeof(Vehicle.eVehicleStatus), "Enter a Vehicle Status"));
                         userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Vehicle.eVehicleStatus)).Length);
                         try
@@ -259,9 +258,17 @@ namespace ConsoleUI
                             amountToRecharge = this.getFloatFromUser(0, int.MaxValue);
                             m_Garage.ChargeElectricVehice(licenseNumber, amountToRecharge);
                         }
-                        catch (Exception e)
+                        catch (ArgumentException argumentException)
                         {
-                            System.Console.WriteLine("we caught a exception");
+                            System.Console.WriteLine(argumentException.ToString());
+                        }
+                        catch(FormatException formatException)
+                        {
+                            System.Console.WriteLine(formatException.ToString());
+                        }
+                        catch(ValueOutOfRangeException valueOutOfRangeEx)
+                        {
+                            System.Console.WriteLine(valueOutOfRangeEx.ToString());
                         }
                         /* 6) charge vehicle */
                         // TODO: get function to work, add catches
@@ -280,14 +287,23 @@ namespace ConsoleUI
             mainMenu();
         }
 
-        private float getFloatFromUser(int i_MaxNumber, int i_MinNumber)
+        private float getFloatFromUser(int i_MinNumber, int i_MaxNumber)
         {
             float userInputNumber;
             string input = System.Console.ReadLine();
             while (!(float.TryParse(input, out userInputNumber) && userInputNumber >= i_MinNumber && userInputNumber <= i_MaxNumber))
             {
-                System.Console.Write(string.Format("Invalid Input. Please eneter a number between {0} and {1}.", i_MinNumber, i_MaxNumber)); //TODO: exception trown 
-                input = System.Console.ReadLine();
+                //System.Console.Write(string.Format("Invalid Input. Please eneter a number between {0} and {1}.", i_MinNumber, i_MaxNumber)); //TODO: exception trown 
+                try
+                {
+                    throw new ValueOutOfRangeException("getFloatFromUser", i_MinNumber, i_MaxNumber);
+                }
+                catch(ValueOutOfRangeException ex)
+                {
+                    string outputMessage = string.Format("{0}, please enter a value in this range.", ex.ToString());
+                    System.Console.WriteLine(outputMessage);
+                    input = System.Console.ReadLine();
+                }  
             }
 
             return userInputNumber;

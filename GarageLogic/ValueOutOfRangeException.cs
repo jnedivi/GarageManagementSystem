@@ -28,7 +28,7 @@ namespace GarageLogic
 
         public override string ToString()
         {
-            return string.Format("Value must be in range of {0}:{1}", MinValue, MaxVlaue);
+            return string.Format("Value must be between {0} and {1}", MinValue, MaxVlaue);
         }
     }
 }
