@@ -29,6 +29,7 @@ namespace ConsoleUI
 
             if (mainMenuInputNumber == k_NumberOfMainMenuItems)
             {
+                System.Console.WriteLine("Exit program selected. Bye Bye ...");
                 System.Environment.Exit(1);
             }
 
@@ -69,6 +70,12 @@ namespace ConsoleUI
                 string ownerName = System.Console.ReadLine();
                 System.Console.WriteLine("Please enter Owners phone number:");
                 string ownerPhoneNumber = System.Console.ReadLine();
+                while (!Vehicle.isLegalPhoneNumber(ownerPhoneNumber))
+                {
+                    System.Console.WriteLine("Please enter valid phone number:");
+                    ownerPhoneNumber = System.Console.ReadLine();
+                }
+
                 System.Console.WriteLine("Please enter Vehicles Model Name:");
                 string vehicleModelName = System.Console.ReadLine();
 
@@ -99,21 +106,21 @@ namespace ConsoleUI
                 System.Console.WriteLine("Please enter Tires Manufacturer Name:");
                 string tiresManufacturerName = System.Console.ReadLine();
 
-                Factory.CreateWheels(createdVehicle, tiresManufacturerName, tirePressures);
+                Factory.CreateWheels(createdVehicle, tiresManufacturerName, tirePressures); //TODO 
                 int userChoice;
 
                 if (createdVehicle is Car)
                 {
 
                     System.Console.WriteLine(createMenuStringFromEnum(typeof(Car.eColor), "Enter the car's color:"));
-                    userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Vehicle.eVehicleStatus)).Length);
+                    userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Car.eColor)).Length);
                     ((Car)createdVehicle).Color = (Car.eColor)userChoice - 1;
 
                     System.Console.WriteLine(createMenuStringFromEnum(typeof(Car.eNumOfDoors), "Enter the car's number of doors:"));
-                    userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Vehicle.eVehicleStatus)).Length);
+                    userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Car.eNumOfDoors)).Length);
                     ((Car)createdVehicle).NumberOfDoors = (Car.eNumOfDoors)userChoice - 1;
 
-                    Factory.SetCarDoorsAndColor((Car)createdVehicle, (Car.eNumOfDoors)userChoice, (Car.eColor)userChoice);
+                    Factory.SetCarDoorsAndColor((Car)createdVehicle, (Car.eNumOfDoors)userChoice, (Car.eColor)userChoice); //TODO
                 }
                 else if (createdVehicle is Motorcycle)
                 {
@@ -122,7 +129,7 @@ namespace ConsoleUI
                     ((Motorcycle)createdVehicle).LicenceType = (Motorcycle.eLicenseType)userChoice - 1;
                     System.Console.WriteLine("please enter engine volume");
                     userChoice = (int)getFloatFromUser(int.MaxValue, 0);
-                    //TODO 
+                    ((Motorcycle)createdVehicle).EngineVolume = userChoice;
 
                 }
                 else if (createdVehicle is Truck)
@@ -130,8 +137,6 @@ namespace ConsoleUI
 
                     System.Console.WriteLine(createMenuStringFromEnum(typeof(Truck.eIsCarryingHazardousMaterials), "Is the truck carrying hazardous materials?:"));
                     userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Truck.eIsCarryingHazardousMaterials)).Length);
-
-
 
                     if (userChoice == 0)
                     {
@@ -149,12 +154,15 @@ namespace ConsoleUI
 
                 if (createdVehicle.Engine is FuelBasedEngine)
                 {
-                    //TODO: amout to refuel
+					System.Console.WriteLine("Please enter current amount of fuel:");
+                    float currentAmountOfFuel = getFloatFromUser( (int)((FuelBasedEngine)createdVehicle.Engine).MaxAmountOfFuel , 0);
+                    ((FuelBasedEngine)createdVehicle.Engine).CurrentAmountOfFuel = currentAmountOfFuel;
                 }
                 else if (createdVehicle.Engine is ElectricBasedEngine)
                 {
-                    // TODO                }
-
+					System.Console.WriteLine("Please enter remaining time of engine operation in hours:");
+                    float currentBatteryEnergy = getFloatFromUser((int)((ElectricBasedEngine)createdVehicle.Engine).MaxBatteryLife, 0);
+                    ((ElectricBasedEngine)createdVehicle.Engine).RemainingTimeOnBattery = currentBatteryEnergy;
                 }
             }
 

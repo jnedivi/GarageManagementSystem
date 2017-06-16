@@ -12,10 +12,12 @@ namespace GarageLogic
 
         private const float k_MaxAirPressureCar = 30.0f; 
         private const byte k_NumberOfWheelsForCar = 4;
+       
         private const string k_Color = "Color";
         private const string k_NumberOfDoors = "NumberOfDoors";
 		private eColor m_Color;
         private eNumOfDoors m_NumberOfDoors;
+       
         
         /*** Getters and Setters***/
 

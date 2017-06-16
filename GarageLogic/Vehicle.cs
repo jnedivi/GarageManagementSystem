@@ -87,7 +87,7 @@ namespace GarageLogic
 				}
 			}
 
-            return (phoneNumber.Length >= k_MinPhoneNumLength && phoneNumber.Length <= k_MinPhoneNumLength ) ? isLegalNumber : false;
+            return (phoneNumber.Length >= k_MinPhoneNumLength && phoneNumber.Length <= k_MaxPhoneNumLength ) ? isLegalNumber : false;
         }
 
         /*** Getters and Setters ***/

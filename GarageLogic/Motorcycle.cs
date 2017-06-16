@@ -12,7 +12,7 @@ namespace GarageLogic
         private const float k_MaxAirPressureForMotorcycle = 33.0f;
         private const byte k_NumberOfWheelsForMotorcycle = 2;
         private const string k_LicenseType = "License Type";
-        private float m_EngineVolume;
+        private int m_EngineVolume;
         private eLicenseType m_LicenceType;
 
         /*** Getters and Setters***/
@@ -39,19 +39,20 @@ namespace GarageLogic
             }
         }
 
-        public string EngineVolume
+        public int EngineVolume
         {
-            get { return this.m_EngineVolume.ToString(); }
+            get { return this.m_EngineVolume; }
             set
             {
-                try
-                {
-                    m_EngineVolume = float.Parse(value);
-                }
-                catch (FormatException)
-                {
-                    throw new FormatException("Engine Volume");
-                }
+                //try
+                //{
+                //    m_EngineVolume = float.Parse(value);
+                //}
+                //catch (FormatException)
+                //{
+                //    throw new FormatException("Engine Volume");
+                //}
+                this.m_EngineVolume = value;
             }
         }
 
@@ -60,7 +61,7 @@ namespace GarageLogic
 		protected Motorcycle(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName)
             : base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName , k_NumberOfWheelsForMotorcycle , k_MaxAirPressureForMotorcycle)
 		{
-			EngineVolume = 0f.ToString();
+		
 		}
 
 		/*** Class Logic ***/
