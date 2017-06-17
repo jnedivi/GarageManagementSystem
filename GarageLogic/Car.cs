@@ -42,9 +42,15 @@ namespace GarageLogic
 
 		}
 
-		/*** Class Logic ***/
+        /*** Class Logic ***/
 
-		public enum eColor
+        public void SetCarDoorsAndColor(Car.eColor i_Color, Car.eNumOfDoors i_NumOfDoors)
+        {
+            m_Color = i_Color;
+            m_NumberOfDoors = i_NumOfDoors;
+        }
+
+        public enum eColor
 		{
 			Yellow,
 			White,

@@ -124,6 +124,7 @@ namespace GarageLogic
             if(engine != null)
             {
                 engine.Refuel(i_AmountToRefuel, i_FuelType);
+                m_GarageVehicles[i_LicenseNumber] = vehicle;
             }
             else
             {
@@ -149,6 +150,7 @@ namespace GarageLogic
             if(engine != null)
             {
                 engine.Recharge(hoursToRecharge);
+                m_GarageVehicles[i_LicenseNumber] = vehicle;
             }
             else
             {

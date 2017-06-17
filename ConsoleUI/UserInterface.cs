@@ -111,7 +111,6 @@ namespace ConsoleUI
 
                 if (createdVehicle is Car)
                 {
-
                     System.Console.WriteLine(createMenuStringFromEnum(typeof(Car.eColor), "Enter the car's color:"));
                     userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Car.eColor)).Length);
                     ((Car)createdVehicle).Color = (Car.eColor)userChoice - 1;
@@ -120,7 +119,7 @@ namespace ConsoleUI
                     userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Car.eNumOfDoors)).Length);
                     ((Car)createdVehicle).NumberOfDoors = (Car.eNumOfDoors)userChoice - 1;
 
-                    Factory.SetCarDoorsAndColor((Car)createdVehicle, (Car.eNumOfDoors)userChoice, (Car.eColor)userChoice); //TODO
+                    ((Car)createdVehicle).SetCarDoorsAndColor((Car.eColor)userChoice , (Car.eNumOfDoors)userChoice);
                 }
                 else if (createdVehicle is Motorcycle)
                 {
@@ -240,7 +239,8 @@ namespace ConsoleUI
                         /* 4) Inflate tires to max */
                         currentVehicle.InflateAllWheelsToMax();
                         System.Console.Clear();
-                        System.Console.WriteLine("All the tires of theis vehicle have been inflated.");
+                        System.Console.WriteLine("Inflation of tires succesful.");
+                        System.Console.WriteLine(Environment.NewLine);
                         break;
                     case 5:
                         /* 5) Refuel vehicle */
@@ -256,6 +256,7 @@ namespace ConsoleUI
                             catch (FormatException)
                             {
                                 Console.WriteLine("This vehicle does not have a fuel based engine. Refuel Failed");
+                                System.Console.WriteLine(Environment.NewLine);
                             }
                         }
                         else
@@ -266,25 +267,21 @@ namespace ConsoleUI
 Maximum Amount Of Fuel: {1}
 Please enter amount to refuel:", fuelEngine.CurrentAmountOfFuel, fuelEngine.MaxAmountOfFuel);
                             System.Console.WriteLine(refuelMessage);
-                            float amountToRefuel = this.getFloatFromUser(0, int.MaxValue);
+                            float amountToRefuel = this.getFloatFromUser(0, fuelEngine.MaxAmountOfFuel - fuelEngine.CurrentAmountOfFuel);
+                            
                             try
                             {
                                 this.m_Garage.RefuelVehicle(licenseNumber, (FuelBasedEngine.eFuelType)(userChoice - 1), amountToRefuel);
                             }
-                            catch (ValueOutOfRangeException ex)
-                            {
-                                Console.WriteLine(ex.ToString());
-
-                            }
                             catch (ArgumentException)
                             {
-                                Console.WriteLine("Wrong fuel type for this vehicle. Refuel Failed.");
+                                string fuelTypeExceptionMessage = string.Format("Wrong fuel type for this vehicle, expected {0}. Refuel Failed.", fuelEngine.FuelType);
+                                Console.WriteLine(fuelTypeExceptionMessage);
                             }
                         }
                         break;
                     case 6:
                         /* 6) charge vehicle */
-                        // TODO: get function to work, add catches
                         ElectricBasedEngine electricEngine = currentVehicle.Engine as ElectricBasedEngine;
 
                         if(electricEngine == null)
@@ -298,17 +295,12 @@ Please enter amount to refuel:", fuelEngine.CurrentAmountOfFuel, fuelEngine.MaxA
                                 System.Console.WriteLine("This vehicle does not have an electric based engine. Recharge Failed.");
                             }
                         }
-                        System.Console.WriteLine("Please enter amount to recharge:");
-                        float amountToRecharge;
-                        try
-                        {
-                            amountToRecharge = this.getFloatFromUser(0, int.MaxValue);
-                            m_Garage.ChargeElectricVehice(licenseNumber, amountToRecharge);
-                        }
-                        catch(ValueOutOfRangeException ex)
-                        {
-                            System.Console.WriteLine(ex.ToString());
-                        }
+                        string rechargeMessage = string.Format(@"Remaining time of engine operation in hours: {0}
+Max time of engine operations in hours: {1}
+Please enter time to recharge in hours:", electricEngine.RemainingTimeOnBattery, electricEngine.MaxBatteryLife);
+                        System.Console.WriteLine(rechargeMessage);
+                        float amountToRecharge = this.getFloatFromUser(0, electricEngine.MaxBatteryLife - electricEngine.RemainingTimeOnBattery);
+                        m_Garage.ChargeElectricVehice(licenseNumber, amountToRecharge);
                         break;
                     case 7:
                         /* 7) Display vehicle information */
@@ -451,8 +443,6 @@ Please enter amount to refuel:", fuelEngine.CurrentAmountOfFuel, fuelEngine.MaxA
             }
         } 
 
-
-
         /*** End of class ***/
 
 
@@ -467,7 +457,7 @@ Please Select a task number you wish to complete:
 3) Change a Vehicle's status
 4) Inflate tires
 5) Refuel a vehicle.
-6) Charge a electric vehice.
+6) Charge an electric vehicle.
 7) Display vehicle information.
 8) Quit ");
 
