@@ -253,11 +253,7 @@ Maximum Air Pressure: {2}", m_ManufacturerName, m_CurrentAirPressure, m_MaxAirPr
             }
         }
 
-		public enum eTireAirPressureStatus
-		{
-			Yes,
-			No
-		}
+
 
         public void UpdateWheelsManufacturerName(string i_ManufacturerName)
         {

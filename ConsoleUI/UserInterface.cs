@@ -81,7 +81,7 @@ namespace ConsoleUI
 
                 this.m_Garage.InsertNewVehicle(vehicleToAdd, licenseNumber, ownerName, ownerPhoneNumber, vehicleModelName);
 
-                System.Console.WriteLine(createMenuStringFromEnum(typeof(Vehicle.eTireAirPressureStatus), "Do all tires have the same air pressure"));
+                System.Console.WriteLine(createMenuStringFromEnum(typeof(Factory.eTireAirPressureStatus), "Do all tires have the same air pressure"));
                 int tireStatusNumber = promptUserForMenuSelection(Enum.GetNames(typeof(Factory.eVehicleType)).Length);
                 Vehicle createdVehicle;
                 m_Garage.GetVehicle(licenseNumber, out createdVehicle);
@@ -166,6 +166,7 @@ namespace ConsoleUI
                 }
             }
 
+            System.Console.Clear();
             mainMenu();
         }
 
@@ -173,13 +174,10 @@ namespace ConsoleUI
         /* 2) Display list of licence numbers */
         private void displayListOfLicenceNumbers()
         {
-
             System.Console.Clear();
-            string filterOptionMessage = string.Format(@"Would you like to see a filtered or unfiltered list of license numbers?
-1) Filtered List
-2) Unfiltered List
-");
-            int userSelection = this.promptUserForMenuSelection(2);
+            System.Console.WriteLine(createMenuStringFromEnum(typeof(Factory.eFilteredOrUnfiltered), "Would you like to see a filtered or unfiltered list of license numbers?"));
+
+            int userSelection = this.promptUserForMenuSelection(Enum.GetNames(typeof(Factory.eFilteredOrUnfiltered)).Length);
             Dictionary<string, Vehicle>.KeyCollection listOfLicenses;
 
             if (userSelection == 1)
@@ -209,8 +207,7 @@ namespace ConsoleUI
                 }
             }
 
-            System.Console.Clear();
-            mainMenu();
+            returnToMenuOrQuit();
         }
 
         /*** Options 3 - 7 ***/
@@ -240,6 +237,9 @@ namespace ConsoleUI
                     case 4:
                         /* 4) Inflate tires to max */
                         currentVehicle.InflateAllWheelsToMax();
+                        System.Console.Clear();
+                        System.Console.WriteLine("All the tires of theis vehicle have been inflated.");
+                        System.Console.WriteLine(Environment.NewLine);
                         break;
                     case 5:
                         /* 5) Refuel vehicle */
@@ -268,6 +268,8 @@ namespace ConsoleUI
                         break;
                     case 6:
                         /* 6) charge vehicle */
+                        // TODO: get function to work, add catches
+
                         System.Console.WriteLine("Please enter amount to recharge:");
                         float amountToRecharge;
                         try
@@ -287,11 +289,10 @@ namespace ConsoleUI
                         {
                             System.Console.WriteLine(valueOutOfRangeEx.ToString());
                         }
-                        /* 6) charge vehicle */
-                        // TODO: get function to work, add catches
                         break;
                     case 7:
                         /* 7) Display vehicle information */
+                        System.Console.Clear();
                         System.Console.WriteLine(currentVehicle.ToString());
                         break;
                 }
@@ -301,7 +302,7 @@ namespace ConsoleUI
                 System.Console.WriteLine(string.Format("Vehicle with licence number {0} is not in the garage.{1}", licenseNumber, Environment.NewLine));
             }
 
-            mainMenu();
+            returnToMenuOrQuit();
         }
 
         private float getFloatFromUser(int i_MinNumber, int i_MaxNumber)
@@ -310,7 +311,6 @@ namespace ConsoleUI
             string input = System.Console.ReadLine();
             while (!(float.TryParse(input, out userInputNumber) && userInputNumber >= i_MinNumber && userInputNumber <= i_MaxNumber))
             {
-                //System.Console.Write(string.Format("Invalid Input. Please eneter a number between {0} and {1}.", i_MinNumber, i_MaxNumber)); //TODO: exception trown 
                 try
                 {
                     throw new ValueOutOfRangeException("getFloatFromUser", i_MinNumber, i_MaxNumber);
@@ -361,7 +361,7 @@ namespace ConsoleUI
             {
                 while (!Vehicle.isLegalLicenseNumber(o_licenceNumber))
                 {
-                    System.Console.WriteLine("Invalid input. please enter a legal licence plate number.");
+                    System.Console.WriteLine("Invalid input. Please enter a legal licence plate number (7 digits).");
                     o_licenceNumber = System.Console.ReadLine();
                 }
             }
@@ -413,10 +413,23 @@ namespace ConsoleUI
             return menuString.ToString();
         }
 
-        /*private static void refuelVehicle(ref Vehicle io_Vehicle)
+        private void returnToMenuOrQuit()
         {
+            System.Console.WriteLine(createMenuStringFromEnum(typeof(Factory.eUserOptions), "Would you like to return to the Main Menu or Quit?"));
+            int userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Factory.eUserOptions)).Length);
+            System.Console.Clear();
 
-        }*/
+            switch (userChoice)
+            {
+                case 1:
+                    mainMenu();
+                    break;
+                case 2:
+                    System.Console.WriteLine("Exit program selected. Bye Bye ...");
+                    System.Environment.Exit(1);
+                    break;
+            }
+        } 
 
 
 

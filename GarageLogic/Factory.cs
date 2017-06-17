@@ -12,8 +12,25 @@ namespace GarageLogic
 			ElectricMotorcycle,
 			ElectricCar,
 			FuelBasedTruck,
-
 		}
+
+        public enum eTireAirPressureStatus
+        {
+            Yes,
+            No
+        }
+
+        public enum eFilteredOrUnfiltered
+        {
+            Filtered,
+            Unfiltered
+        }
+
+        public enum eUserOptions
+        {
+            Menu,
+            Quit
+        }
 
         public static Vehicle CreateNewVehicle(eVehicleType i_VehicleType, string i_LicenseNumber, string i_OwnerName,string i_OwnerPhoneNumber, string i_ModelName)
         {
