@@ -23,7 +23,7 @@ namespace ConsoleUI
 
         private void mainMenu()
         {
-
+            System.Console.Clear();
             System.Console.WriteLine(MainMenuMessage());
             int mainMenuInputNumber = this.promptUserForMenuSelection(k_NumberOfMainMenuItems);
 
@@ -68,11 +68,11 @@ namespace ConsoleUI
             {
                 System.Console.WriteLine("Please enter Owner name:");
                 string ownerName = System.Console.ReadLine();
-                System.Console.WriteLine("Please enter Owners phone number:");
+                System.Console.WriteLine("Please enter Owners phone number (6-9 digits):");
                 string ownerPhoneNumber = System.Console.ReadLine();
                 while (!Vehicle.isLegalPhoneNumber(ownerPhoneNumber))
                 {
-                    System.Console.WriteLine("Please enter valid phone number:");
+                    System.Console.WriteLine("Please enter a valid phone number (6-9 digits):");
                     ownerPhoneNumber = System.Console.ReadLine();
                 }
 
@@ -173,23 +173,40 @@ namespace ConsoleUI
         /* 2) Display list of licence numbers */
         private void displayListOfLicenceNumbers()
         {
-            //TODO: Give user option if to filter or not
+
             System.Console.Clear();
+            string filterOptionMessage = string.Format(@"Would you like to see a filtered or unfiltered list of license numbers?
+1) Filtered List
+2) Unfiltered List
+");
+            int userSelection = this.promptUserForMenuSelection(2);
+            Dictionary<string, Vehicle>.KeyCollection listOfLicenses;
 
-            System.Console.WriteLine(createMenuStringFromEnum(typeof(Vehicle.eVehicleStatus), "Enter a Vehicle type"));
-            int userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Vehicle.eVehicleStatus)).Length);
-            Dictionary<string, Vehicle>.KeyCollection list = m_Garage.GetFilteredListOfLicenseNumbers((Vehicle.eVehicleStatus)(userChoice - 1));
-            int vehicleNumber = 1;
-            foreach (string license in list)
+            if (userSelection == 1)
             {
-
-                System.Console.WriteLine(string.Format("{0}. Licence number: {1}{2}", vehicleNumber, license, Environment.NewLine));
-                vehicleNumber++;
+                System.Console.WriteLine(createMenuStringFromEnum(typeof(Vehicle.eVehicleStatus), "Please enter a vehicle status you would like to filter by:"));
+                int userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Vehicle.eVehicleStatus)).Length);
+                listOfLicenses = m_Garage.GetFilteredListOfLicenseNumbers((Vehicle.eVehicleStatus)(userChoice - 1));  
+            }
+            else
+            {
+                listOfLicenses = m_Garage.GetListOfLicenceNumbers();
             }
 
-            if (list.Count == 0)
+            if (listOfLicenses.Count == 0)
             {
-                System.Console.WriteLine("No Vehicles Available" + Environment.NewLine);
+                System.Console.WriteLine("No vehicles in the garage");
+                System.Console.WriteLine(Environment.NewLine);
+            }
+            else
+            {
+                int vehicleNumber = 1;
+
+                foreach (string license in listOfLicenses)
+                {
+                    System.Console.WriteLine(string.Format("{0}. Licence number: {1}{2}", vehicleNumber, license, Environment.NewLine));
+                    vehicleNumber++;
+                }
             }
 
             System.Console.Clear();
@@ -317,8 +334,15 @@ namespace ConsoleUI
 
             while (!(int.TryParse(userInputString, out userInputNumber) && userInputNumber >= 1 && userInputNumber <= i_NumberOfItems))
             {
-                System.Console.WriteLine("Invalid Input. " + messageToUser);
-                userInputString = System.Console.ReadLine();
+                try
+                {
+                    throw new ValueOutOfRangeException("promptUserForMenuSelection,", 0, i_NumberOfItems);
+                }
+                catch(ValueOutOfRangeException ex)
+                {
+                    System.Console.WriteLine(ex.ToString());
+                    userInputString = System.Console.ReadLine();
+                }
             }
             System.Console.Clear();
             return userInputNumber;
@@ -358,8 +382,15 @@ namespace ConsoleUI
 
             while (!(float.TryParse(userInputPressure, out tirePressure) && tirePressure <= i_Vehicle.MaxAirPressure && tirePressure >= 0))
             {
-                System.Console.WriteLine(string.Format("Invalid Input. {0}", maxAirPressumeMessage));
-                userInputPressure = System.Console.ReadLine();
+                try
+                {
+                    throw new ValueOutOfRangeException("getTirePressureFromUser", 0, i_Vehicle.MaxAirPressure);
+                }
+                catch(ValueOutOfRangeException ex)
+                {
+                    System.Console.WriteLine(ex.ToString());
+                    userInputPressure = System.Console.ReadLine();
+                }
             }
 
             return tirePressure;

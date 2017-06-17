@@ -8,3 +8,4 @@ C:\Users\jnedi\Documents\Visual Studio 2015\Projects\B17 Ex03 JonathanNedivi 304
 C:\Users\jnedi\Documents\Visual Studio 2015\Projects\B17 Ex03 JonathanNedivi 304786270 JonathanWestfield 00080147\C-ex3\GarageLogic\obj\x86\Debug\GarageLogic.pdb
 C:\Users\jnedi\Documents\Visual Studio 2015\Projects\B17 Ex03 JonathanNedivi 304786270 JonathanWestfield 00080147\C-ex3\GarageLogic\bin\Debug\GarageLogic.dll
 C:\Users\jnedi\Documents\Visual Studio 2015\Projects\B17 Ex03 JonathanNedivi 304786270 JonathanWestfield 00080147\C-ex3\GarageLogic\bin\Debug\GarageLogic.pdb
+C:\Users\jnedi\Documents\Visual Studio 2015\Projects\B17 Ex03 JonathanNedivi 304786270 JonathanWestfield 00080147\C-ex3\GarageLogic\obj\x86\Debug\GarageLogic.csprojResolveAssemblyReference.cache
