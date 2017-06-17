@@ -81,7 +81,7 @@ namespace ConsoleUI
 
                 this.m_Garage.InsertNewVehicle(vehicleToAdd, licenseNumber, ownerName, ownerPhoneNumber, vehicleModelName);
 
-                System.Console.WriteLine(createMenuStringFromEnum(typeof(Factory.eTireAirPressureStatus), "Do all tires have the same air pressure"));
+                System.Console.WriteLine(createMenuStringFromEnum(typeof(eTireAirPressureStatus), "Do all tires have the same air pressure"));
                 int tireStatusNumber = promptUserForMenuSelection(Enum.GetNames(typeof(Factory.eVehicleType)).Length);
                 Vehicle createdVehicle;
                 m_Garage.GetVehicle(licenseNumber, out createdVehicle);
@@ -135,8 +135,8 @@ namespace ConsoleUI
                 else if (createdVehicle is Truck)
                 {
 
-                    System.Console.WriteLine(createMenuStringFromEnum(typeof(Truck.eIsCarryingHazardousMaterials), "Is the truck carrying hazardous materials?:"));
-                    userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Truck.eIsCarryingHazardousMaterials)).Length);
+                    System.Console.WriteLine(createMenuStringFromEnum(typeof(eIsCarryingHazardousMaterials), "Is the truck carrying hazardous materials?:"));
+                    userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(eIsCarryingHazardousMaterials)).Length);
 
                     if (userChoice == 0)
                     {
@@ -161,7 +161,7 @@ namespace ConsoleUI
                 else if (createdVehicle.Engine is ElectricBasedEngine)
                 {
 					System.Console.WriteLine("Please enter remaining time of engine operation in hours:");
-                    float currentBatteryEnergy = getFloatFromUser(0, (int)((ElectricBasedEngine)createdVehicle.Engine).MaxBatteryLife);
+                    float currentBatteryEnergy = getFloatFromUser(0, (float)((ElectricBasedEngine)createdVehicle.Engine).MaxBatteryLife);
                     ((ElectricBasedEngine)createdVehicle.Engine).RemainingTimeOnBattery = currentBatteryEnergy;
                 }
             }
@@ -175,9 +175,9 @@ namespace ConsoleUI
         private void displayListOfLicenceNumbers()
         {
             System.Console.Clear();
-            System.Console.WriteLine(createMenuStringFromEnum(typeof(Factory.eFilteredOrUnfiltered), "Would you like to see a filtered or unfiltered list of license numbers?"));
+            System.Console.WriteLine(createMenuStringFromEnum(typeof(eFilteredOrUnfiltered), "Would you like to see a filtered or unfiltered list of license numbers?"));
 
-            int userSelection = this.promptUserForMenuSelection(Enum.GetNames(typeof(Factory.eFilteredOrUnfiltered)).Length);
+            int userSelection = this.promptUserForMenuSelection(Enum.GetNames(typeof(eFilteredOrUnfiltered)).Length);
             Dictionary<string, Vehicle>.KeyCollection listOfLicenses;
 
             if (userSelection == 1)
@@ -245,32 +245,59 @@ namespace ConsoleUI
                     case 5:
                         /* 5) Refuel vehicle */
                         // TODO: get function to work, as well as the catches
-                        System.Console.WriteLine(createMenuStringFromEnum(typeof(FuelBasedEngine.eFuelType), "Enter a Fuel Type"));
-                        userChoice = this.promptUserForMenuSelection(Enum.GetNames(typeof(FuelBasedEngine.eFuelType)).Length);
-                        System.Console.WriteLine("Please enter amount to refuel");
-                        float amountToRefuel = this.getFloatFromUser(0, int.MaxValue);
-                        try
-                        {
-                            this.m_Garage.RefuelVehicle(licenseNumber, (FuelBasedEngine.eFuelType)(userChoice - 1), amountToRefuel);
-                        }
-                        catch (FormatException ex)
-                        {
-                            Console.WriteLine(ex.ToString());
-                        }
-                        catch (ValueOutOfRangeException ex)
-                        {
-                            Console.WriteLine(ex.ToString());
+                        FuelBasedEngine fuelEngine = currentVehicle.Engine as FuelBasedEngine;
 
-                        }
-                        catch (ArgumentException ex)
+                        if (fuelEngine == null)
                         {
-                            Console.WriteLine(ex.ToString());
+                            try
+                            {
+                                throw new FormatException();
+                            }
+                            catch (FormatException)
+                            {
+                                Console.WriteLine("This vehicle does not have a fuel based engine. Refuel Failed");
+                            }
+                        }
+                        else
+                        {
+                            System.Console.WriteLine(createMenuStringFromEnum(typeof(FuelBasedEngine.eFuelType), "Enter a Fuel Type"));
+                            userChoice = this.promptUserForMenuSelection(Enum.GetNames(typeof(FuelBasedEngine.eFuelType)).Length);
+                            string refuelMessage = string.Format(@"Current Amount Of Fuel: {0}
+Maximum Amount Of Fuel: {1}
+Please enter amount to refuel:", fuelEngine.CurrentAmountOfFuel, fuelEngine.MaxAmountOfFuel);
+                            System.Console.WriteLine(refuelMessage);
+                            float amountToRefuel = this.getFloatFromUser(0, int.MaxValue);
+                            try
+                            {
+                                this.m_Garage.RefuelVehicle(licenseNumber, (FuelBasedEngine.eFuelType)(userChoice - 1), amountToRefuel);
+                            }
+                            catch (ValueOutOfRangeException ex)
+                            {
+                                Console.WriteLine(ex.ToString());
+
+                            }
+                            catch (ArgumentException)
+                            {
+                                Console.WriteLine("Wrong fuel type for this vehicle. Refuel Failed.");
+                            }
                         }
                         break;
                     case 6:
                         /* 6) charge vehicle */
                         // TODO: get function to work, add catches
+                        ElectricBasedEngine electricEngine = currentVehicle.Engine as ElectricBasedEngine;
 
+                        if(electricEngine == null)
+                        {
+                            try
+                            {
+                                throw new FormatException();
+                            }
+                            catch(FormatException)
+                            {
+                                System.Console.WriteLine("This vehicle does not have an electric based engine. Recharge Failed.");
+                            }
+                        }
                         System.Console.WriteLine("Please enter amount to recharge:");
                         float amountToRecharge;
                         try
@@ -278,17 +305,9 @@ namespace ConsoleUI
                             amountToRecharge = this.getFloatFromUser(0, int.MaxValue);
                             m_Garage.ChargeElectricVehice(licenseNumber, amountToRecharge);
                         }
-                        catch (ArgumentException argumentException)
+                        catch(ValueOutOfRangeException ex)
                         {
-                            System.Console.WriteLine(argumentException.ToString());
-                        }
-                        catch(FormatException formatException)
-                        {
-                            System.Console.WriteLine(formatException.ToString());
-                        }
-                        catch(ValueOutOfRangeException valueOutOfRangeEx)
-                        {
-                            System.Console.WriteLine(valueOutOfRangeEx.ToString());
+                            System.Console.WriteLine(ex.ToString());
                         }
                         break;
                     case 7:
@@ -307,7 +326,7 @@ namespace ConsoleUI
             returnToMenuOrQuit();
         }
 
-        private float getFloatFromUser(int i_MinNumber, int i_MaxNumber)
+        private float getFloatFromUser(float i_MinNumber, float i_MaxNumber)
         {
             float userInputNumber;
             string input = System.Console.ReadLine();
@@ -398,7 +417,6 @@ namespace ConsoleUI
             return tirePressure;
         }
 
-
         private static string createMenuStringFromEnum(Type i_EnumType, string i_Title)
         {
             int menuNumber = 1;
@@ -417,8 +435,8 @@ namespace ConsoleUI
 
         private void returnToMenuOrQuit()
         {
-            System.Console.WriteLine(createMenuStringFromEnum(typeof(Factory.eUserOptions), "Please choose whether to return to the Main Menu or Quit:"));
-            int userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Factory.eUserOptions)).Length);
+            System.Console.WriteLine(createMenuStringFromEnum(typeof(eUserOptions), "Please choose whether to return to the Main Menu or Quit:"));
+            int userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(eUserOptions)).Length);
             System.Console.Clear();
 
             switch (userChoice)
@@ -455,9 +473,30 @@ Please Select a task number you wish to complete:
 
             return mainMenuMessage;
         }
+
+        public enum eTireAirPressureStatus
+        {
+            Yes,
+            No
+        }
+
+        public enum eIsCarryingHazardousMaterials
+        {
+            Yes,
+            No
+        }
+        public enum eFilteredOrUnfiltered
+        {
+            Filtered,
+            Unfiltered
+        }
+
+        public enum eUserOptions
+        {
+            Menu,
+            Quit
+        }
     }
-
-
 }
 
 

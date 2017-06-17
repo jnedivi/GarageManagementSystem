@@ -156,8 +156,6 @@ namespace GarageLogic
             }
         }
 
-		/* 7) Display vehicle information */
-        // toString() method
         public bool GetVehicle(string i_LicenseNumber, out Vehicle o_Vehicle)
         {
             bool vehicleIsInGarage = m_GarageVehicles.TryGetValue(i_LicenseNumber, out o_Vehicle);

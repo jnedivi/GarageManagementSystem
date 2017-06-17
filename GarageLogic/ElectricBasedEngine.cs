@@ -48,7 +48,7 @@ namespace GarageLogic
             }
 
             RemainingTimeOnBattery += i_HoursToRecharge;
-            RemainingEnergyPercentage = ((RemainingTimeOnBattery / MaxBatteryLife) * 100);
+            RemainingEnergyPercentage = (RemainingTimeOnBattery / MaxBatteryLife);
         }
 
         public override string ToString()

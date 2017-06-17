@@ -20,40 +20,13 @@ namespace GarageLogic
         public eLicenseType LicenceType
         {
             get { return this.m_LicenceType; }
-            set
-            {
-                //if (!Enum.IsDefined(typeof(eLicenseType), value))
-                //{
-                //    throw new FormatException(k_LicenseType);
-                //}
-
-                //try
-                //{
-                //    m_LicenceType = (eLicenseType)Enum.Parse(typeof(eLicenseType), value);
-                //}
-                //catch (ArgumentException)
-                //{
-                //    throw new ArgumentException(k_LicenseType);
-                //}
-                this.m_LicenceType = value;
-            }
+            set { this.m_LicenceType = value; }
         }
 
         public int EngineVolume
         {
             get { return this.m_EngineVolume; }
-            set
-            {
-                //try
-                //{
-                //    m_EngineVolume = float.Parse(value);
-                //}
-                //catch (FormatException)
-                //{
-                //    throw new FormatException("Engine Volume");
-                //}
-                this.m_EngineVolume = value;
-            }
+            set { this.m_EngineVolume = value; }
         }
 
 		/*** Constructor ***/
@@ -61,7 +34,7 @@ namespace GarageLogic
 		protected Motorcycle(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName)
             : base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName , k_NumberOfWheelsForMotorcycle , k_MaxAirPressureForMotorcycle)
 		{
-		
+		    
 		}
 
 		/*** Class Logic ***/
