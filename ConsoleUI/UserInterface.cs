@@ -228,6 +228,8 @@ namespace ConsoleUI
                         try
                         {
                             m_Garage.ChangeVehicleStatus(licenseNumber, (Vehicle.eVehicleStatus)(userChoice - 1));
+                            string vehicleStatusMessage = string.Format(@"The status of this vehicle is now: {0}
+", (Vehicle.eVehicleStatus)(userChoice - 1));
                         }
                         catch(ArgumentException ex)
                         {
@@ -239,7 +241,6 @@ namespace ConsoleUI
                         currentVehicle.InflateAllWheelsToMax();
                         System.Console.Clear();
                         System.Console.WriteLine("All the tires of theis vehicle have been inflated.");
-                        System.Console.WriteLine(Environment.NewLine);
                         break;
                     case 5:
                         /* 5) Refuel vehicle */
@@ -294,6 +295,7 @@ namespace ConsoleUI
                         /* 7) Display vehicle information */
                         System.Console.Clear();
                         System.Console.WriteLine(currentVehicle.ToString());
+                        System.Console.WriteLine(Environment.NewLine);
                         break;
                 }
             }
@@ -415,7 +417,7 @@ namespace ConsoleUI
 
         private void returnToMenuOrQuit()
         {
-            System.Console.WriteLine(createMenuStringFromEnum(typeof(Factory.eUserOptions), "Would you like to return to the Main Menu or Quit?"));
+            System.Console.WriteLine(createMenuStringFromEnum(typeof(Factory.eUserOptions), "Please choose whether to return to the Main Menu or Quit:"));
             int userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Factory.eUserOptions)).Length);
             System.Console.Clear();
 
