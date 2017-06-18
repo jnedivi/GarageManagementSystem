@@ -9,14 +9,12 @@ namespace GarageLogic
     {
         /*** Constants ***/
 
-        
-		/*** Data Members ***/
-
         private const string k_LicenseNumber = "License Number:";
         private const string k_ModelName = "Model Name:";
         private const string k_Owner = "Owner:";
         private const string k_VehicleStatus = "Vehicle Status:";
         private const string k_OwnerPhoneNumber = "Owner Phone Number";
+
         /*** Data Members ***/
 
         private const byte k_LegalLicenseNumberLength = 7;
@@ -33,7 +31,6 @@ namespace GarageLogic
         private List<Wheel> m_Wheels;
         private eVehicleStatus m_VehicleStatus;
         private Engine m_Engine;
-
 
 		protected Vehicle(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName, byte i_NumberOfWheels, float i_MaxAirPressure)
         {
@@ -249,14 +246,16 @@ Maximum Air Pressure: {2}", m_ManufacturerName, m_CurrentAirPressure, m_MaxAirPr
             }
         }
 
-
-
-        public void UpdateWheelsManufacturerName(string i_ManufacturerName)
+        public static void CreateWheels(Vehicle i_Vehicle, string i_ManufactureName, List<float> i_CurrentAirPressures)
         {
-            foreach(Wheel wheel in Wheels)
+            List<Vehicle.Wheel> newVehiclesWheels = new List<Vehicle.Wheel>();
+
+            foreach (float wheelPressure in i_CurrentAirPressures)
             {
-                wheel.ManufacturerName = i_ManufacturerName;
+                newVehiclesWheels.Add(new Vehicle.Wheel(i_ManufactureName, wheelPressure, i_Vehicle.MaxAirPressure));
             }
+
+            i_Vehicle.Wheels = newVehiclesWheels;
         }
 
         public void InflateAllWheelsToMax()

@@ -6,11 +6,13 @@ namespace GarageLogic
 {
     public abstract class Truck : Vehicle
     {
-
-        /*** Data Members ***/
+        /*** Constants ***/
 
         private const float k_MaxAirPressureTruck = 32.0f;
         private const byte k_NumberOfWheelsForTruck = 12;
+
+        /*** Data Members ***/
+
         private float m_MaxWeightAllowed;
         private bool m_HasHazardousMaterials;
 

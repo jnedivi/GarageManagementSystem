@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GarageLogic.Engine">
+    <Position X="3.5" Y="0.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAgAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GarageLogic.FuelBasedEngine">
+    <Position X="2.25" Y="3" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="GarageLogic.FuelBasedEngine.eFuelType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>FuelBasedEngine.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAEAAAAAQAAAAQAAAAIEAEAAAAQAAA=</HashCode>
+      <FileName>FuelBasedEngine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GarageLogic.ElectricBasedEngine">
+    <Position X="5.25" Y="3" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAEAAAAAAAAAgAAEAAAAAAABABAAAA=</HashCode>
+      <FileName>ElectricBasedEngine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -5,12 +5,10 @@ namespace GarageLogic
 {
     public class Garage
     {
-		
 
         /*** Data Members ***/
         private const string k_VehicleDoesntExist = "This vehicle is not in the garage.";
-        private Dictionary<string, Vehicle> m_GarageVehicles;
-
+        private readonly Dictionary<string, Vehicle> m_GarageVehicles;
 
         /*** Getters and Setters ***/
 
@@ -19,16 +17,13 @@ namespace GarageLogic
             get { return this.m_GarageVehicles; }
         }
 
-
         public Garage()
         {
             m_GarageVehicles = new Dictionary<string, Vehicle>();
         }
 
+        /*** Class Logic ***/
 
-        /*** Garage Logic Methods ***/
-
-        /* 1) Insert new Vehicle into Garage */
         public bool IsInGarage(string i_LicenseNumber)
         {
             return this.m_GarageVehicles.ContainsKey(i_LicenseNumber);
@@ -51,8 +46,6 @@ namespace GarageLogic
             this.m_GarageVehicles.Add(i_LicenseNumber , currentVehicle);
         }
 
-
-        /* 2) Display list of licence numbers */
         public Dictionary<string, Vehicle>.KeyCollection GetListOfLicenceNumbers()
         { 
             return GarageVehicles.Keys;
@@ -78,7 +71,6 @@ namespace GarageLogic
             return filteredVehicles;
         }
 
-		/* 3) Change a Vehicle's status */
         public void ChangeVehicleStatus(string i_LicenseNumber , Vehicle.eVehicleStatus i_Status)
 		{
             Vehicle vehicle;
@@ -93,7 +85,6 @@ namespace GarageLogic
             GarageVehicles[i_LicenseNumber] = vehicle;
         }
 
-		/* 4) Inflate tires */
 		public void InflateTiresToMax(string i_LicenseNumber)
 		{
             Vehicle vehicle;
@@ -108,7 +99,6 @@ namespace GarageLogic
             GarageVehicles[i_LicenseNumber] = vehicle;
         }
 
-		/* 5) Refuel a vehicle */
         public void RefuelVehicle(string i_LicenseNumber, FuelBasedEngine.eFuelType i_FuelType, float i_AmountToRefuel)
 		{
             Vehicle vehicle;
@@ -130,10 +120,8 @@ namespace GarageLogic
             {
                 throw new FormatException("Not Fuel Based Vehicle");
             }
-
 		}
 
-		/* 6) Charge a electric vehice. */
 		public void ChargeElectricVehice(string i_LicenseNumber, float i_MinutesToCharge)
 		{
             Vehicle vehicle;
@@ -164,7 +152,6 @@ namespace GarageLogic
 
             return vehicleIsInGarage;
         }
-
     }
 }
 
