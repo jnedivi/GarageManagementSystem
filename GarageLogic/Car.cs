@@ -60,7 +60,7 @@ namespace GarageLogic
 
 		public enum eNumOfDoors
 		{
-			Two = 2, 
+			Two, 
 			Three,
 			Four,
 			Five,

@@ -10,6 +10,9 @@ namespace ConsoleUI
 
         private Garage m_Garage;
         private const int k_NumberOfMainMenuItems = 8;
+        private const byte k_MinPhoneNumLength = 7;
+        private const byte k_MaxPhoneNumLength = 10;
+        private const byte k_LegalLicenseNumberLength = 7;
 
         /*** Constructor ***/
 
@@ -69,11 +72,13 @@ namespace ConsoleUI
             {
                 System.Console.WriteLine("Please enter Owner name:");
                 string ownerName = System.Console.ReadLine();
-                System.Console.WriteLine("Please enter Owners phone number (6-9 digits):");
+                string phoneNumMessage = string.Format("Please enter Owners phone number ({0}-{1} digits):", k_MinPhoneNumLength, k_MaxPhoneNumLength);
+                string validPhoneNumMessage = string.Format("Please enter a valid phone number ({0} -{1} digits:", k_MinPhoneNumLength, k_MaxPhoneNumLength);
+                System.Console.WriteLine(phoneNumMessage);
                 string ownerPhoneNumber = System.Console.ReadLine();
                 while (!Vehicle.isLegalPhoneNumber(ownerPhoneNumber))
                 {
-                    System.Console.WriteLine("Please enter a valid phone number (6-9 digits):");
+                    System.Console.WriteLine(validPhoneNumMessage);
                     ownerPhoneNumber = System.Console.ReadLine();
                 }
 
@@ -119,8 +124,6 @@ namespace ConsoleUI
                     System.Console.WriteLine(createMenuStringFromEnum(typeof(Car.eNumOfDoors), "Enter the car's number of doors:"));
                     userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Car.eNumOfDoors)).Length);
                     ((Car)createdVehicle).NumberOfDoors = (Car.eNumOfDoors)userChoice - 1;
-
-                    ((Car)createdVehicle).SetCarDoorsAndColor((Car.eColor)userChoice , (Car.eNumOfDoors)userChoice);
                 }
                 else if (createdVehicle is Motorcycle)
                 {
@@ -367,7 +370,9 @@ Please enter number of minutes to recharge:", electricEngine.RemainingTimeOnBatt
         /* Get Licence number and Vehilce from user */
         private Vehicle promptUserForLicenseNumber(out string o_licenceNumber)
         {
-            System.Console.WriteLine("Please enter the licence number of your vehicle or Q to cancel:");
+            string licenseNumberMessage = string.Format("Please enter the licence number ({0} digits) of your vehicle or Q to cancel:)", k_LegalLicenseNumberLength);
+            string invalidInputMessage = string.Format("Invalid input. Please enter a legal licence plate number ({0} digits).", k_LegalLicenseNumberLength);
+            System.Console.WriteLine(licenseNumberMessage);
             o_licenceNumber = System.Console.ReadLine();
             if (o_licenceNumber == "Q" || o_licenceNumber == "q")
             {
@@ -377,7 +382,7 @@ Please enter number of minutes to recharge:", electricEngine.RemainingTimeOnBatt
             {
                 while (!Vehicle.isLegalLicenseNumber(o_licenceNumber))
                 {
-                    System.Console.WriteLine("Invalid input. Please enter a legal licence plate number (7 digits).");
+                    System.Console.WriteLine(invalidInputMessage);
                     o_licenceNumber = System.Console.ReadLine();
                 }
             }

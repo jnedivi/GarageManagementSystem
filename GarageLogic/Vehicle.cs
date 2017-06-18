@@ -20,8 +20,8 @@ namespace GarageLogic
         /*** Data Members ***/
 
         private const byte k_LegalLicenseNumberLength = 7;
-        private const byte k_MinPhoneNumLength = 6;
-        private const byte k_MaxPhoneNumLength = 9;
+        private const byte k_MinPhoneNumLength = 7;
+        private const byte k_MaxPhoneNumLength = 10;
         private readonly byte r_NumberOfWheels;
         private readonly float r_MaxWheelAirPressure;
        
