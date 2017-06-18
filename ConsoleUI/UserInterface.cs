@@ -124,15 +124,12 @@ namespace ConsoleUI
                     System.Console.WriteLine(createMenuStringFromEnum(typeof(Car.eNumOfDoors), "Enter the car's number of doors:"));
                     userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Car.eNumOfDoors)).Length);
                     ((Car)createdVehicle).NumberOfDoors = (Car.eNumOfDoors)userChoice - 1;
-<<<<<<< HEAD
-=======
 
-<<<<<<< HEAD
-                    Factory.CreateCarFeatures((Car)createdVehicle, (Car.eNumOfDoors)userChoice, (Car.eColor)userChoice); //TODO
-=======
-                    ((Car)createdVehicle).SetCarDoorsAndColor((Car.eColor)userChoice , (Car.eNumOfDoors)userChoice);
->>>>>>> origin/master
->>>>>>> 110e0649adb446f05533ee045d375cf171fa0101
+
+                    /*Factory.CreateCarFeatures((Car)createdVehicle, (Car.eNumOfDoors)userChoice, (Car.eColor)userChoice); //TODO
+
+                    ((Car)createdVehicle).SetCarDoorsAndColor((Car.eColor)userChoice , (Car.eNumOfDoors)userChoice);*/
+
                 }
                 else if (createdVehicle is Motorcycle)
                 {
@@ -210,19 +207,14 @@ namespace ConsoleUI
             {
                 int vehicleNumber = 1;
 
-<<<<<<< HEAD
-            //System.Console.Clear();
-            mainMenu();
-=======
                 foreach (string license in listOfLicenses)
                 {
                     System.Console.WriteLine(string.Format("{0}. Licence number: {1}{2}", vehicleNumber, license, Environment.NewLine));
                     vehicleNumber++;
                 }
             }
-
+            //System.Console.Clear();
             returnToMenuOrQuit();
->>>>>>> origin/master
         }
 
         /*** Options 3 - 7 ***/
@@ -358,9 +350,6 @@ Please enter number of minutes to recharge:", electricEngine.RemainingTimeOnBatt
             return userInputNumber;
         }
 
-<<<<<<< HEAD
-     
-=======
         /* Get Menu Selection From User */
         private int promptUserForMenuSelection(int i_NumberOfItems)
         {
@@ -383,12 +372,11 @@ Please enter number of minutes to recharge:", electricEngine.RemainingTimeOnBatt
             System.Console.Clear();
             return userInputNumber;
         }
->>>>>>> origin/master
 
         /* Get Licence number and Vehilce from user */
         private Vehicle promptUserForLicenseNumber(out string o_licenceNumber)
         {
-            string licenseNumberMessage = string.Format("Please enter the licence number ({0} digits) of your vehicle or Q to cancel:)", k_LegalLicenseNumberLength);
+            string licenseNumberMessage = string.Format("Please enter the licence number ({0} digits) of your vehicle or Q to cancel:", k_LegalLicenseNumberLength);
             string invalidInputMessage = string.Format("Invalid input. Please enter a legal licence plate number ({0} digits).", k_LegalLicenseNumberLength);
             System.Console.WriteLine(licenseNumberMessage);
             o_licenceNumber = System.Console.ReadLine();
@@ -435,10 +423,8 @@ Please enter number of minutes to recharge:", electricEngine.RemainingTimeOnBatt
             return tirePressure;
         }
 
-<<<<<<< HEAD
+
         /* Creates Menu From any given Enum */
-=======
->>>>>>> origin/master
         private static string createMenuStringFromEnum(Type i_EnumType, string i_Title)
         {
             int menuNumber = 1;
@@ -455,9 +441,8 @@ Please enter number of minutes to recharge:", electricEngine.RemainingTimeOnBatt
             return menuString.ToString();
         }
 
-<<<<<<< HEAD
 		/* Get Menu Selection From User */
-		private int promptUserForMenuSelection(int i_NumberOfItems)
+		/*private int promptUserForMenuSelection(int i_NumberOfItems)
 		{
 			string userInputString = System.Console.ReadLine();
 			int userInputNumber;
@@ -470,9 +455,8 @@ Please enter number of minutes to recharge:", electricEngine.RemainingTimeOnBatt
 			}
 			System.Console.Clear();
 			return userInputNumber;
-		}
+		}*/
 
-=======
         private void returnToMenuOrQuit()
         {
             System.Console.WriteLine(createMenuStringFromEnum(typeof(eUserOptions), "Please choose whether to return to the Main Menu or Quit:"));
@@ -490,7 +474,7 @@ Please enter number of minutes to recharge:", electricEngine.RemainingTimeOnBatt
                     break;
             }
         } 
->>>>>>> origin/master
+
 
         /*** End of class ***/
 

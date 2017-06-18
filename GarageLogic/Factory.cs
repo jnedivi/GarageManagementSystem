@@ -51,10 +51,10 @@ namespace GarageLogic
 
             i_Vehicle.Wheels = newVehiclesWheels;
         }
-<<<<<<< HEAD
 
-        public static void CreateMotorcycleFeatures(Motorcycle i_Motorcycle , Motorcycle.eLicenseType i_LicenceType)
-=======
+
+        /*public static void CreateMotorcycleFeatures(Motorcycle i_Motorcycle , Motorcycle.eLicenseType i_LicenceType)
+
         
         /*public static void SetLicenseType(Motorcycle i_Motorcycle , Motorcycle.eLicenseType i_LicenceType)
 >>>>>>> origin/master
