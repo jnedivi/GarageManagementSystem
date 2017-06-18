@@ -1,4 +1,4 @@
-﻿﻿﻿using System;
+﻿﻿﻿﻿using System;
 using System.Collections.Generic;
 namespace GarageLogic
 {
@@ -39,5 +39,46 @@ namespace GarageLogic
 
             return newVehicle;
         }
+
+        public static void CreateWheels(Vehicle i_Vehicle , string i_ManufactureName , List<float> i_CurrentAirPressures)
+        {
+            List < Vehicle.Wheel > newVehiclesWheels = new List<Vehicle.Wheel>();
+
+            foreach(float wheelPressure in i_CurrentAirPressures)
+            {
+                newVehiclesWheels.Add(new Vehicle.Wheel(i_ManufactureName , wheelPressure , i_Vehicle.MaxAirPressure));
+            }
+
+            i_Vehicle.Wheels = newVehiclesWheels;
+        }
+
+
+        /*public static void CreateMotorcycleFeatures(Motorcycle i_Motorcycle , Motorcycle.eLicenseType i_LicenceType)
+
+        
+        /*public static void SetLicenseType(Motorcycle i_Motorcycle , Motorcycle.eLicenseType i_LicenceType)
+>>>>>>> origin/master
+        {
+
+
+        }
+
+<<<<<<< HEAD
+        public static void CreateCarFeatures(Car i_Car, Car.eNumOfDoors i_NumOfDoors , Car.eColor i_Color)
+        {
+
+
+        }
+
+        public static void CreateTruckFeatures(Truck i_Truck)
+=======
+
+
+        public static void SetTruckHasHazardousMaterials(Truck i_Truck)
+>>>>>>> origin/master
+        {
+             
+
+        }*/
     }
 }

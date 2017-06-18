@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿using GarageLogic;
+﻿﻿﻿﻿﻿﻿﻿﻿﻿using GarageLogic;
 using System;
 using System.Text;
 using System.Collections.Generic;
@@ -6,16 +6,16 @@ namespace ConsoleUI
 {
     public class UserInterface
     {
-        /*** Constants ***/
+        /*** Data Members ***/
+
+        private Garage m_Garage;
         private const int k_NumberOfMainMenuItems = 8;
         private const byte k_MinPhoneNumLength = 7;
         private const byte k_MaxPhoneNumLength = 10;
         private const byte k_LegalLicenseNumberLength = 7;
 
-        /*** Data Members ***/
-        private Garage m_Garage;
-        
         /*** Constructor ***/
+
         public UserInterface()
         {
             m_Garage = new Garage();
@@ -76,7 +76,6 @@ namespace ConsoleUI
                 string validPhoneNumMessage = string.Format("Please enter a valid phone number ({0} -{1} digits:", k_MinPhoneNumLength, k_MaxPhoneNumLength);
                 System.Console.WriteLine(phoneNumMessage);
                 string ownerPhoneNumber = System.Console.ReadLine();
-
                 while (!Vehicle.isLegalPhoneNumber(ownerPhoneNumber))
                 {
                     System.Console.WriteLine(validPhoneNumMessage);
@@ -85,7 +84,9 @@ namespace ConsoleUI
 
                 System.Console.WriteLine("Please enter Vehicles Model Name:");
                 string vehicleModelName = System.Console.ReadLine();
+
                 this.m_Garage.InsertNewVehicle(vehicleToAdd, licenseNumber, ownerName, ownerPhoneNumber, vehicleModelName);
+
                 System.Console.WriteLine(createMenuStringFromEnum(typeof(eTireAirPressureStatus), "Do all tires have the same air pressure"));
                 int tireStatusNumber = promptUserForMenuSelection(Enum.GetNames(typeof(Factory.eVehicleType)).Length);
                 Vehicle createdVehicle;
@@ -110,7 +111,8 @@ namespace ConsoleUI
 
                 System.Console.WriteLine("Please enter Tires Manufacturer Name:");
                 string tiresManufacturerName = System.Console.ReadLine();
-                Vehicle.CreateWheels(createdVehicle, tiresManufacturerName, tirePressures); //TODO 
+
+                Factory.CreateWheels(createdVehicle, tiresManufacturerName, tirePressures); //TODO 
                 int userChoice;
 
                 if (createdVehicle is Car)
@@ -118,9 +120,16 @@ namespace ConsoleUI
                     System.Console.WriteLine(createMenuStringFromEnum(typeof(Car.eColor), "Enter the car's color:"));
                     userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Car.eColor)).Length);
                     ((Car)createdVehicle).Color = (Car.eColor)userChoice - 1;
+
                     System.Console.WriteLine(createMenuStringFromEnum(typeof(Car.eNumOfDoors), "Enter the car's number of doors:"));
                     userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Car.eNumOfDoors)).Length);
                     ((Car)createdVehicle).NumberOfDoors = (Car.eNumOfDoors)userChoice - 1;
+
+
+                    /*Factory.CreateCarFeatures((Car)createdVehicle, (Car.eNumOfDoors)userChoice, (Car.eColor)userChoice); //TODO
+
+                    ((Car)createdVehicle).SetCarDoorsAndColor((Car.eColor)userChoice , (Car.eNumOfDoors)userChoice);*/
+
                 }
                 else if (createdVehicle is Motorcycle)
                 {
@@ -168,6 +177,7 @@ namespace ConsoleUI
             returnToMenuOrQuit();
         }
 
+
         /* 2) Display list of licence numbers */
         private void displayListOfLicenceNumbers()
         {
@@ -203,7 +213,7 @@ namespace ConsoleUI
                     vehicleNumber++;
                 }
             }
-           
+            //System.Console.Clear();
             returnToMenuOrQuit();
         }
 
@@ -242,6 +252,7 @@ namespace ConsoleUI
                         break;
                     case 5:
                         /* 5) Refuel vehicle */
+                        
                         FuelBasedEngine fuelEngine = currentVehicle.Engine as FuelBasedEngine;
 
                         if (fuelEngine == null)
@@ -293,18 +304,15 @@ Please enter amount to refuel:", fuelEngine.CurrentAmountOfFuel, fuelEngine.MaxA
                             {
                                 System.Console.WriteLine("This vehicle does not have an electric based engine. Recharge Failed.");
                             }
-                        }else
-                        {
-                            string rechargeMessage = string.Format(@"Remaining time of engine operation in hours: {0}
+                        }
+                        string rechargeMessage = string.Format(@"Remaining time of engine operation in hours: {0}
 Max time of engine operations in hours: {1}
 Please enter number of minutes to recharge:", electricEngine.RemainingTimeOnBattery, electricEngine.MaxBatteryLife);
-                            System.Console.WriteLine(rechargeMessage);
-                            float amountToRecharge = this.getFloatFromUser(0, (electricEngine.MaxBatteryLife - electricEngine.RemainingTimeOnBattery) * 60);
-                            m_Garage.ChargeElectricVehice(licenseNumber, amountToRecharge);
-                            System.Console.WriteLine("Recharge Succesful.");
-                            System.Console.WriteLine(Environment.NewLine);
-                        }
-
+                        System.Console.WriteLine(rechargeMessage);
+                        float amountToRecharge = this.getFloatFromUser(0, (electricEngine.MaxBatteryLife - electricEngine.RemainingTimeOnBattery)* 60);
+                        m_Garage.ChargeElectricVehice(licenseNumber, amountToRecharge);
+                        System.Console.WriteLine("Recharge Succesful.");
+                        System.Console.WriteLine(Environment.NewLine);
                         break;
                     case 7:
                         /* 7) Display vehicle information */
@@ -353,7 +361,7 @@ Please enter number of minutes to recharge:", electricEngine.RemainingTimeOnBatt
             {
                 try
                 {
-                    throw new ValueOutOfRangeException("promptUserForMenuSelection,", 1, i_NumberOfItems);
+                    throw new ValueOutOfRangeException("promptUserForMenuSelection,", 0, i_NumberOfItems);
                 }
                 catch(ValueOutOfRangeException ex)
                 {
@@ -415,6 +423,7 @@ Please enter number of minutes to recharge:", electricEngine.RemainingTimeOnBatt
             return tirePressure;
         }
 
+
         /* Creates Menu From any given Enum */
         private static string createMenuStringFromEnum(Type i_EnumType, string i_Title)
         {
@@ -466,7 +475,6 @@ Please enter number of minutes to recharge:", electricEngine.RemainingTimeOnBatt
             }
         } 
 
-        /*** End of class ***/
 
         public static string MainMenuMessage()
         {
