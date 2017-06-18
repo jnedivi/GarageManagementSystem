@@ -124,6 +124,7 @@ namespace GarageLogic
             if(engine != null)
             {
                 engine.Refuel(i_AmountToRefuel, i_FuelType);
+                m_GarageVehicles[i_LicenseNumber] = vehicle;
             }
             else
             {
@@ -149,6 +150,7 @@ namespace GarageLogic
             if(engine != null)
             {
                 engine.Recharge(hoursToRecharge);
+                m_GarageVehicles[i_LicenseNumber] = vehicle;
             }
             else
             {
@@ -156,8 +158,6 @@ namespace GarageLogic
             }
         }
 
-		/* 7) Display vehicle information */
-        // toString() method
         public bool GetVehicle(string i_LicenseNumber, out Vehicle o_Vehicle)
         {
             bool vehicleIsInGarage = m_GarageVehicles.TryGetValue(i_LicenseNumber, out o_Vehicle);

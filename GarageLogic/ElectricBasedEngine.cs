@@ -15,12 +15,16 @@ namespace GarageLogic
         public float RemainingTimeOnBattery
 		{
 			get { return this.m_RemainingTimeOnBattery; }
-			set { this.m_RemainingTimeOnBattery = value; }
+			set
+            {
+                this.m_RemainingTimeOnBattery = value;
+                RemainingEnergyPercentage = value / MaxBatteryLife;
+            }
 		}
+
 		public float MaxBatteryLife
 		{
 			get { return this.m_MaxBatteryLife; }
-			set { this.m_MaxBatteryLife = value; }
 		}
 
         /*** Class Logic ***/
@@ -44,7 +48,7 @@ namespace GarageLogic
             }
 
             RemainingTimeOnBattery += i_HoursToRecharge;
-            RemainingEnergyPercentage = ((RemainingTimeOnBattery / MaxBatteryLife) * 100);
+            RemainingEnergyPercentage = (RemainingTimeOnBattery / MaxBatteryLife);
         }
 
         public override string ToString()

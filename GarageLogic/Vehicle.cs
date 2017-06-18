@@ -19,10 +19,6 @@ namespace GarageLogic
         private const string k_OwnerPhoneNumber = "Owner Phone Number";
         /*** Data Members ***/
 
-        //private const string k_OwnerPhoneNumber = "Owner Phone Number";
-        // private const string k_LicenseNumber = "License Number";
-        //private const string k_VehicleStatus = "Vehicle Status";
-
         private const byte k_LegalLicenseNumberLength = 7;
         private const byte k_MinPhoneNumLength = 6;
         private const byte k_MaxPhoneNumLength = 9;
@@ -253,11 +249,7 @@ Maximum Air Pressure: {2}", m_ManufacturerName, m_CurrentAirPressure, m_MaxAirPr
             }
         }
 
-		public enum eTireAirPressureStatus
-		{
-			Yes,
-			No
-		}
+
 
         public void UpdateWheelsManufacturerName(string i_ManufacturerName)
         {

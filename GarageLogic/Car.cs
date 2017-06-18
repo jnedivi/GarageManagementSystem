@@ -24,45 +24,13 @@ namespace GarageLogic
         public eColor Color
         {
             get { return this.m_Color; }
-            set
-            {
-                //if(!Enum.IsDefined(typeof(eColor), value))
-                //{
-                //    throw new FormatException(k_Color);
-                //}
-
-                //try
-                //{
-                //    m_Color = (eColor)Enum.Parse(typeof(eColor), value);
-                //}
-                //catch(ArgumentException)
-                //{
-                //    throw new ArgumentException(k_Color);
-                //}  
-                this.m_Color = value;
-            }
+            set { this.m_Color = value; }
         }
 
         public eNumOfDoors NumberOfDoors
 		{
 			get { return this.m_NumberOfDoors; }
-			set
-            {
-                //if (!Enum.IsDefined(typeof(eNumOfDoors), value))
-                //{
-                //    throw new FormatException(k_NumberOfDoors);
-                //}
-
-                //try
-                //{
-                //    m_NumberOfDoors = (eNumOfDoors)Enum.Parse(typeof(eNumOfDoors), value);
-                //}
-                //catch (ArgumentException)
-                //{
-                //    throw new ArgumentException(k_NumberOfDoors);
-                //}
-                this.m_NumberOfDoors = value;
-            }
+			set { this.m_NumberOfDoors = value; }
 		}
 
 		/*** Constructor ***/
@@ -71,14 +39,18 @@ namespace GarageLogic
 		protected Car(string i_LicenceNumber, string i_OwnerName, string i_OwnerPhoneNumber, string i_ModelName)
             : base(i_LicenceNumber, i_OwnerName, i_OwnerPhoneNumber, i_ModelName , k_NumberOfWheelsForCar , k_MaxAirPressureCar )
 		{
-			//Color = eColor.Black.ToString();
-           // NumberOfDoors = eNumOfDoors.Two.ToString();
 
 		}
 
-		/*** Class Logic ***/
+        /*** Class Logic ***/
 
-		public enum eColor
+        public void SetCarDoorsAndColor(Car.eColor i_Color, Car.eNumOfDoors i_NumOfDoors)
+        {
+            m_Color = i_Color;
+            m_NumberOfDoors = i_NumOfDoors;
+        }
+
+        public enum eColor
 		{
 			Yellow,
 			White,

@@ -28,13 +28,16 @@ namespace GarageLogic
         public float MaxAmountOfFuel
 		{
 			get { return this.m_MaxAmountOfFuel; }
-			set { this.m_MaxAmountOfFuel = value; }
 		}
 
         public float CurrentAmountOfFuel
         {
             get { return this.m_CurrentAmountOfFuel; }
-            set { this.m_CurrentAmountOfFuel = value; }
+            set
+            {
+                this.m_CurrentAmountOfFuel = value;
+                RemainingEnergyPercentage = value / MaxAmountOfFuel;
+            }
         }
 
         public eFuelType FuelType
@@ -69,7 +72,6 @@ namespace GarageLogic
             }
 
             CurrentAmountOfFuel += i_FuelToAdd;
-            RemainingEnergyPercentage = ((CurrentAmountOfFuel / MaxAmountOfFuel) * 100);
 		}
 
         public override string ToString()
