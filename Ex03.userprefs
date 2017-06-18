@@ -1,24 +1,24 @@
 ﻿<Properties StartupConfiguration="{A64F1C84-B9AF-4CD0-B8FE-D48409E2BA91}|Default">
   <MonoDevelop.Ide.ItemProperties.ConsoleUI PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ConsoleUI/UserInterface.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GarageLogic/Motorcycle.cs">
     <Files>
-      <File FileName="ConsoleUI/UserInterface.cs" Line="184" Column="13" />
+      <File FileName="ConsoleUI/UserInterface.cs" Line="195" Column="15" />
       <File FileName="ConsoleUI/Program.cs" Line="11" Column="56" />
-      <File FileName="GarageLogic/Car.cs" Line="91" Column="4" />
+      <File FileName="GarageLogic/Car.cs" Line="20" Column="7" />
       <File FileName="GarageLogic/ElectricBasedEngine.cs" Line="26" Column="9" />
       <File FileName="GarageLogic/ElectricCar.cs" Line="1" Column="1" />
       <File FileName="GarageLogic/ElectricMotorcycle.cs" Line="1" Column="1" />
-      <File FileName="GarageLogic/Factory.cs" Line="59" Column="13" />
+      <File FileName="GarageLogic/Factory.cs" Line="70" Column="14" />
       <File FileName="GarageLogic/FuelBasedMotorcycle.cs" Line="1" Column="1" />
-      <File FileName="GarageLogic/Vehicle.cs" Line="98" Column="31" />
+      <File FileName="GarageLogic/Vehicle.cs" Line="90" Column="120" />
       <File FileName="GarageLogic/FuelBasedTruck.cs" Line="1" Column="1" />
-      <File FileName="GarageLogic/Motorcycle.cs" Line="74" Column="11" />
+      <File FileName="GarageLogic/Motorcycle.cs" Line="55" Column="45" />
       <File FileName="GarageLogic/FuelBasedCar.cs" Line="1" Column="1" />
       <File FileName="GarageLogic/FuelBasedEngine.cs" Line="62" Column="1" />
       <File FileName="GarageLogic/Engine.cs" Line="1" Column="1" />
-      <File FileName="GarageLogic/Truck.cs" Line="51" Column="24" />
+      <File FileName="GarageLogic/Truck.cs" Line="65" Column="14" />
       <File FileName="GarageLogic/ValueOutOfRangeException.cs" Line="1" Column="1" />
-      <File FileName="GarageLogic/Garage.cs" Line="1" Column="1" />
+      <File FileName="GarageLogic/Garage.cs" Line="53" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />

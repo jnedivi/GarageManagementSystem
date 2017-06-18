@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿using GarageLogic;
+﻿﻿﻿﻿﻿﻿﻿﻿using GarageLogic;
 using System;
 using System.Text;
 using System.Collections.Generic;
@@ -120,7 +120,7 @@ namespace ConsoleUI
                     userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Car.eNumOfDoors)).Length);
                     ((Car)createdVehicle).NumberOfDoors = (Car.eNumOfDoors)userChoice - 1;
 
-                    Factory.SetCarDoorsAndColor((Car)createdVehicle, (Car.eNumOfDoors)userChoice, (Car.eColor)userChoice); //TODO
+                    Factory.CreateCarFeatures((Car)createdVehicle, (Car.eNumOfDoors)userChoice, (Car.eColor)userChoice); //TODO
                 }
                 else if (createdVehicle is Motorcycle)
                 {
@@ -192,7 +192,7 @@ namespace ConsoleUI
                 System.Console.WriteLine("No Vehicles Available" + Environment.NewLine);
             }
 
-            System.Console.Clear();
+            //System.Console.Clear();
             mainMenu();
         }
 
@@ -293,21 +293,7 @@ namespace ConsoleUI
             return userInputNumber;
         }
 
-        /* Get Menu Selection From User */
-        private int promptUserForMenuSelection(int i_NumberOfItems)
-        {
-            string userInputString = System.Console.ReadLine();
-            int userInputNumber;
-            string messageToUser = string.Format("Please enter a number between 1 and {0}", i_NumberOfItems);
-
-            while (!(int.TryParse(userInputString, out userInputNumber) && userInputNumber >= 1 && userInputNumber <= i_NumberOfItems))
-            {
-                System.Console.WriteLine("Invalid Input. " + messageToUser);
-                userInputString = System.Console.ReadLine();
-            }
-            System.Console.Clear();
-            return userInputNumber;
-        }
+     
 
         /* Get Licence number and Vehilce from user */
         private Vehicle promptUserForLicenseNumber(out string o_licenceNumber)
@@ -350,7 +336,7 @@ namespace ConsoleUI
             return tirePressure;
         }
 
-
+        /* Creates Menu From any given Enum */
         private static string createMenuStringFromEnum(Type i_EnumType, string i_Title)
         {
             int menuNumber = 1;
@@ -367,11 +353,21 @@ namespace ConsoleUI
             return menuString.ToString();
         }
 
-        /*private static void refuelVehicle(ref Vehicle io_Vehicle)
-        {
+		/* Get Menu Selection From User */
+		private int promptUserForMenuSelection(int i_NumberOfItems)
+		{
+			string userInputString = System.Console.ReadLine();
+			int userInputNumber;
+			string messageToUser = string.Format("Please enter a number between 1 and {0}", i_NumberOfItems);
 
-        }*/
-
+			while (!(int.TryParse(userInputString, out userInputNumber) && userInputNumber >= 1 && userInputNumber <= i_NumberOfItems))
+			{
+				System.Console.WriteLine("Invalid Input. " + messageToUser);
+				userInputString = System.Console.ReadLine();
+			}
+			System.Console.Clear();
+			return userInputNumber;
+		}
 
 
         /*** End of class ***/
