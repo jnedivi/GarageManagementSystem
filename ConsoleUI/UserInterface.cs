@@ -63,6 +63,7 @@ namespace ConsoleUI
             {
                 System.Console.WriteLine("Veicle currently in garage. Status changed to: In Repair.");
                 this.m_Garage.StatusInRepairedUpdate(licenseNumber);
+                System.Console.WriteLine(Environment.NewLine);
             }
             else
             {
@@ -127,17 +128,16 @@ namespace ConsoleUI
                     userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(Motorcycle.eLicenseType)).Length);
                     ((Motorcycle)createdVehicle).LicenceType = (Motorcycle.eLicenseType)userChoice - 1;
                     System.Console.WriteLine("Please enter engine volume:");
-                    userChoice = (int)getFloatFromUser( 0, int.MaxValue);
+                    userChoice = (int)getFloatFromUser(0, int.MaxValue);
                     ((Motorcycle)createdVehicle).EngineVolume = userChoice;
 
                 }
                 else if (createdVehicle is Truck)
                 {
-
                     System.Console.WriteLine(createMenuStringFromEnum(typeof(eIsCarryingHazardousMaterials), "Is the truck carrying hazardous materials?:"));
                     userChoice = promptUserForMenuSelection(Enum.GetNames(typeof(eIsCarryingHazardousMaterials)).Length);
 
-                    if (userChoice == 0)
+                    if (userChoice == 1)
                     {
                         ((Truck)createdVehicle).HasHazardousMaterials = true;
                     }
@@ -154,7 +154,7 @@ namespace ConsoleUI
                 if (createdVehicle.Engine is FuelBasedEngine)
                 {
 					System.Console.WriteLine("Please enter current amount of fuel:");
-                    float currentAmountOfFuel = getFloatFromUser( 0, (int)((FuelBasedEngine)createdVehicle.Engine).MaxAmountOfFuel);
+                    float currentAmountOfFuel = getFloatFromUser( 0, (float)((FuelBasedEngine)createdVehicle.Engine).MaxAmountOfFuel);
                     ((FuelBasedEngine)createdVehicle.Engine).CurrentAmountOfFuel = currentAmountOfFuel;
                 }
                 else if (createdVehicle.Engine is ElectricBasedEngine)
@@ -165,8 +165,7 @@ namespace ConsoleUI
                 }
             }
 
-            System.Console.Clear();
-            mainMenu();
+            returnToMenuOrQuit();
         }
 
 
@@ -240,11 +239,11 @@ namespace ConsoleUI
                         currentVehicle.InflateAllWheelsToMax();
                         System.Console.Clear();
                         System.Console.WriteLine("Inflation of tires succesful.");
-                        System.Console.WriteLine(Environment.NewLine);
+                        //System.Console.WriteLine(Environment.NewLine);
                         break;
                     case 5:
                         /* 5) Refuel vehicle */
-                        // TODO: get function to work, as well as the catches
+                        
                         FuelBasedEngine fuelEngine = currentVehicle.Engine as FuelBasedEngine;
 
                         if (fuelEngine == null)
@@ -272,12 +271,14 @@ Please enter amount to refuel:", fuelEngine.CurrentAmountOfFuel, fuelEngine.MaxA
                             try
                             {
                                 this.m_Garage.RefuelVehicle(licenseNumber, (FuelBasedEngine.eFuelType)(userChoice - 1), amountToRefuel);
+                                System.Console.WriteLine("Refuel Succesful.");
                             }
                             catch (ArgumentException)
                             {
                                 string fuelTypeExceptionMessage = string.Format("Wrong fuel type for this vehicle, expected {0}. Refuel Failed.", fuelEngine.FuelType);
                                 Console.WriteLine(fuelTypeExceptionMessage);
                             }
+                            System.Console.WriteLine(Environment.NewLine);
                         }
                         break;
                     case 6:
@@ -297,10 +298,12 @@ Please enter amount to refuel:", fuelEngine.CurrentAmountOfFuel, fuelEngine.MaxA
                         }
                         string rechargeMessage = string.Format(@"Remaining time of engine operation in hours: {0}
 Max time of engine operations in hours: {1}
-Please enter time to recharge in hours:", electricEngine.RemainingTimeOnBattery, electricEngine.MaxBatteryLife);
+Please enter number of minutes to recharge:", electricEngine.RemainingTimeOnBattery, electricEngine.MaxBatteryLife);
                         System.Console.WriteLine(rechargeMessage);
-                        float amountToRecharge = this.getFloatFromUser(0, electricEngine.MaxBatteryLife - electricEngine.RemainingTimeOnBattery);
+                        float amountToRecharge = this.getFloatFromUser(0, (electricEngine.MaxBatteryLife - electricEngine.RemainingTimeOnBattery)* 60);
                         m_Garage.ChargeElectricVehice(licenseNumber, amountToRecharge);
+                        System.Console.WriteLine("Recharge Succesful.");
+                        System.Console.WriteLine(Environment.NewLine);
                         break;
                     case 7:
                         /* 7) Display vehicle information */
